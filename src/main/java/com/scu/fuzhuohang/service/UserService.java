@@ -18,7 +18,7 @@ public interface UserService {
 
     public int changeUserInfo(String accountOrName, User user);
 
-    public int logout();
+    public int logout(String account);
 
-    public int delete();
+    public int delete(int userId);
 }

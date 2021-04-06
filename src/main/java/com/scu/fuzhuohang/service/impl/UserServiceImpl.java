@@ -21,8 +21,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String accountOrName, String Password) {
-        User user =userDao.getUser(accountOrName);
+        User user = userDao.getUser(accountOrName);
         if(user != null && user.getPassword().equals(Password)){
+            userDao.updateLoggingStatus(user.getAccount(),1);
             return user;
         }else {
             return null;
@@ -31,31 +32,32 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(String accountOrName) {
-        return null;
+        User user = userDao.getUser(accountOrName);
+        return user;
     }
 
     @Override
     public int register(User user) {
-        return 0;
+        return userDao.addUser(user);
     }
 
     @Override
     public int changePassword(String accountOrName, String Password) {
-        return 0;
+        return userDao.updatePassword(accountOrName, Password);
     }
 
     @Override
     public int changeUserInfo(String accountOrName, User user) {
-        return 0;
+        return userDao.updateUserInfo(accountOrName, user);
     }
 
     @Override
-    public int logout() {
-        return 0;
+    public int logout(String account) {
+        return userDao.updateLoggingStatus(account,0);
     }
 
     @Override
-    public int delete() {
-        return 0;
+    public int delete(int userId) {
+        return userDao.delUser(userId);
     }
 }
