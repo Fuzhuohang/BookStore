@@ -52,8 +52,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int changeUserInfo(String accountOrName, User user) {
-        return userDao.updateUserInfo(accountOrName, user);
+    public int changeUserInfo(String account, User user) {
+        return userDao.updateUserInfo(account, user);
     }
 
     @Override

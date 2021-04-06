@@ -16,7 +16,7 @@ public interface UserService {
 
     public int changePassword(String accountOrName, String password);
 
-    public int changeUserInfo(String accountOrName, User user);
+    public int changeUserInfo(String account, User user);
 
     public int logout(String account);
 

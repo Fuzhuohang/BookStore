@@ -10,7 +10,7 @@
 
     <insert id="addUser">
         INSERT INTO user (Uid, Account, Password, Username, Tel, Email, State, IsBusiness)
-        VALUES (null, #{usr.Account},#{usr.Password},#{usr.Username},#{usr.Tel},null,null,null);
+        VALUES (null, #{usr.Account},#{usr.Password},#{usr.Username},#{usr.Tel},null,0,0);
     </insert>
 
     <update id="updatePassword">
