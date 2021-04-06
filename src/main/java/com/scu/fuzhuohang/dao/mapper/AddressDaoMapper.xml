@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.scu.fuzhuohang.dao.AddressDao">
+    <select id="getAddresses" resultType="Address">
+        SELECT * FROM address
+        LIMIT #{userid};
+    </select>
+
+    <insert id="addAddress">
+        INSERT INTO address (Addrid, Uid, Name, Tel, Addr)
+        VALUES (null, #{addr.Uid}, #{addr.Name}, #{addr.Tel}, #{addr.Addr});
+    </insert>
+
+    <update id="updateAddress">
+        UPDATE address
+        SET Name = #{addr.Name}, Tel = #{addr.Tel}, Addr = #{addr.Addr}
+        WHERE Addrid = #{addrid};
+    </update>
+
+    <delete id="deleteAddressByAddr">
+        DELETE FROM address
+        WHERE Addrid = #{addrid};
+    </delete>
+
+    <delete id="deleteAddressByUser">
+        DELETE FROM address
+        WHERE Uid = #{userid};
+    </delete>
+</mapper>
