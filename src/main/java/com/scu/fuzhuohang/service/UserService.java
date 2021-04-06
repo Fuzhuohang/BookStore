@@ -8,13 +8,13 @@ import com.scu.fuzhuohang.bean.User;
  */
 public interface UserService {
 
-    public User login(String accountOrName, String Password);
+    public User login(String accountOrName, String password);
 
     public User getUser(String accountOrName);
 
     public int register(User user);
 
-    public int changePassword(String accountOrName, String Password);
+    public int changePassword(String accountOrName, String password);
 
     public int changeUserInfo(String accountOrName, User user);
 
