@@ -20,7 +20,7 @@
     <!--配置数据源-->
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-        <property name="url" value="jdbc:mysql://localhost:3306/bookstore?useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/bookstore?useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true&amp;useSSL=false"/>
         <property name="username" value="root"/>
         <property name="password" value="fzh2197178_"/>
 
@@ -50,7 +50,7 @@
         <!--配置类的别名-->
         <property name="typeAliasesPackage" value="com.scu.fuzhuohang.bean"></property>
         <!--自动扫描mapper文件-->
-        <!--        <property name="mapperLocations" value="classpath*:com/scu/dao/mapper/*.xml"></property>-->
+        <property name="mapperLocations" value="classpath*:com/scu/fuzhuohang/dao/mapper/*.xml"></property>
     </bean>
     <!--Dao接口所在的包名，spring自动查找并实例化-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -75,7 +75,7 @@
     </bean>
 
     <!--静态资源的配置-->
-<!--    <mvc:resources mapping="/js/**" location="/js/"></mvc:resources>-->
+    <mvc:resources mapping="/js/**" location="/js/"></mvc:resources>
 
     <!--日期转换 防止json串讲日期以毫秒来传递-->
     <mvc:annotation-driven>

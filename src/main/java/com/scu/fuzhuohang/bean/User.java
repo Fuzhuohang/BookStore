@@ -6,76 +6,76 @@ package com.scu.fuzhuohang.bean;
  * 对应数据库库中的 user 表，描述用户收货地址
  */
 public class User {
-    private int Uid;
-    private String Account;
-    private String Password;
-    private String Username;
-    private String Tel;
-    private String Email;
-    private int State;
-    private int IsBusiness;
+    private int uid;
+    private String account;
+    private String password;
+    private String username;
+    private String tel;
+    private String email;
+    private int state;
+    private int isBusiness;
 
     public int getUid() {
-        return Uid;
+        return uid;
     }
 
     public void setUid(int uid) {
-        Uid = uid;
+        this.uid = uid;
     }
 
     public String getAccount() {
-        return Account;
+        return account;
     }
 
     public void setAccount(String account) {
-        Account = account;
+        this.account = account;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
 
     public String getTel() {
-        return Tel;
+        return tel;
     }
 
     public void setTel(String tel) {
-        Tel = tel;
+        this.tel = tel;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public int getState() {
-        return State;
+        return state;
     }
 
     public void setState(int state) {
-        State = state;
+        this.state = state;
     }
 
     public int getIsBusiness() {
-        return IsBusiness;
+        return isBusiness;
     }
 
     public void setIsBusiness(int isBusiness) {
-        IsBusiness = isBusiness;
+        this.isBusiness = isBusiness;
     }
 }
