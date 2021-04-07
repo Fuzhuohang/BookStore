@@ -1,0 +1,9 @@
+
+q	java:S116"PRename this field "Money" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ö÷òùÿÿÿÿ8Àò·¨Š/
+j	java:S116"NRename this field "Oid" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(£á–ü8Àò·¨Š/
+k	java:S116"ORename this field "Time" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ú°î8£¾¨Š/
+o	java:S116"NRename this field "Pid" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ù°û±şÿÿÿÿ8Àò·¨Š/
+m	java:S116"QRename this field "AddrId" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.( •Á8ãùº¨Š/
+o	java:S116"NRename this field "Uid" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼êïúÿÿÿÿ8Àò·¨Š/
+o	java:S116"NRename this field "Bid" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ğÖÇøÿÿÿÿ8Àò·¨Š/
+m	java:S116"QRename this field "Ostate" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÛÓ»“8îÓº¨Š/

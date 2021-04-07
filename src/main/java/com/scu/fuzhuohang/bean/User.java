@@ -6,76 +6,67 @@ package com.scu.fuzhuohang.bean;
  * 对应数据库库中的 user 表，描述用户收货地址
  */
 public class User {
-    private int uid;
-    private String account;
-    private String password;
-    private String username;
-    private String tel;
-    private String email;
-    private int state;
-    private int isBusiness;
+    private int Uid;
+    private String Account;
+    private String Password;
+    private String Username;
+    private String Tel;
+    private String Email;
+    private int IsBusiness;
 
     public int getUid() {
-        return uid;
+        return Uid;
     }
 
     public void setUid(int uid) {
-        this.uid = uid;
+        this.Uid = uid;
     }
 
     public String getAccount() {
-        return account;
+        return Account;
     }
 
     public void setAccount(String account) {
-        this.account = account;
+        this.Account = account;
     }
 
     public String getPassword() {
-        return password;
+        return Password;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.Password = password;
     }
 
     public String getUsername() {
-        return username;
+        return Username;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.Username = username;
     }
 
     public String getTel() {
-        return tel;
+        return Tel;
     }
 
     public void setTel(String tel) {
-        this.tel = tel;
+        this.Tel = tel;
     }
 
     public String getEmail() {
-        return email;
+        return Email;
     }
 
     public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getState() {
-        return state;
-    }
-
-    public void setState(int state) {
-        this.state = state;
+        this.Email = email;
     }
 
     public int getIsBusiness() {
-        return isBusiness;
+        return IsBusiness;
     }
 
     public void setIsBusiness(int isBusiness) {
-        this.isBusiness = isBusiness;
+        this.IsBusiness = isBusiness;
     }
 }

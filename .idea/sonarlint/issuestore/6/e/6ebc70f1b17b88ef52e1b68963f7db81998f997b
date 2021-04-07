@@ -1,0 +1,10 @@
+
+l	java:S116"PRename this field "Image" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(£”Õ8á…É¨Š/
+l	java:S116"PRename this field "Price" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(î” ½8á…É¨Š/
+o	java:S116
+"NRename this field "Bid" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ğÖÇøÿÿÿÿ8á…É¨Š/
+p	java:S116"ORename this field "Pnum" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(İô§šüÿÿÿÿ8á…É¨Š/
+o	java:S116	"NRename this field "Pid" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ù°û±şÿÿÿÿ8¯ÏÃ¨Š/
+q	java:S116"PRename this field "Pname" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(àĞÖòüÿÿÿÿ8á…É¨Š/
+q	java:S116"PRename this field "Pdesc" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÓÂ‘ûÿÿÿÿ8á…É¨Š/
+k	java:S116"ORename this field "Csid" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¾ü„°8á…É¨Š/

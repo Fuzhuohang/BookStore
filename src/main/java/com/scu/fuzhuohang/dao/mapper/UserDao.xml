@@ -9,8 +9,8 @@
     </select>
 
     <insert id="addUser">
-        INSERT INTO user (Uid, Account, Password, Username, Tel, Email, State, IsBusiness)
-        VALUES (null, #{usr.Account},#{usr.Password},#{usr.Username},#{usr.Tel},null,0,0);
+        INSERT INTO user (Uid, Account, Password, Username, Tel, Email, IsBusiness)
+        VALUES (null, #{usr.Account},#{usr.Password},#{usr.Username},#{usr.Tel},null,0);
     </insert>
 
     <update id="updatePassword">
@@ -24,13 +24,6 @@
         UPDATE user
         SET Username = #{usr.Username}, Tel = #{usr.Tel}, Email = #{usr.Email}
         WHERE Account = #{acc};
-    </update>
-
-    <update id="updateLoggingStatus">
-        UPDATE user
-        SET State = #{status}
-        WHERE Account = #{str}
-           OR Username = #{str};
     </update>
 
     <update id="updateIsBusiness">
