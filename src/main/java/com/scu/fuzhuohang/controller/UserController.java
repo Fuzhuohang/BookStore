@@ -39,14 +39,15 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping("logout")
-    @ResponseBody
-    public ModelAndView logout(HttpSession session,
-                               ModelAndView modelAndView){
-        session.removeAttribute("current_user");
-        modelAndView.setViewName("/shopindex");
-        return modelAndView;
-    }
+//    @RequestMapping("logout")
+//    @ResponseBody
+//    public ModelAndView logout(HttpSession session,
+//                               ModelAndView modelAndView){
+//        session.removeAttribute("current_user");
+//        modelAndView.setViewName("/shopindex");
+//        System.out.println("成功退出登录");
+//        return modelAndView;
+//    }
 
     @RequestMapping("register")
     @ResponseBody

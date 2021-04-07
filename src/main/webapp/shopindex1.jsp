@@ -39,7 +39,7 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="personalspace.jsp">欢迎！<%=user.getUsername()%></a></li>
-                    <li><a href="logout.action">退出登录</a></li>
+                    <li><a href="index.html">退出登录</a></li>
                     <li><a href="#about">收藏夹</a></li>
                     <li><a href="#shopping">购物车</a></li>
                     <li><a href="#order">订单</a></li>
