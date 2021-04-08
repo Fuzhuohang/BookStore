@@ -1,56 +1,44 @@
 <%@ page import="com.scu.fuzhuohang.bean.User" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.scu.fuzhuohang.bean.Address" %>
+<%@ page import="com.scu.fuzhuohang.controller.AddressController" %>
 <%--
   Created by IntelliJ IDEA.
   User: LX
-  Date: 2021/4/7
-  Time: 15:42
+  Date: 2021/4/8
+  Time: 14:48
   To change this template use File | Settings | File Templates.
 --%>
 <%
     User user = (User) request.getSession().getAttribute("current_user");
+    List<Address> addresses = (List<Address>) request.getSession().getAttribute("current_addresses");
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>个人空间</title>
+    <script src="webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="webjars/layui/2.5.7/css/layui.css" rel="stylesheet" media="all">
     <link href="css/theme.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
     <link href="css/signin.css" rel="stylesheet">
     <script type="text/javascript" language="JavaScript">
+        function fun(){
+            window.location.href="getAddressList.action?uid="+<%=user.getUid()%>;
+        }
         function url(){
             var obj = document.getElementById("writeOff");
             if(confirm('警告：注销账号将不可逆，请慎重考虑！！！请确认是否注销账号')){
                 window.location.href="writeoff.action";
             }
         }
-
-        <%--function postform(){--%>
-        <%--    var oldpassword = document.getElementById("oldpassword").value;--%>
-        <%--    if(oldpassword == <%=user.getPassword()%>){--%>
-        <%--        var newpassword = document.getElementById("newpassword").value;--%>
-        <%--        var newpassword2 = document.getElementById("newpassword2").value;--%>
-        <%--        if(newpassword == newpassword2){--%>
-        <%--            var accountOrName = <%=user.getAccount()%>;--%>
-        <%--            var password = newpassword;--%>
-        <%--            window.location.href="/updatepwd.action?accountOrName="+ accountOrName+"&password="+password;--%>
-        <%--        }else{--%>
-        <%--            alert("两次密码不一样");--%>
-        <%--            return false;--%>
-        <%--        }--%>
-        <%--    }else{--%>
-        <%--        alert("旧密码输入错误");--%>
-        <%--        return false;--%>
-        <%--    }--%>
-        <%--}--%>
-    </script>
-    <script type="javascript">
-
     </script>
 </head>
-<body>
+<body onload="fun()">
 <!-- Fixed navbar -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -73,6 +61,12 @@
             </ul>
         </div><!--/.nav-collapse -->
     </div>
+    <%--        <form>--%>
+    <%--            <div>--%>
+    <%--                <input type="text" id="search" name="search" class="form-control">--%>
+    <%--                <button id="btn_login" class="btn btn-lg btn-primary btn-block" type="submit">搜索</button>--%>
+    <%--            </div>--%>
+    <%--        </form>--%>
 </nav>
 <div class="container-fluid">
     <div class="row">
@@ -80,8 +74,8 @@
             <ul class="nav nav-sidebar">
                 <li><a href="personalspace.jsp">个人信息</a></li>
                 <li><a href="changeUserInfo.jsp">修改信息</a></li>
-                <li class="active"><a href="changePassword.jsp">修改密码</a></li>
-                <li><a href="shippingAddress.jsp">我的地址</a></li>
+                <li><a href="changePassword.jsp">修改密码</a></li>
+                <li class="active"><a href="shippingAddress.jsp">我的地址</a></li>
                 <li><a href="#">我的足迹</a></li>
                 <li><a href="#">我的评论</a></li>
                 <li><a onclick="url()" href="javascript:void(0)">注销账号</a></li>
@@ -89,18 +83,28 @@
         </div>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
-        <form id="formid" class="form-signin" action="updatepwd.action" method="post">
-            <label for="oldpassword" class="sr-only">请输入旧密码：</label>
-            <input type="password" name="oldpassword" id="oldpassword" class="form-control" placeholder="请输入旧密码" required>
-            <label for="newpassword" class="sr-only">请输入新密码：</label>
-            <input type="password" name="newpassword" id="newpassword" class="form-control" placeholder="请输入新密码" required>
-            <label for="newpassword1" class="sr-only">请确认新密码：</label>
-            <input type="password" name="newpassword1" id="newpassword1" class="form-control" placeholder="请确认新密码" required>
-            <div>
-                <button id="btn_login" class="btn btn-lg btn-primary btn-block" type="submit">提&nbsp;&nbsp;&nbsp;&nbsp;交</button>
+        <div class="layui-bg-gray" style="padding: 30px;">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">卡片面板</div>
+                        <div class="layui-card-body">
+                            卡片式面板面板通常用于非白色背景色的主体内<br>
+                            从而映衬出边框投影
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">卡片面板</div>
+                        <div class="layui-card-body">
+                            结合 layui 的栅格系统<br>
+                            轻松实现响应式布局
+                        </div>
+                    </div>
+                </div>
             </div>
-        </form>
-
+        </div>
     </div>
 </div>
 </body>

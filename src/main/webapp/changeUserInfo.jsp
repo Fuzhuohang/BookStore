@@ -19,6 +19,14 @@
     <link href="css/theme.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
     <link href="css/signin.css" rel="stylesheet">
+    <script type="text/javascript" language="JavaScript">
+        function url(){
+            var obj = document.getElementById("writeOff");
+            if(confirm('警告：注销账号将不可逆，请慎重考虑！！！请确认是否注销账号')){
+                window.location.href="writeoff.action";
+            }
+        }
+    </script>
 </head>
 <body>
 <!-- Fixed navbar -->
@@ -43,12 +51,6 @@
             </ul>
         </div><!--/.nav-collapse -->
     </div>
-    <%--        <form>--%>
-    <%--            <div>--%>
-    <%--                <input type="text" id="search" name="search" class="form-control">--%>
-    <%--                <button id="btn_login" class="btn btn-lg btn-primary btn-block" type="submit">搜索</button>--%>
-    <%--            </div>--%>
-    <%--        </form>--%>
 </nav>
 <div class="container-fluid">
     <div class="row">
@@ -56,28 +58,31 @@
             <ul class="nav nav-sidebar">
                 <li><a href="personalspace.jsp">个人信息</a></li>
                 <li class="active"><a href="changeUserInfo.jsp">修改信息</a></li>
-                <li><a href="#">修改密码</a></li>
-                <li><a href="#">我的购物车</a></li>
-                <li><a href="#">我的收藏夹</a></li>
+                <li><a href="changePassword.jsp">修改密码</a></li>
+                <li><a href="shippingAddress.jsp">我的地址</a></li>
                 <li><a href="#">我的足迹</a></li>
                 <li><a href="#">我的评论</a></li>
+                <li><a onclick="url()" href="javascript:void(0)">注销账号</a></li>
             </ul>
         </div>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
-        <form>
+        <form class="form-signin" action="updateInfo.action" method="post">
             <div align="center">
-                <h1>你好！<%=user.getUsername()%></h1>
-                <label for="account">账号：</label>
-                <input id="account" name="account" type="text" value="<%=user.getAccount()%>" disabled>
+                <label for="account">账&nbsp;&nbsp;&nbsp;号：</label>
+                <input id="account" name="account" type="text" class="form-control2" value="<%=user.getAccount()%>" readonly="readonly">
             </div>
             <div align="center">
-                <label for="tel">电话：</label>
-                <input id="tel" name="tel" type="text" value="<%=user.getTel()%>">
+                <label for="username">用户名：</label>
+                <input id="username" name="username" type="text" value="<%=user.getUsername()%>">
             </div>
             <div align="center">
-                <label for="email">邮件：</label>
-                <input id="email" name="email" type="text" value="<%=user.getTel()%>">
+                <label for="tel">电&nbsp;&nbsp;&nbsp;话：</label>
+                <input id="tel" name="tel" type="tel" value="<%=user.getTel()%>">
+            </div>
+            <div align="center">
+                <label for="email">邮&nbsp;&nbsp;&nbsp;件：</label>
+                <input id="email" name="email" type="email" value="<%=user.getEmail()%>">
             </div>
             <div>
                 <button id="btn_login" class="btn btn-lg btn-primary btn-block" type="submit">提&nbsp;&nbsp;&nbsp;&nbsp;交</button>

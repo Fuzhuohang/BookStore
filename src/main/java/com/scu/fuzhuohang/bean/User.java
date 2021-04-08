@@ -69,4 +69,17 @@ public class User {
     public void setIsBusiness(int isBusiness) {
         this.IsBusiness = isBusiness;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "Uid=" + Uid +
+                ", Account='" + Account + '\'' +
+                ", Password='" + Password + '\'' +
+                ", Username='" + Username + '\'' +
+                ", Tel='" + Tel + '\'' +
+                ", Email='" + Email + '\'' +
+                ", IsBusiness=" + IsBusiness +
+                '}';
+    }
 }

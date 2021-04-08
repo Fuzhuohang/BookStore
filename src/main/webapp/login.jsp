@@ -27,7 +27,7 @@
                 <a href="register.jsp">没有账号？立即注册!</a>
             </div>
             <div id = "forget_pwd" style="float: right">
-                <a href="forgetPassword.jsp">忘记密码</a>
+                <a href="forgetVerify.jsp">忘记密码</a>
             </div>
         </div>
     </form>
