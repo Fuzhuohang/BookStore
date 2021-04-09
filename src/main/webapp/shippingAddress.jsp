@@ -22,7 +22,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
-    <title>个人空间</title>
+    <title>悦读书城-个人空间</title>
     <script src="webjars/jquery/3.6.0/jquery.min.js"></script>
     <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">

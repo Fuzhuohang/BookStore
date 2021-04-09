@@ -6,7 +6,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
-    <title>登录</title>
+    <title>悦读书城-登录</title>
     <link rel="stylesheet" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <link href="css/signin.css" rel="stylesheet">

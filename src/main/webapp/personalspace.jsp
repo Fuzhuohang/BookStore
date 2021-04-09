@@ -12,7 +12,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
-    <title>个人空间</title>
+    <title>悦读书城-个人空间</title>
     <link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -54,12 +54,6 @@
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
-<%--        <form>--%>
-<%--            <div>--%>
-<%--                <input type="text" id="search" name="search" class="form-control">--%>
-<%--                <button id="btn_login" class="btn btn-lg btn-primary btn-block" type="submit">搜索</button>--%>
-<%--            </div>--%>
-<%--        </form>--%>
     </nav>
     <div class="container-fluid">
         <div class="row">

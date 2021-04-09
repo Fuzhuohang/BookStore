@@ -12,7 +12,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
-    <title>个人空间</title>
+    <title>悦读书城-个人空间</title>
     <link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
