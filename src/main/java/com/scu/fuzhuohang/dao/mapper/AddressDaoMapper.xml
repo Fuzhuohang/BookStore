@@ -5,7 +5,7 @@
 <mapper namespace="com.scu.fuzhuohang.dao.AddressDao">
     <select id="getAddresses" resultType="Address">
         SELECT * FROM address
-        LIMIT #{userid};
+        WHERE Uid = #{userid}
     </select>
 
     <insert id="addAddress">

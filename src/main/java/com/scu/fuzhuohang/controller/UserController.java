@@ -1,6 +1,7 @@
 package com.scu.fuzhuohang.controller;
 
 import com.scu.fuzhuohang.bean.User;
+import com.scu.fuzhuohang.service.AddressService;
 import com.scu.fuzhuohang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,13 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    AddressService addressService;
+
+    private static final String MESSAGE = "message";
+    private static final String CURRENT_USER = "current_user";
+    private static final String URL_1 = "redirect:/shopindex1.jsp";
+
     @RequestMapping("login")
     @ResponseBody
     public ModelAndView login(@RequestParam("accountOrName") String accountOrName,
@@ -29,12 +37,12 @@ public class UserController {
                               ModelAndView modelAndView){
         User user = userService.login(accountOrName, password);
         if(user == null){
-            modelAndView.addObject("message","登录失败，账号或密码错误");
+            modelAndView.addObject(MESSAGE,"登录失败，账号或密码错误");
             modelAndView.setViewName("login");
         } else {
-            session.setAttribute("current_user", user);
-            modelAndView.addObject("messge","登录成功");
-            modelAndView.setViewName("/shopindex1");
+            session.setAttribute(CURRENT_USER, user);
+            modelAndView.addObject(MESSAGE,"登录成功");
+            modelAndView.setViewName(URL_1);
         }
         return modelAndView;
     }
@@ -43,9 +51,8 @@ public class UserController {
     @ResponseBody
     public ModelAndView logout(HttpSession session,
                                ModelAndView modelAndView){
-        session.removeAttribute("current_user");
-        modelAndView.setViewName("/shopindex");
-        System.out.println("成功退出登录");
+        session.removeAttribute(CURRENT_USER);
+        modelAndView.setViewName("redirect:/shopindex.jsp");
         return modelAndView;
     }
 
@@ -53,28 +60,23 @@ public class UserController {
     @ResponseBody
     public ModelAndView register(@RequestParam("tel") String tel,
                                  @RequestParam("password") String password,
-                                 @RequestParam("password1") String password1,
                                  HttpSession session,
                                  ModelAndView modelAndView){
-        System.out.println("continue: "+tel+"::"+password+"::"+password1);
         User exist = userService.getUser(tel);
-        System.out.println("continue: "+exist);
-        if(exist == null && password.equals(password1)){
+        if(exist == null){
             User user = new User();
             user.setAccount(tel);
             user.setUsername(tel);
             user.setTel(tel);
             user.setPassword(password);
-            System.out.println("continue: "+user);
             if(userService.register(user)!=0){
                 user = userService.login(user.getAccount(), password);
-                System.out.println("success: "+user);
-                session.setAttribute("current_user", user);
-                modelAndView.addObject("messge","登录成功");
-                modelAndView.setViewName("/shopindex1");
+                session.setAttribute(CURRENT_USER, user);
+                modelAndView.addObject(MESSAGE,"注册成功");
+                modelAndView.setViewName(URL_1);
             }
         } else{
-            modelAndView.addObject("message","注册失败");
+            modelAndView.addObject(MESSAGE,"注册失败");
             modelAndView.setViewName("register");
         }
         return modelAndView;
@@ -82,26 +84,17 @@ public class UserController {
 
     @RequestMapping("updatepwd")
     @ResponseBody
-    public ModelAndView updatePwd(@RequestParam("oldpassword") String oldpassword,
-                                  @RequestParam("newpassword") String newpassword,
-                                  @RequestParam("newpassword1") String newpassword1,
+    public ModelAndView updatePwd(@RequestParam("accountOrName") String accountOrName,
+                                  @RequestParam("password") String password,
                                   HttpSession session,
                                   ModelAndView modelAndView){
-        System.out.println(oldpassword+"::"+newpassword+"::"+newpassword1);
-        User user = (User) session.getAttribute("current_user");
-        System.out.println(user.toString());
-        if(!oldpassword.equals(newpassword) && oldpassword.equals(user.getPassword()) && newpassword.equals(newpassword1)){
-            if(userService.changePassword(user.getAccount(), newpassword)!=0){
-                user = userService.getUser(user.getAccount());
-                session.setAttribute("current_user", user);
-                modelAndView.addObject("messge","修改成功");
-                modelAndView.setViewName("/changePassword");
-            }else{
-                modelAndView.addObject("message","修改失败");
-                modelAndView.setViewName("changePassword");
-            }
+        if(userService.changePassword(accountOrName, password)!=0){
+            User user = userService.getUser(accountOrName);
+            session.setAttribute(CURRENT_USER, user);
+            modelAndView.addObject(MESSAGE,"修改成功");
+            modelAndView.setViewName("redirect:/changePassword.jsp");
         }else{
-            modelAndView.addObject("message","修改失败");
+            modelAndView.addObject(MESSAGE,"修改失败");
             modelAndView.setViewName("changePassword");
         }
         return modelAndView;
@@ -115,19 +108,17 @@ public class UserController {
                                    @RequestParam("email") String email,
                                    HttpSession session,
                                    ModelAndView modelAndView){
-        System.out.println(account+"::"+username+"::"+tel+"::"+email);
         User user = new User();
         user.setUsername(username);
         user.setTel(tel);
         user.setEmail(email);
-        System.out.println(user);
         if(userService.changeUserInfo(account,user)!=0){
             user = userService.getUser(account);
-            session.setAttribute("current_user", user);
-            modelAndView.addObject("messge","修改成功");
-            modelAndView.setViewName("/changeUserInfo");
+            session.setAttribute(CURRENT_USER, user);
+            modelAndView.addObject(MESSAGE,"修改成功");
+            modelAndView.setViewName("redirect:/changeUserInfo.jsp");
         } else {
-            modelAndView.addObject("message","修改失败");
+            modelAndView.addObject(MESSAGE,"修改失败");
             modelAndView.setViewName("changeUserInfo");
         }
         return modelAndView;
@@ -143,11 +134,11 @@ public class UserController {
                                    ModelAndView modelAndView){
         User user = userService.getUser(account);
         if(user.getUsername().equals(username) && user.getTel().equals(tel) && user.getEmail().equals(email)){
-            session.setAttribute("current_user", user);
+            session.setAttribute(CURRENT_USER, user);
             modelAndView.addObject("messge","验证通过");
-            modelAndView.setViewName("/resetPassword");
+            modelAndView.setViewName("redirect:/resetPassword.jsp");
         }else {
-            modelAndView.addObject("message","验证失败，请重新验证");
+            modelAndView.addObject(MESSAGE,"验证失败，请重新验证");
             modelAndView.setViewName("forgetVerify");
         }
         return modelAndView;
@@ -155,24 +146,17 @@ public class UserController {
 
     @RequestMapping("reset")
     @ResponseBody
-    public ModelAndView resetPassword(@RequestParam("newpassword") String newpassword,
-                                      @RequestParam("newpassword1") String newpassword1,
+    public ModelAndView resetPassword(@RequestParam("password") String newpassword,
                                       HttpSession session,
                                       ModelAndView modelAndView){
-        User user = (User) session.getAttribute("current_user");
-        System.out.println(user.toString());
-        if(newpassword.equals(newpassword1)){
-            if(userService.changePassword(user.getAccount(), newpassword)!=0){
-                user = userService.getUser(user.getAccount());
-                session.setAttribute("current_user", user);
-                modelAndView.addObject("messge","重设成功");
-                modelAndView.setViewName("/shopindex1");
-            }else{
-                modelAndView.addObject("message","重设失败");
-                modelAndView.setViewName("resetPassword");
-            }
+        User user = (User) session.getAttribute(CURRENT_USER);
+        if(userService.changePassword(user.getAccount(), newpassword)!=0){
+            user = userService.getUser(user.getAccount());
+            session.setAttribute(CURRENT_USER, user);
+            modelAndView.addObject("messge","重设成功");
+            modelAndView.setViewName(URL_1);
         }else{
-            modelAndView.addObject("message","重设失败");
+            modelAndView.addObject(MESSAGE,"重设失败");
             modelAndView.setViewName("resetPassword");
         }
         return modelAndView;
@@ -180,13 +164,13 @@ public class UserController {
 
     @RequestMapping("writeoff")
     @ResponseBody
-    public ModelAndView writeOff(HttpSession session,
+    public ModelAndView writeOff(@RequestParam("uid") int uid,
+                                 HttpSession session,
                                  ModelAndView modelAndView){
-        User user = (User) session.getAttribute("current_user");
-        if(userService.delete(user.getUid()) != 0){
-            session.removeAttribute("current_user");
-            modelAndView.setViewName("/shopindex");
-            System.out.println("成功注销账号");
+
+        if(userService.delete(uid) != 0 && addressService.deleteAddressByUser(uid)!=0){
+            session.removeAttribute(CURRENT_USER);
+            modelAndView.setViewName("redirect:/shopindex.jsp");
         }
         return modelAndView;
     }

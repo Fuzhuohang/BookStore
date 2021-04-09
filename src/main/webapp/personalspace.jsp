@@ -9,7 +9,7 @@
 <%
     User user = (User) request.getSession().getAttribute("current_user");
 %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
     <title>个人空间</title>
@@ -20,11 +20,13 @@
     <link href="css/dashboard.css" rel="stylesheet">
     <link href="css/signin.css" rel="stylesheet">
     <script type="text/javascript" language="JavaScript">
-        function url(){
-            var obj = document.getElementById("writeOff");
+        function url(uid){
             if(confirm('警告：注销账号将不可逆，请慎重考虑！！！请确认是否注销账号')){
-                window.location.href="writeoff.action";
+                window.location.href="writeoff.action?uid="+uid;
             }
+        }
+        function addr(){
+            window.location.href="getAddressList.action"
         }
     </script>
 </head>
@@ -43,11 +45,12 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="personalspace.jsp">欢迎！<%=user.getUsername()%></a></li>
+                    <li class="active"><a href="personalspace.jsp">欢迎！${sessionScope.current_user.username}</a></li>
                     <li><a href="logout.action">退出登录</a></li>
                     <li><a href="#about">收藏夹</a></li>
                     <li><a href="#shopping">购物车</a></li>
                     <li><a href="#order">订单</a></li>
+                    <li><a href="#">我的店铺</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
@@ -65,26 +68,26 @@
                     <li class="active"><a href="personalspace.jsp">个人信息</a></li>
                     <li><a href="changeUserInfo.jsp">修改信息</a></li>
                     <li><a href="changePassword.jsp">修改密码</a></li>
-                    <li><a href="shippingAddress.jsp">我的地址</a></li>
+                    <li><a onclick="addr()" href="javascript:void(0)">我的地址</a></li>
                     <li><a href="#">我的足迹</a></li>
                     <li><a href="#">我的评论</a></li>
-                    <li><a onclick="url()" href="javascript:void(0)">注销账号</a></li>
+                    <li><a onclick="url(${sessionScope.current_user.uid})" href="javascript:void(0)">注销账号</a></li>
                 </ul>
             </div>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
             <div align="center">
-                <h1>你好！<%=user.getUsername()%></h1>
+                <h1>你好！${sessionScope.current_user.username}</h1>
                 <label for="account">账号：</label>
-                <input id="account" name="account" type="text" value="<%=user.getAccount()%>" disabled>
+                <input id="account" name="account" type="text" value="${sessionScope.current_user.account}" disabled>
             </div>
             <div align="center">
                 <label for="tel">电话：</label>
-                <input id="tel" name="tel" type="tel" value="<%=user.getTel()%>" disabled>
+                <input id="tel" name="tel" type="tel" value="${sessionScope.current_user.tel}" disabled>
             </div>
             <div align="center">
                 <label for="email">邮件：</label>
-                <input id="email" name="email" type="email" value="<%=user.getEmail()%>" disabled>
+                <input id="email" name="email" type="email" value="${sessionScope.current_user.email}" disabled>
             </div>
         </div>
     </div>

@@ -51,4 +51,15 @@ public class Address {
     public void setAddr(String addr) {
         Addr = addr;
     }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "AddrId=" + AddrId +
+                ", Uid=" + Uid +
+                ", Name='" + Name + '\'' +
+                ", Tel='" + Tel + '\'' +
+                ", Addr='" + Addr + '\'' +
+                '}';
+    }
 }

@@ -9,7 +9,7 @@
 <%
     User user = (User) request.getSession().getAttribute("current_user");
 %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
     <title>个人空间</title>
@@ -20,31 +20,33 @@
     <link href="css/dashboard.css" rel="stylesheet">
     <link href="css/signin.css" rel="stylesheet">
     <script type="text/javascript" language="JavaScript">
-        function url(){
-            var obj = document.getElementById("writeOff");
+        function url(uid){
             if(confirm('警告：注销账号将不可逆，请慎重考虑！！！请确认是否注销账号')){
-                window.location.href="writeoff.action";
+                window.location.href="writeoff.action?uid="+uid;
             }
         }
 
-        <%--function postform(){--%>
-        <%--    var oldpassword = document.getElementById("oldpassword").value;--%>
-        <%--    if(oldpassword == <%=user.getPassword()%>){--%>
-        <%--        var newpassword = document.getElementById("newpassword").value;--%>
-        <%--        var newpassword2 = document.getElementById("newpassword2").value;--%>
-        <%--        if(newpassword == newpassword2){--%>
-        <%--            var accountOrName = <%=user.getAccount()%>;--%>
-        <%--            var password = newpassword;--%>
-        <%--            window.location.href="/updatepwd.action?accountOrName="+ accountOrName+"&password="+password;--%>
-        <%--        }else{--%>
-        <%--            alert("两次密码不一样");--%>
-        <%--            return false;--%>
-        <%--        }--%>
-        <%--    }else{--%>
-        <%--        alert("旧密码输入错误");--%>
-        <%--        return false;--%>
-        <%--    }--%>
-        <%--}--%>
+        function postform(){
+            var oldpassword = document.getElementById("oldpassword").value;
+            if(oldpassword == ${sessionScope.current_user.password}){
+                var newpassword = document.getElementById("newpassword").value;
+                var newpassword2 = document.getElementById("newpassword1").value;
+                if(newpassword == oldpassword){
+                    alert("新密码与旧密码相同，请重新输入");
+                    return false;
+                }
+                if(newpassword == newpassword2){
+                    var password = newpassword;
+                    window.location.href="updatepwd.action?accountOrName="+ ${sessionScope.current_user.account}+"&password="+password;
+                }else{
+                    alert("两次密码不一样");
+                    return false;
+                }
+            }else{
+                alert("旧密码输入错误");
+                return false;
+            }
+        }
     </script>
     <script type="javascript">
 
@@ -65,11 +67,12 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="personalspace.jsp">欢迎！<%=user.getUsername()%></a></li>
+                <li class="active"><a href="personalspace.jsp">欢迎！${sessionScope.current_user.username}</a></li>
                 <li><a href="logout.action">退出登录</a></li>
                 <li><a href="#about">收藏夹</a></li>
                 <li><a href="#shopping">购物车</a></li>
                 <li><a href="#order">订单</a></li>
+                <li><a href="#">我的店铺</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -84,22 +87,34 @@
                 <li><a href="shippingAddress.jsp">我的地址</a></li>
                 <li><a href="#">我的足迹</a></li>
                 <li><a href="#">我的评论</a></li>
-                <li><a onclick="url()" href="javascript:void(0)">注销账号</a></li>
+                <li><a onclick="url(${sessionScope.current_user.uid})" href="javascript:void(0)">注销账号</a></li>
             </ul>
         </div>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
-        <form id="formid" class="form-signin" action="updatepwd.action" method="post">
-            <label for="oldpassword" class="sr-only">请输入旧密码：</label>
-            <input type="password" name="oldpassword" id="oldpassword" class="form-control" placeholder="请输入旧密码" required>
-            <label for="newpassword" class="sr-only">请输入新密码：</label>
-            <input type="password" name="newpassword" id="newpassword" class="form-control" placeholder="请输入新密码" required>
-            <label for="newpassword1" class="sr-only">请确认新密码：</label>
-            <input type="password" name="newpassword1" id="newpassword1" class="form-control" placeholder="请确认新密码" required>
-            <div>
-                <button id="btn_login" class="btn btn-lg btn-primary btn-block" type="submit">提&nbsp;&nbsp;&nbsp;&nbsp;交</button>
-            </div>
-        </form>
+<%--        <form id="formid" class="form-signin" action="updatepwd.action" method="post">--%>
+<%--            <label for="oldpassword" class="sr-only">请输入旧密码：</label>--%>
+<%--            <input type="password" name="oldpassword" id="oldpassword" class="form-control" placeholder="请输入旧密码" required>--%>
+<%--            <label for="newpassword" class="sr-only">请输入新密码：</label>--%>
+<%--            <input type="password" name="newpassword" id="newpassword" class="form-control" placeholder="请输入新密码" required>--%>
+<%--            <label for="newpassword1" class="sr-only">请确认新密码：</label>--%>
+<%--            <input type="password" name="newpassword1" id="newpassword1" class="form-control" placeholder="请确认新密码" required>--%>
+<%--            <div>--%>
+<%--                <button id="btn_login" class="btn btn-lg btn-primary btn-block" type="submit">提&nbsp;&nbsp;&nbsp;&nbsp;交</button>--%>
+<%--            </div>--%>
+<%--        </form>--%>
+
+    <form id="formid" class="form-signin">
+        <label for="oldpassword" class="sr-only">请输入旧密码：</label>
+        <input type="password" name="oldpassword" id="oldpassword" class="form-control" placeholder="请输入旧密码" required>
+        <label for="newpassword" class="sr-only">请输入新密码：</label>
+        <input type="password" name="newpassword" id="newpassword" class="form-control" placeholder="请输入新密码" required>
+        <label for="newpassword1" class="sr-only">请确认新密码：</label>
+        <input type="password" name="newpassword1" id="newpassword1" class="form-control" placeholder="请确认新密码" required>
+        <div>
+            <button id="btn_login" class="btn btn-lg btn-primary btn-block" type="button" onclick="postform()">提&nbsp;&nbsp;&nbsp;&nbsp;交</button>
+        </div>
+    </form>
 
     </div>
 </div>

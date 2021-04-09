@@ -3,6 +3,9 @@ package com.scu.fuzhuohang.service.impl;
 import com.scu.fuzhuohang.bean.Address;
 import com.scu.fuzhuohang.dao.AddressDao;
 import com.scu.fuzhuohang.service.AddressService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -11,8 +14,11 @@ import java.util.List;
  * @Date 2021/4/8 14:57
  * @Version 1.0
  */
+@Service
+@Transactional
 public class AddressServiceImpl implements AddressService {
 
+    @Autowired
     private AddressDao addressDao;
 
     @Override

@@ -9,7 +9,7 @@
 <%
     User user = (User) request.getSession().getAttribute("current_user");
 %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
     <title>个人空间</title>
@@ -20,10 +20,9 @@
     <link href="css/dashboard.css" rel="stylesheet">
     <link href="css/signin.css" rel="stylesheet">
     <script type="text/javascript" language="JavaScript">
-        function url(){
-            var obj = document.getElementById("writeOff");
+        function url(uid){
             if(confirm('警告：注销账号将不可逆，请慎重考虑！！！请确认是否注销账号')){
-                window.location.href="writeoff.action";
+                window.location.href="writeoff.action?uid="+uid;
             }
         }
     </script>
@@ -43,11 +42,12 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="personalspace.jsp">欢迎！<%=user.getUsername()%></a></li>
+                <li class="active"><a href="personalspace.jsp">欢迎！${sessionScope.current_user.username}</a></li>
                 <li><a href="logout.action">退出登录</a></li>
                 <li><a href="#about">收藏夹</a></li>
                 <li><a href="#shopping">购物车</a></li>
                 <li><a href="#order">订单</a></li>
+                <li><a href="#">我的店铺</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -62,7 +62,7 @@
                 <li><a href="shippingAddress.jsp">我的地址</a></li>
                 <li><a href="#">我的足迹</a></li>
                 <li><a href="#">我的评论</a></li>
-                <li><a onclick="url()" href="javascript:void(0)">注销账号</a></li>
+                <li><a onclick="url(${sessionScope.current_user.uid})" href="javascript:void(0)">注销账号</a></li>
             </ul>
         </div>
     </div>

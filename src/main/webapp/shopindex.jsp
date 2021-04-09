@@ -5,44 +5,184 @@
   Time: 9:04
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
-    <title>商城</title>
+    <title>悦读书城</title>
+    <script src="webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="layui/js/layui.js"></script>
     <link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="layui/css/layui.css" rel="stylesheet" media="all">
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <link href="css/theme.css" rel="stylesheet">
+    <script>
+        layui.use(['dropdown', 'util'], function(){
+            var dropdown = layui.dropdown
+                ,util = layui.util
+                ,$ = layui.jquery;
+
+            //菜单点击事件
+            dropdown.on('click(demo1)', function(options){
+                var thisElem = $(this);
+                console.log(thisElem, options);
+            });
+
+
+            util.event('lay-active', {
+                normal: function(){
+                    $('#demo-box').children().addClass('layui-col-md3').removeClass('layui-col-md4');
+                    $('#demo-box').find('.layui-menu').removeClass('layui-menu-lg');
+                }
+                ,lg: function(){
+                    $('#demo-box').children().addClass('layui-col-md4').removeClass('layui-col-md3')
+                    $('#demo-box').find('.layui-menu').addClass('layui-menu-lg');
+                }
+            });
+        });
+        layui.use(['carousel', 'form'], function(){
+            var carousel = layui.carousel
+                ,form = layui.form;
+
+            //常规轮播
+            carousel.render({
+                elem: '#test1'
+                ,arrow: 'always'
+            });
+
+            //改变下时间间隔、动画类型、高度
+            carousel.render({
+                elem: '#test2'
+                ,interval: 1800
+                ,anim: 'fade'
+                ,height: '120px'
+            });
+
+            //设定各种参数
+            var ins3 = carousel.render({
+                elem: '#test3'
+            });
+            //图片轮播
+            carousel.render({
+                elem: '#test10'
+                ,width: '778px'
+                ,height: '440px'
+                ,interval: 5000
+            });
+
+            //事件
+            carousel.on('change(test4)', function(res){
+                console.log(res)
+            });
+
+            var $ = layui.$, active = {
+                set: function(othis){
+                    var THIS = 'layui-bg-normal'
+                        ,key = othis.data('key')
+                        ,options = {};
+
+                    othis.css('background-color', '#5FB878').siblings().removeAttr('style');
+                    options[key] = othis.data('value');
+                    ins3.reload(options);
+                }
+            };
+
+            //监听开关
+            form.on('switch(autoplay)', function(){
+                ins3.reload({
+                    autoplay: this.checked
+                });
+            });
+
+            $('.demoSet').on('keyup', function(){
+                var value = this.value
+                    ,options = {};
+                if(!/^\d+$/.test(value)) return;
+
+                options[this.name] = value;
+                ins3.reload(options);
+            });
+
+            //其它示例
+            $('.demoTest .layui-btn').on('click', function(){
+                var othis = $(this), type = othis.data('type');
+                active[type] ? active[type].call(this, othis) : '';
+            });
+        });
+    </script>
 </head>
 <body>
 <!-- Fixed navbar -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar">a</span>
-                <span class="icon-bar">b</span>
-                <span class="icon-bar">c</span>
-            </button>
-            <a class="navbar-brand" href="index.html">悦读书城</a>
+<nav>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar">a</span>
+                    <span class="icon-bar">b</span>
+                    <span class="icon-bar">c</span>
+                </button>
+                <a class="navbar-brand" href="index.html">悦读书城</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="login.jsp">登录</a></li>
+                    <li><a href="register.jsp">注册</a></li>
+                    <li><a href="#about">收藏夹</a></li>
+                    <li><a href="#shopping">购物车</a></li>
+                    <li><a href="#order">订单</a></li>
+                    <li><a href="#">我的店铺</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="login.jsp">登录</a></li>
-                <li><a href="register.jsp">注册</a></li>
-                <li><a href="#about">收藏夹</a></li>
-                <li><a href="#shopping">购物车</a></li>
-                <li><a href="#order">订单</a></li>
-            </ul>
-        </div><!--/.nav-collapse -->
     </div>
-<%--    <form>--%>
-<%--        <div>--%>
-<%--            <input type="text" id="search" name="search" class="form-control">--%>
-<%--            <button id="btn_login" class="btn btn-lg btn-primary btn-block" type="submit">搜索</button>&ndash;%&gt;--%>
-<%--        </div>--%>
-<%--    </form>--%>
+    <div class="layui-row container" style="display: flex;margin-bottom: 10px">
+        <div class="layui-col-xs3">&nbsp;</div>
+        <div class="layui-col-xs6" style="display: flex">
+            <input type="text" id="search" name="search" class="form-control" style="height: 38px">
+            <button type="button" class="layui-btn" style="float:right;">搜索</button>
+        </div>
+        <div class="layui-col-xs3">&nbsp;</div>
+    </div>
 </nav>
+<div>
+<%--    <div class="layui-row layui-col-space30" id="demo-box" style="margin: 0 auto; max-width: 970px;">--%>
+<%--        <div class="layui-col-xs9 layui-col-md3">--%>
+<%--            <div class="layui-panel">--%>
+<%--                <ul class="layui-menu" id="demo1">--%>
+<%--                    <li class="layui-menu-item-group" lay-options="{type: 'group'}">--%>
+<%--                        <ul>--%>
+<%--                            <li class="layui-menu-item-parent" lay-options="{type: 'parent'}">--%>
+<%--                                <div class="layui-menu-body-title">--%>
+<%--                                    menu item 9-2--%>
+<%--                                    <i class="layui-icon layui-icon-right"></i>--%>
+<%--                                </div>--%>
+<%--                                <div class="layui-panel layui-menu-body-panel">--%>
+<%--                                    <ul>--%>
+<%--                                        <li><div class="layui-menu-body-title">menu item 9-2-1</div></li>--%>
+<%--                                        <li><div class="layui-menu-body-title">menu item 9-2-2</div></li>--%>
+<%--                                        <li><div class="layui-menu-body-title">menu item 9-2-3</div></li>--%>
+<%--                                    </ul>--%>
+<%--                                </div>--%>
+<%--                            </li>--%>
+<%--                        </ul>--%>
+<%--                    </li>--%>
+<%--                </ul>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--    <div class="layui-carousel" id="test1" lay-filter="test1">--%>
+<%--        <div carousel-item="">--%>
+<%--            <div>条目1</div>--%>
+<%--            <div>条目2</div>--%>
+<%--            <div>条目3</div>--%>
+<%--            <div>条目4</div>--%>
+<%--            <div>条目5</div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
+
 </body>
 </html>
