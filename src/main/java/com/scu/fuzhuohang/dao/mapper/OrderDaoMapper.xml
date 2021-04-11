@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scu.fuzhuohang.dao.OrderDao">
+    <select id="getOrder" resultType="Order">
+        SELECT * FROM orders
+        WHERE Oid = #{oid};
+    </select>
+
+    <select id="getOrderAll" resultType="Order">
+        SELECT * FROM orders
+        WHERE Uid = #{uid};
+    </select>
+
+    <select id="getOrderByState" resultType="Order">
+        SELECT * FROM orders
+        WHERE Uid = #{uid} AND Ostate = #{ostate};
+    </select>
+
+    <insert id="createOrder">
+        INSERT INTO orders (Oid, Uid, Bid, Pid, Money, Ostate, Addrid, Time, Pnum, Total)
+        VALUES (null, #{order.Uid},#{order.Bid},#{order.Pid},#{order.Money},#{order.Ostate},#{order.Addrid},#{order.Time},#{order.Pnum},#{order.Total});
+    </insert>
+
+    <update id="editOrder">
+        UPDATE orders
+        SET Money = #{order.Money},Addrid = #{order.Addrid},Pnum = #{order.Pnum},Total = #{order.Total}
+        WHERE Oid = #{oid};
+    </update>
+
+    <update id="updateState">
+        UPDATE user
+        SET Ostate = #{order.Ostate}, Time = #{order.time}
+        WHERE Oid = #{oid};
+    </update>
+
+    <delete id="deleteOrder">
+        DELETE FROM orders
+        WHERE Oid = #{oid};
+    </delete>
+
+    <select id="getCountByState" resultType="Integer">
+        SELECT COUNT(*)
+        FROM orders
+        WHERE Uid = #{uid} AND Ostate = #{ostate};
+    </select>
+
+</mapper>

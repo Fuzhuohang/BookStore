@@ -14,9 +14,11 @@ public class Orders {
     private int Uid;
     private int Bid;
     private int Pid;
+    private int Pnum;
     private double Money;
     private int Ostate;
     private int AddrId;
+    private double Total;
 
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date Time;
@@ -53,6 +55,14 @@ public class Orders {
         Pid = pid;
     }
 
+    public int getPnum() {
+        return Pnum;
+    }
+
+    public void setPnum(int pnum) {
+        Pnum = pnum;
+    }
+
     public double getMoney() {
         return Money;
     }
@@ -83,5 +93,13 @@ public class Orders {
 
     public void setTime(Date time) {
         Time = time;
+    }
+
+    public double getTotal() {
+        return Total;
+    }
+
+    public void setTotal(double total) {
+        Total = total;
     }
 }

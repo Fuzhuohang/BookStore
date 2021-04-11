@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scu.fuzhuohang.dao.BusinessDao">
+    <select id="getBusinessByUser" resultType="Business">
+        SELECT * FROM business
+        WHERE Uid = #{uid};
+    </select>
+
+    <select id="getBusinessByBusiness" resultType="Business">
+        SELECT * FROM business
+        WHERE Bid = #{bid};
+    </select>
+
+    <insert id="createBusiness">
+        INSERT INTO business (Bid,Uid,Bname,BAddr)
+        VALUES (null, #{business.Uid},#{business.Bname},#{business.BAddr});
+    </insert>
+
+    <update id="editBusiness">
+        UPDATE user
+        SET Bname = #{business.Bname},BAddr = #{business.BAddr}
+        WHERE Uid = #{uid};
+    </update>
+
+    <delete id="deleteBusiness">
+        DELETE FROM user
+        WHERE Bid = #{bid};
+    </delete>
+</mapper>

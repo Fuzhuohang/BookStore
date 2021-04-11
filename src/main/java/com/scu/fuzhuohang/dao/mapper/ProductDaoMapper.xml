@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scu.fuzhuohang.dao.ProductDao">
+    <select id="getProductByName" resultType="Product">
+        SELECT * FROM product
+        WHERE Pname = #{pname};
+    </select>
+
+    <select id="getProductById" resultType="Product">
+        SELECT * FROM product
+        WHERE Pid = #{pid};
+    </select>
+
+    <insert id="addProduct">
+        INSERT INTO product (Uid, Bid, Pname, Price, Pnum, Pdesc, Image, Csid)
+        VALUES (null, #{product.Bid},#{product.Pname},#{product.Price},#{product.Pnum},#{product.Pdesc},#{product.Image},#{product.Csid});
+    </insert>
+
+    <update id="editProduct">
+        UPDATE user
+        SET Pname=#{product.Pname}, Price=#{product.Price}, Pnum=#{product.Pnum}, Pdesc=#{product.Pdesc}, Image=#{product.Image}, Csid=#{product.Csid}
+        WHERE Pid = #{pid};
+    </update>
+
+    <update id="updateNum">
+        UPDATE user
+        SET Pnum=#{pnum}
+        WHERE Pid = #{pid};
+    </update>
+
+    <delete id="deleteProductByProduct">
+        DELETE FROM product
+        WHERE Pid = #{pid};
+    </delete>
+
+    <delete id="deleteProductByBusiness">
+        DELETE FROM product
+        WHERE Bid = #{bid};
+    </delete>
+</mapper>

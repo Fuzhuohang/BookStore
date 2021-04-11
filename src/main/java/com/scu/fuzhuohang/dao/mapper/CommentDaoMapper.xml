@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scu.fuzhuohang.dao.CommentDao">
+    <select id="getCommentsByUser" resultType="Comment">
+        SELECT * FROM comment
+        WHERE Uid = #{uid};
+    </select>
+
+    <select id="getCommentsByProduct" resultType="Comment">
+        SELECT * FROM comment
+        WHERE Pid = #{pid};
+    </select>
+
+    <insert id="addComment">
+        INSERT INTO comment (Cid,Uid,Pid,Score,Comm)
+        VALUES (null, #{comment.Uid},#{comment.Pid},#{comment.Score},#{comment.Comm});
+    </insert>
+</mapper>
