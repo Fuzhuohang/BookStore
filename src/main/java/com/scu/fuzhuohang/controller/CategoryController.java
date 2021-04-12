@@ -29,41 +29,9 @@ public class CategoryController {
     public ModelAndView getCategory(HttpSession session,
                                     ModelAndView modelAndView){
         List<Category> categoryList = categoryService.getCategoryFirst();
-//        List<Cate> cateList = new ArrayList<>();
-        List<List<CategorySecond>> categorySecondList = new ArrayList<List<CategorySecond>>();
-        for(Category category : categoryList){
-            List<CategorySecond> categorySeconds = categoryService.getCategorySecond(category.getCateId());
-//            Cate cate = new Cate();
-//            cate.setCategory(category);
-//            cate.setCategorySeconds(categorySeconds);
-//            cateList.add(cate);
-            categorySecondList.add(categorySeconds);
-        }
         session.setAttribute("current_category",categoryList);
-        session.setAttribute("current_categorysecond",categorySecondList);
         modelAndView.addObject("message","加载成功");
         modelAndView.setViewName("redirect:/jsp/shopping/shopindex.jsp");
         return modelAndView;
-    }
-}
-
-class Cate{
-    Category category;
-    List<CategorySecond> categorySeconds;
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public List<CategorySecond> getCategorySeconds() {
-        return categorySeconds;
-    }
-
-    public void setCategorySeconds(List<CategorySecond> categorySeconds) {
-        this.categorySeconds = categorySeconds;
     }
 }

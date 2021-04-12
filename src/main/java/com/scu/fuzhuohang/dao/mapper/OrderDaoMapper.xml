@@ -9,7 +9,7 @@
 
     <select id="getOrderAll" resultType="Orders">
         SELECT * FROM orders
-        WHERE Uid = #{uid};
+        WHERE Uid = #{uid} AND Ostate != 0;
     </select>
 
     <select id="getOrderByState" resultType="Orders">
@@ -19,7 +19,7 @@
 
     <select id="getBusinessOrderAll" resultType="Orders">
         SELECT * FROM orders
-        WHERE Bid = #{bid};
+        WHERE Bid = #{bid} AND Ostate != 0;
     </select>
 
     <select id="getBusinessOrderByState" resultType="Orders">
@@ -52,7 +52,7 @@
     <select id="getCount" resultType="Integer">
         SELECT COUNT(*)
         FROM orders
-        WHERE Uid = #{uid};
+        WHERE Uid = #{uid} AND Ostate != 0;
     </select>
 
     <select id="getCountByState" resultType="Integer">
@@ -64,7 +64,7 @@
     <select id="getBusinessCount" resultType="Integer">
         SELECT COUNT(*)
         FROM orders
-        WHERE Bid = #{bid};
+        WHERE Bid = #{bid} AND Ostate != 0;
     </select>
 
     <select id="getBusinessCountByState" resultType="Integer">
