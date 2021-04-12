@@ -102,20 +102,20 @@ public class BusinessController {
             business=businessService.enterMyBusiness(uid);
             session.setAttribute(CURRENT_BUSINESS,business);
             modelAndView.addObject(MESSAGE,"修改成功");
-
+            modelAndView.setViewName("redirect:/jsp/business/changeBusinessInfo.jsp");
         }else{
             modelAndView.addObject(MESSAGE,"修改失败");
-
+            modelAndView.setViewName("changeBusinessInfo");
         }
         return modelAndView;
     }
 
     @RequestMapping("/jsp/*/deletebusiness")
     @ResponseBody
-    public ModelAndView writeOff(@RequestParam("bid") int businessId,
+    public ModelAndView writeOff(@RequestParam("uid") int uid,
                         HttpSession session,
                         ModelAndView modelAndView){
-        if(businessService.delete(businessId)!=0){
+        if(businessService.delete(uid)!=0 && userService.updateIsBusiness(uid,0)!=0){
             session.removeAttribute(CURRENT_BUSINESS);
             modelAndView.setViewName("redirect:/jsp/shopping/shopindex1.jsp");
         }

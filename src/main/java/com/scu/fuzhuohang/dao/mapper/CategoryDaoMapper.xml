@@ -46,4 +46,9 @@
         DELETE FROM categorysecond
         WHERE Csid = #{csid};
     </delete>
+
+    <delete id="deleteCategorySecondByFirst">
+        DELETE FROM categorysecond
+        WHERE Cateid = #{cateid};
+    </delete>
 </mapper>

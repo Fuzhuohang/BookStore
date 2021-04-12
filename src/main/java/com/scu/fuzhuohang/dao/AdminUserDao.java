@@ -11,7 +11,7 @@ import java.util.List;
  * @Version 1.0
  */
 public interface AdminUserDao {
-    public AdminUser getAdminUser(@Param("username") String ausername);
+    public AdminUser getAdminUser(@Param("username") String ausername, @Param("password") String apassword);
 
     public List<AdminUser> getAdminUserAll();
 

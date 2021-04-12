@@ -18,13 +18,13 @@
     </insert>
 
     <update id="editBusiness">
-        UPDATE user
+        UPDATE business
         SET Bname = #{business.Bname},BAddr = #{business.BAddr}
         WHERE Uid = #{uid};
     </update>
 
     <delete id="deleteBusiness">
-        DELETE FROM user
-        WHERE Bid = #{bid};
+        DELETE FROM business
+        WHERE Uid = #{uid};
     </delete>
 </mapper>

@@ -18,5 +18,5 @@ public interface BusinessDao {
 
     public int editBusiness(@Param("uid") int userId, @Param("business") Business business);
 
-    public int deleteBusiness(@Param("bid") int businessId);
+    public int deleteBusiness(@Param("uid") int userId);
 }

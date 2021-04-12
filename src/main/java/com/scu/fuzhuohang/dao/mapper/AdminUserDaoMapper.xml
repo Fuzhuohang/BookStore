@@ -4,7 +4,7 @@
 <mapper namespace="com.scu.fuzhuohang.dao.AdminUserDao">
     <select id="getAdminUser" resultType="AdminUser">
         SELECT * FROM adminuser
-        WHERE Ausername = #{username};
+        WHERE Ausername = #{username} AND Apassword = #{password};
     </select>
 
     <select id="getAdminUserAll" resultType="AdminUser">

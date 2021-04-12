@@ -48,9 +48,9 @@
                     <li class="active"><a href="${pageContext.request.contextPath}/jsp/personalspace/personalspace.jsp">欢迎！${sessionScope.current_user.username}</a></li>
                     <li><a href="logout.action">退出登录</a></li>
                     <li><a href="#about">收藏夹</a></li>
-                    <li><a href="#shopping">购物车</a></li>
-                    <li><a href="#order">订单</a></li>
-                    <li><a href="#">我的店铺</a></li>
+                    <li><a href="${pageContext.request.contextPath}/jsp/shopping/shoppingcart.jsp">购物车</a></li>
+                    <li><a href="${pageContext.request.contextPath}/jsp/shopping/orders.jsp">订单</a></li>
+                    <li><a href="entermybusiness.action?userId=${sessionScope.current_user.uid}">我的店铺</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
@@ -59,9 +59,9 @@
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar" >
                 <ul class="nav nav-sidebar">
-                    <li class="active"><a href="personalspace.jsp">个人信息</a></li>
-                    <li><a href="changeUserInfo.jsp">修改信息</a></li>
-                    <li><a href="changePassword.jsp">修改密码</a></li>
+                    <li class="active"><a href="${pageContext.request.contextPath}/jsp/personalspace/personalspace.jsp">个人信息</a></li>
+                    <li><a href="${pageContext.request.contextPath}/jsp/personalspace/changeUserInfo.jsp">修改信息</a></li>
+                    <li><a href="${pageContext.request.contextPath}/jsp/personalspace/changePassword.jsp">修改密码</a></li>
                     <li><a onclick="addr()" href="javascript:void(0)">我的地址</a></li>
                     <li><a href="#">我的足迹</a></li>
                     <li><a href="#">我的评论</a></li>

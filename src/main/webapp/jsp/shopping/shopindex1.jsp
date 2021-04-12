@@ -11,7 +11,7 @@
     <title>悦读书城</title>
     <script src="${pageContext.request.contextPath}/webjars/jquery/3.6.0/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/layui/js/layui.js"></script>
+    <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
     <link href="${pageContext.request.contextPath}/webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/layui/css/layui.css" rel="stylesheet" media="all">
@@ -40,8 +40,8 @@
                         <li><a href="${pageContext.request.contextPath}/jsp/personalspace/personalspace.jsp">欢迎！${sessionScope.current_user.username}</a></li>
                         <li><a href="logout.action">退出登录</a></li>
                         <li><a href="#about">收藏夹</a></li>
-                        <li><a href="#shopping">购物车</a></li>
-                        <li><a href="#order">订单</a></li>
+                        <li><a href="${pageContext.request.contextPath}/jsp/shopping/shoppingcart.jsp">购物车</a></li>
+                        <li><a href="${pageContext.request.contextPath}/jsp/shopping/orders.jsp">订单</a></li>
                         <li><a href="entermybusiness.action?userId=${sessionScope.current_user.uid}">我的店铺</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->

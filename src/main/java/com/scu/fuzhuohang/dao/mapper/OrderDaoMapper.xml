@@ -17,6 +17,16 @@
         WHERE Uid = #{uid} AND Ostate = #{ostate};
     </select>
 
+    <select id="getBusinessOrderAll" resultType="Orders">
+        SELECT * FROM orders
+        WHERE Bid = #{bid};
+    </select>
+
+    <select id="getBusinessOrderByState" resultType="Orders">
+        SELECT * FROM orders
+        WHERE Bid = #{bid} AND Ostate = #{ostate};
+    </select>
+
     <insert id="createOrder">
         INSERT INTO orders (Oid, Uid, Bid, Pid, Money, Ostate, Addrid, Time, Pnum, Total)
         VALUES (null, #{order.Uid},#{order.Bid},#{order.Pid},#{order.Money},#{order.Ostate},#{order.Addrid},#{order.Time},#{order.Pnum},#{order.Total});
@@ -39,10 +49,28 @@
         WHERE Oid = #{oid};
     </delete>
 
+    <select id="getCount" resultType="Integer">
+        SELECT COUNT(*)
+        FROM orders
+        WHERE Uid = #{uid};
+    </select>
+
     <select id="getCountByState" resultType="Integer">
         SELECT COUNT(*)
         FROM orders
         WHERE Uid = #{uid} AND Ostate = #{ostate};
+    </select>
+
+    <select id="getBusinessCount" resultType="Integer">
+        SELECT COUNT(*)
+        FROM orders
+        WHERE Bid = #{bid};
+    </select>
+
+    <select id="getBusinessCountByState" resultType="Integer">
+        SELECT COUNT(*)
+        FROM orders
+        WHERE Bid = #{bid} AND Ostate = #{ostate};
     </select>
 
 </mapper>

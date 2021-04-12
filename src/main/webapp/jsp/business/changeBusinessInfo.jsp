@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: LX
   Date: 2021/4/12
-  Time: 10:49
+  Time: 14:32
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
@@ -56,8 +56,8 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar" >
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="mybusiness.jsp">店铺信息</a></li>
-                <li><a href="changeBusinessInfo.jsp">修改信息</a></li>
+                <li><a href="mybusiness.jsp">店铺信息</a></li>
+                <li class="active"><a href="changeBusinessInfo.jsp">修改信息</a></li>
                 <li><a href="businessProducts.jsp">全部商品</a></li>
                 <li><a href="businessorders.jsp">订单详情</a></li>
                 <li><a onclick="url(${sessionScope.current_business.uid})" href="javascript:void(0)">关停店铺</a></li>
@@ -65,7 +65,19 @@
         </div>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
-
+        <form class="form-signin" action="updatebusinessinfo.action?uid=${sessionScope.current_business.uid}" method="post">
+            <div align="center">
+                <label for="bname">店铺名称：</label>
+                <input id="bname" name="bname" type="text" class="form-control2" value="${sessionScope.current_business.bname}" readonly="readonly">
+            </div>
+            <div align="center">
+                <label for="baddr">店铺地址：</label>
+                <input id="baddr" name="baddr" type="text" value="${sessionScope.current_business.BAddr}">
+            </div>
+            <div>
+                <button id="btn_login" class="btn btn-lg btn-primary btn-block" type="submit">提&nbsp;&nbsp;&nbsp;&nbsp;交</button>
+            </div>
+        </form>
     </div>
 </div>
 </body>

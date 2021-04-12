@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: LX
@@ -11,13 +12,16 @@
     <title>悦读书城</title>
     <script src="${pageContext.request.contextPath}/webjars/jquery/3.6.0/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/layui/js/layui.js"></script>
+    <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
     <link href="${pageContext.request.contextPath}/webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/layui/css/layui.css" rel="stylesheet" media="all">
     <link href="${pageContext.request.contextPath}/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/theme.css" rel="stylesheet">
     <script>
+        function fun(){
+            window.location.href = "getCategory.action";
+        }
         layui.use(['dropdown', 'util'], function(){
             var dropdown = layui.dropdown
                 ,util = layui.util
@@ -148,41 +152,31 @@
     </div>
 </nav>
 <div>
-<%--    <div class="layui-row layui-col-space30" id="demo-box" style="margin: 0 auto; max-width: 970px;">--%>
-<%--        <div class="layui-col-xs9 layui-col-md3">--%>
-<%--            <div class="layui-panel">--%>
-<%--                <ul class="layui-menu" id="demo1">--%>
-<%--                    <li class="layui-menu-item-group" lay-options="{type: 'group'}">--%>
-<%--                        <ul>--%>
-<%--                            <li class="layui-menu-item-parent" lay-options="{type: 'parent'}">--%>
-<%--                                <div class="layui-menu-body-title">--%>
-<%--                                    menu item 9-2--%>
-<%--                                    <i class="layui-icon layui-icon-right"></i>--%>
-<%--                                </div>--%>
-<%--                                <div class="layui-panel layui-menu-body-panel">--%>
-<%--                                    <ul>--%>
-<%--                                        <li><div class="layui-menu-body-title">menu item 9-2-1</div></li>--%>
-<%--                                        <li><div class="layui-menu-body-title">menu item 9-2-2</div></li>--%>
-<%--                                        <li><div class="layui-menu-body-title">menu item 9-2-3</div></li>--%>
-<%--                                    </ul>--%>
-<%--                                </div>--%>
-<%--                            </li>--%>
-<%--                        </ul>--%>
-<%--                    </li>--%>
-<%--                </ul>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--    <div class="layui-carousel" id="test1" lay-filter="test1">--%>
-<%--        <div carousel-item="">--%>
-<%--            <div>条目1</div>--%>
-<%--            <div>条目2</div>--%>
-<%--            <div>条目3</div>--%>
-<%--            <div>条目4</div>--%>
-<%--            <div>条目5</div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
+    <div class="layui-row layui-col-space30" id="demo-box" style="margin: 0 auto; max-width: 970px;">
+        <div class="layui-col-xs9 layui-col-md3">
+            <div class="layui-panel">
+                <ul class="layui-menu" id="demo1">
+                    <c:forEach items="${sessionScope.current_category}" var="category">
+                        <li class="layui-menu-item-parent" lay-options="{type: 'parent'}">
+                            <div class="layui-menu-body-title" style="font-size: 5px">
+                                ${category.cname}
+                            </div>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="layui-carousel" id="test1" lay-filter="test1">
+        <div carousel-item="">
+            <div>条目1</div>
+            <div>条目2</div>
+            <div>条目3</div>
+            <div>条目4</div>
+            <div>条目5</div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

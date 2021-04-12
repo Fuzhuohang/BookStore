@@ -8,6 +8,11 @@ import java.sql.Date;
  * @Author Fuzhuoh
  * @Version 1.0
  * 对应数据库库中的 orders 表，描述用户收货地址
+ * Ostate:
+ *      0: 草稿
+ *      1: 下单
+ *      2: 运输中
+ *      3: 确认收货
  */
 public class Orders {
     private int Oid;

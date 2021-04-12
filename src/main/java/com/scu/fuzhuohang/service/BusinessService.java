@@ -17,5 +17,5 @@ public interface BusinessService {
 
     public int changeBusinessInfo(int userId,Business business);
 
-    public int delete(int businessId);
+    public int delete(int userId);
 }

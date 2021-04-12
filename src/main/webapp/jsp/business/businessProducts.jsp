@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: LX
   Date: 2021/4/12
-  Time: 10:49
+  Time: 14:33
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
@@ -56,9 +56,9 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar" >
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="mybusiness.jsp">店铺信息</a></li>
+                <li><a href="mybusiness.jsp">店铺信息</a></li>
                 <li><a href="changeBusinessInfo.jsp">修改信息</a></li>
-                <li><a href="businessProducts.jsp">全部商品</a></li>
+                <li class="active"><a href="businessProducts.jsp">全部商品</a></li>
                 <li><a href="businessorders.jsp">订单详情</a></li>
                 <li><a onclick="url(${sessionScope.current_business.uid})" href="javascript:void(0)">关停店铺</a></li>
             </ul>

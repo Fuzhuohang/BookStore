@@ -13,12 +13,12 @@
 <html>
 <head>
     <title>悦读书城-个人空间</title>
-    <link href="../../webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="../../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-    <link href="../../css/theme.css" rel="stylesheet">
-    <link href="../../css/dashboard.css" rel="stylesheet">
-    <link href="../../css/signin.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/theme.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/dashboard.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/signin.css" rel="stylesheet">
     <script type="text/javascript" language="JavaScript">
         function url(uid){
             if(confirm('警告：注销账号将不可逆，请慎重考虑！！！请确认是否注销账号')){
@@ -45,9 +45,9 @@
                 <li class="active"><a href="personalspace.jsp">欢迎！${sessionScope.current_user.username}</a></li>
                 <li><a href="logout.action">退出登录</a></li>
                 <li><a href="#about">收藏夹</a></li>
-                <li><a href="#shopping">购物车</a></li>
-                <li><a href="#order">订单</a></li>
-                <li><a href="#">我的店铺</a></li>
+                <li><a href="${pageContext.request.contextPath}/jsp/shopping/shoppingcart.jsp">购物车</a></li>
+                <li><a href="${pageContext.request.contextPath}/jsp/shopping/orders.jsp">订单</a></li>
+                <li><a href="entermybusiness.action?userId=${sessionScope.current_user.uid}">我的店铺</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -56,8 +56,8 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar" >
             <ul class="nav nav-sidebar">
-                <li><a href="personalspace.jsp">个人信息</a></li>
-                <li class="active"><a href="changeUserInfo.jsp">修改信息</a></li>
+                <li><a href="${pageContext.request.contextPath}/jsp/personalspace/personalspace.jsp">个人信息</a></li>
+                <li class="active"><a href="${pageContext.request.contextPath}/jsp/personalspace/changeUserInfo.jsp">修改信息</a></li>
                 <li><a href="changePassword.jsp">修改密码</a></li>
                 <li><a href="shippingAddress.jsp">我的地址</a></li>
                 <li><a href="#">我的足迹</a></li>
@@ -88,7 +88,6 @@
                 <button id="btn_login" class="btn btn-lg btn-primary btn-block" type="submit">提&nbsp;&nbsp;&nbsp;&nbsp;交</button>
             </div>
         </form>
-
     </div>
 </div>
 </body>

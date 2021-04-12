@@ -9,9 +9,9 @@
 <html>
 <head>
     <title>悦读书城</title>
-    <link rel="stylesheet" href="../../webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <link href="../../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-    <link href="../../css/signin.css" rel="stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link href="${pageContext.request.contextPath}/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/signin.css" rel="stylesheet">
 </head>
 <body>
 <form class="form-signin" action="verify.action" method="post">

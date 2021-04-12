@@ -29,4 +29,7 @@ public interface CategoryDao {
     public int deleteCategoryFirst(@Param("cateid") int cateid);
 
     public int deleteCategorySecond(@Param("csid") int csid);
+
+    public int deleteCategorySecondByFirst(@Param("cateid") int cateid);
+
 }

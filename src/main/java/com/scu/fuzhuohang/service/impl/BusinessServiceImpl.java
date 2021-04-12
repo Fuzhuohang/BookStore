@@ -40,7 +40,7 @@ public class BusinessServiceImpl implements BusinessService {
     }
 
     @Override
-    public int delete(int businessId) {
-        return businessDao.deleteBusiness(businessId);
+    public int delete(int userId) {
+        return businessDao.deleteBusiness(userId);
     }
 }
