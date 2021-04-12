@@ -9,14 +9,14 @@
 <html>
 <head>
     <title>悦读书城</title>
-    <script src="webjars/jquery/3.6.0/jquery.min.js"></script>
-    <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="layui/js/layui.js"></script>
-    <link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="layui/css/layui.css" rel="stylesheet" media="all">
-    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-    <link href="css/theme.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath}/webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/layui/js/layui.js"></script>
+    <link href="${pageContext.request.contextPath}/webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/layui/css/layui.css" rel="stylesheet" media="all">
+    <link href="${pageContext.request.contextPath}/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/theme.css" rel="stylesheet">
     <script>
         layui.use(['dropdown', 'util'], function(){
             var dropdown = layui.dropdown
@@ -124,16 +124,16 @@
                     <span class="icon-bar">b</span>
                     <span class="icon-bar">c</span>
                 </button>
-                <a class="navbar-brand" href="index.html">悦读书城</a>
+                <a class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp">悦读书城</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="login.jsp">登录</a></li>
-                    <li><a href="register.jsp">注册</a></li>
-                    <li><a href="#about">收藏夹</a></li>
-                    <li><a href="#shopping">购物车</a></li>
-                    <li><a href="#order">订单</a></li>
-                    <li><a href="#">我的店铺</a></li>
+                    <li><a href="${pageContext.request.contextPath}/jsp/useraccount/login.jsp">登录</a></li>
+                    <li><a href="${pageContext.request.contextPath}/jsp/useraccount/register.jsp">注册</a></li>
+                    <li><a href="${pageContext.request.contextPath}/jsp/useraccount/login.jsp">收藏夹</a></li>
+                    <li><a href="${pageContext.request.contextPath}/jsp/useraccount/login.jsp">购物车</a></li>
+                    <li><a href="${pageContext.request.contextPath}/jsp/useraccount/login.jsp">订单</a></li>
+                    <li><a href="${pageContext.request.contextPath}/jsp/useraccount/login.jsp">我的店铺</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>

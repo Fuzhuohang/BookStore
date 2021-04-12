@@ -18,5 +18,7 @@ public interface UserService {
 
     public int changeUserInfo(String account, User user);
 
+    public int updateIsBusiness(int uid, int isBusiness);
+
     public int delete(int userId);
 }

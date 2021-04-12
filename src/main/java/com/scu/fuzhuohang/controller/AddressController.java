@@ -25,13 +25,13 @@ public class AddressController {
     @Autowired
     AddressService addressService;
 
-    private static final String URL_1 = "redirect:/shippingAddress.jsp";
+    private static final String URL_1 = "redirect:/jsp/personalspace/shippingAddress.jsp";
     private static final String URL_2 = "shippingAddress";
     private static final String CURRENT_USER = "current_user";
     private static final String CURRENT_ADDRESSES = "current_addresses";
     private static final String MESSAGE = "message";
 
-    @RequestMapping("getAddressList")
+    @RequestMapping("/jsp/*/getAddressList")
     @ResponseBody
     public ModelAndView getAddressList(HttpSession session,
                                        ModelAndView modelAndView){
@@ -43,7 +43,7 @@ public class AddressController {
         return modelAndView;
     }
 
-    @RequestMapping("insertaddress")
+    @RequestMapping("/jsp/*/insertaddress")
     @ResponseBody
     public ModelAndView insertAddress(@RequestParam("uid") int uid,
                                       @RequestParam("reciveName") String reciveName,
@@ -68,7 +68,7 @@ public class AddressController {
         return modelAndView;
     }
 
-    @RequestMapping("updateaddress")
+    @RequestMapping("/jsp/*/updateaddress")
     @ResponseBody
     public ModelAndView updateAddress(@RequestParam("addrid") int addrid,
                                       @RequestParam("reciveName") String reciveName,
@@ -92,7 +92,7 @@ public class AddressController {
         return modelAndView;
     }
 
-    @RequestMapping("deleteaddress")
+    @RequestMapping("/jsp/*/deleteaddress")
     @ResponseBody
     public ModelAndView deleteAddressByAddr(@RequestParam("addrid") int addrid,
                                             HttpSession session,

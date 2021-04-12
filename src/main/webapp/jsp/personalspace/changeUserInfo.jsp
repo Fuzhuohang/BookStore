@@ -13,12 +13,12 @@
 <html>
 <head>
     <title>悦读书城-个人空间</title>
-    <link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-    <link href="css/theme.css" rel="stylesheet">
-    <link href="css/dashboard.css" rel="stylesheet">
-    <link href="css/signin.css" rel="stylesheet">
+    <link href="../../webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="../../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="../../css/theme.css" rel="stylesheet">
+    <link href="../../css/dashboard.css" rel="stylesheet">
+    <link href="../../css/signin.css" rel="stylesheet">
     <script type="text/javascript" language="JavaScript">
         function url(uid){
             if(confirm('警告：注销账号将不可逆，请慎重考虑！！！请确认是否注销账号')){
@@ -70,19 +70,19 @@
         <form class="form-signin" action="updateInfo.action" method="post">
             <div align="center">
                 <label for="account">账&nbsp;&nbsp;&nbsp;号：</label>
-                <input id="account" name="account" type="text" class="form-control2" value="<%=user.getAccount()%>" readonly="readonly">
+                <input id="account" name="account" type="text" class="form-control2" value="${sessionScope.current_user.account}" readonly="readonly">
             </div>
             <div align="center">
                 <label for="username">用户名：</label>
-                <input id="username" name="username" type="text" value="<%=user.getUsername()%>">
+                <input id="username" name="username" type="text" value="${sessionScope.current_user.username}">
             </div>
             <div align="center">
                 <label for="tel">电&nbsp;&nbsp;&nbsp;话：</label>
-                <input id="tel" name="tel" type="tel" value="<%=user.getTel()%>">
+                <input id="tel" name="tel" type="tel" value="${sessionScope.current_user.tel}">
             </div>
             <div align="center">
                 <label for="email">邮&nbsp;&nbsp;&nbsp;件：</label>
-                <input id="email" name="email" type="email" value="<%=user.getEmail()%>">
+                <input id="email" name="email" type="email" value="${sessionScope.current_user.email}">
             </div>
             <div>
                 <button id="btn_login" class="btn btn-lg btn-primary btn-block" type="submit">提&nbsp;&nbsp;&nbsp;&nbsp;交</button>

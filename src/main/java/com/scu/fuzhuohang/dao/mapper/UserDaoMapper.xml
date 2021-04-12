@@ -29,8 +29,7 @@
     <update id="updateIsBusiness">
         UPDATE user
         SET IsBusiness = #{isbusiness}
-        WHERE Account = #{str}
-           OR Username = #{str};
+        WHERE Uid = #{uid};
     </update>
 
     <delete id="delUser">

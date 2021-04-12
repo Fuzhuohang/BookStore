@@ -1,8 +1,7 @@
 package com.scu.fuzhuohang.dao;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
+import com.scu.fuzhuohang.bean.Orders;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.core.annotation.Order;
 
 import java.util.Date;
 import java.util.List;
@@ -14,17 +13,17 @@ import java.util.List;
  */
 public interface OrderDao {
 
-    public Order getOrder(@Param("oid") int orderId);
+    public Orders getOrder(@Param("oid") int orderId);
 
-    public List<Order> getOrderAll(@Param("uid") int userId);
+    public List<Orders> getOrderAll(@Param("uid") int userId);
 
-    public List<Order> getOrderByState(@Param("uid") int userId, @Param("ostate") int orderState);
+    public List<Orders> getOrderByState(@Param("uid") int userId, @Param("ostate") int orderState);
 
-    public int createOrder(@Param("order") Order order);
+    public int createOrder(@Param("order") Orders order);
 
     public int deleteOrder(@Param("oid") int orderId);
 
-    public int editOrder(@Param("oid") int orderId, @Param("order") Order order);
+    public int editOrder(@Param("oid") int orderId, @Param("order") Orders order);
 
     public int updateState(@Param("oid") int orderId, @Param("ostate") int ostate, @Param("time")Date time);
 

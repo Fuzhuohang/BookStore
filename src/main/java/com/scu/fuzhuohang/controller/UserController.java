@@ -27,9 +27,9 @@ public class UserController {
 
     private static final String MESSAGE = "message";
     private static final String CURRENT_USER = "current_user";
-    private static final String URL_1 = "redirect:/shopindex1.jsp";
+    private static final String URL_1 = "redirect:/jsp/shopping/shopindex1.jsp";
 
-    @RequestMapping("login")
+    @RequestMapping("/jsp/*/login")
     @ResponseBody
     public ModelAndView login(@RequestParam("accountOrName") String accountOrName,
                               @RequestParam("password") String password,
@@ -47,16 +47,16 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping("logout")
+    @RequestMapping("jsp/*/logout")
     @ResponseBody
     public ModelAndView logout(HttpSession session,
                                ModelAndView modelAndView){
         session.removeAttribute(CURRENT_USER);
-        modelAndView.setViewName("redirect:/shopindex.jsp");
+        modelAndView.setViewName("redirect:/index.jsp");
         return modelAndView;
     }
 
-    @RequestMapping("register")
+    @RequestMapping("/jsp/*/register")
     @ResponseBody
     public ModelAndView register(@RequestParam("tel") String tel,
                                  @RequestParam("password") String password,
@@ -82,7 +82,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping("updatepwd")
+    @RequestMapping("/jsp/*/updatepwd")
     @ResponseBody
     public ModelAndView updatePwd(@RequestParam("accountOrName") String accountOrName,
                                   @RequestParam("password") String password,
@@ -92,7 +92,7 @@ public class UserController {
             User user = userService.getUser(accountOrName);
             session.setAttribute(CURRENT_USER, user);
             modelAndView.addObject(MESSAGE,"修改成功");
-            modelAndView.setViewName("redirect:/changePassword.jsp");
+            modelAndView.setViewName("redirect:/jsp/personalspace/changePassword.jsp");
         }else{
             modelAndView.addObject(MESSAGE,"修改失败");
             modelAndView.setViewName("changePassword");
@@ -100,7 +100,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping("updateInfo")
+    @RequestMapping("/jsp/*/updateInfo")
     @ResponseBody
     public ModelAndView updateInfo(@RequestParam("account") String account,
                                    @RequestParam("username") String username,
@@ -116,7 +116,7 @@ public class UserController {
             user = userService.getUser(account);
             session.setAttribute(CURRENT_USER, user);
             modelAndView.addObject(MESSAGE,"修改成功");
-            modelAndView.setViewName("redirect:/changeUserInfo.jsp");
+            modelAndView.setViewName("redirect:/jsp/personalspace/changeUserInfo.jsp");
         } else {
             modelAndView.addObject(MESSAGE,"修改失败");
             modelAndView.setViewName("changeUserInfo");
@@ -124,7 +124,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping("verify")
+    @RequestMapping("/jsp/*/verify")
     @ResponseBody
     public ModelAndView forgetVerify(@RequestParam("account") String account,
                                    @RequestParam("username") String username,
@@ -136,7 +136,7 @@ public class UserController {
         if(user.getUsername().equals(username) && user.getTel().equals(tel) && user.getEmail().equals(email)){
             session.setAttribute(CURRENT_USER, user);
             modelAndView.addObject("messge","验证通过");
-            modelAndView.setViewName("redirect:/resetPassword.jsp");
+            modelAndView.setViewName("redirect:/jsp/useraccount/resetPassword.jsp");
         }else {
             modelAndView.addObject(MESSAGE,"验证失败，请重新验证");
             modelAndView.setViewName("forgetVerify");
@@ -144,7 +144,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping("reset")
+    @RequestMapping("/jsp/*/reset")
     @ResponseBody
     public ModelAndView resetPassword(@RequestParam("password") String newpassword,
                                       HttpSession session,
@@ -162,7 +162,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping("writeoff")
+    @RequestMapping("/jsp/*/writeoff")
     @ResponseBody
     public ModelAndView writeOff(@RequestParam("uid") int uid,
                                  HttpSession session,
@@ -170,7 +170,7 @@ public class UserController {
 
         if(userService.delete(uid) != 0 && addressService.deleteAddressByUser(uid)!=0){
             session.removeAttribute(CURRENT_USER);
-            modelAndView.setViewName("redirect:/shopindex.jsp");
+            modelAndView.setViewName("redirect:/index.jsp");
         }
         return modelAndView;
     }

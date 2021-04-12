@@ -11,27 +11,19 @@
   Time: 14:48
   To change this template use File | Settings | File Templates.
 --%>
-<%
-    User user = (User) request.getSession().getAttribute("current_user");
-//    List<Address> addresses = (List<Address>) request.getSession().getAttribute("current_addresses");
-//    for(Address a : addresses){
-//        System.out.println(a.toString());
-//    }
-//    JSONArray addresses = (JSONArray) request.getSession().getAttribute("current_addresses");
-%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
     <title>悦读书城-个人空间</title>
-    <script src="webjars/jquery/3.6.0/jquery.min.js"></script>
-    <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-    <link href="webjars/layui/2.5.7/css/layui.css" rel="stylesheet" media="all">
-    <link href="css/theme.css" rel="stylesheet">
-    <link href="css/dashboard.css" rel="stylesheet">
-    <link href="css/signin.css" rel="stylesheet">
+    <script src="../../webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="../../webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="../../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="../../webjars/layui/2.5.7/css/layui.css" rel="stylesheet" media="all">
+    <link href="../../css/theme.css" rel="stylesheet">
+    <link href="../../css/dashboard.css" rel="stylesheet">
+    <link href="../../css/signin.css" rel="stylesheet">
     <script type="text/javascript" language="JavaScript">
         function url(uid){
             if(confirm('警告：注销账号将不可逆，请慎重考虑！！！请确认是否注销账号')){

@@ -9,9 +9,9 @@
 <html>
 <head>
     <title>悦读书城</title>
-    <link rel="stylesheet" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-    <link href="css/signin.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link href="../../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="../../css/signin.css" rel="stylesheet">
     <script type="text/javascript">
         function postform(){
             var password = document.getElementById("newpassword").value;

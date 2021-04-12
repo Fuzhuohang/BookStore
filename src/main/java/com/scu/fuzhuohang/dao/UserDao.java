@@ -18,7 +18,7 @@ public interface UserDao {
 
     public int updateUserInfo(@Param("acc") String account, @Param("usr") User usr);
 
-    public int updateIsBusiness(@Param("str") String accountOrName, @Param("isbusiness") int isBusiness);
+    public int updateIsBusiness(@Param("uid") int uid, @Param("isbusiness") int isBusiness);
 
     public int delUser(@Param("uid") int uid);
 

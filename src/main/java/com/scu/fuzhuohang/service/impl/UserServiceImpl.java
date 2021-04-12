@@ -55,6 +55,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int updateIsBusiness(int uid, int isBusiness) {
+        return userDao.updateIsBusiness(uid,isBusiness);
+    }
+
+    @Override
     public int delete(int userId) {
         return userDao.delUser(userId);
     }
