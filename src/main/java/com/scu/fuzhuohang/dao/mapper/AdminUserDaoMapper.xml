@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scu.fuzhuohang.dao.AdminUserDao">
+    <select id="getAdminUser" resultType="AdminUser">
+        SELECT * FROM adminuser
+        WHERE Ausername = #{username};
+    </select>
+
+    <select id="getAdminUserAll" resultType="AdminUser">
+        SELECT * FROM adminuser;
+    </select>
+
+    <insert id="addAdminUser">
+        INSERT INTO adminuser (Aid, Ausername, Apassword)
+        VALUES (null, #{adminuser.Ausername},#{adminuser.Apassword});
+    </insert>
+
+    <update id="editAdminUser">
+        UPDATE adminuser
+        SET Ausername=#{adminuser.Ausername},Apassword=#{adminuser.Apassword}
+        WHERE Aid = #{aid};
+    </update>
+
+    <delete id="deleteAdminUser">
+        DELETE FROM adminuser
+        WHERE Aid = #{aid};
+    </delete>
+</mapper>

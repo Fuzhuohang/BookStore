@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scu.fuzhuohang.dao.CategoryDao">
+    <select id="getCategoryFirst" resultType="Category">
+        SELECT * FROM category;
+    </select>
+
+    <select id="getCategorySecondAll" resultType="CategorySecond">
+        SELECT * FROM categorysecond;
+    </select>
+
+    <select id="getCategorySecond" resultType="CategorySecond">
+        SELECT * FROM categorysecond
+        WHERE Cateid = #{cateid};
+    </select>
+
+    <insert id="addCategoryFirst">
+        INSERT INTO category (Cateid,Cname)
+        VALUES (null, #{category.Cname});
+    </insert>
+
+    <insert id="addCategorySecond">
+        INSERT INTO categorysecond (Csid,Csname,Cateid)
+        VALUES (null, #{categorysecond.Csname},#{categorysecond.Cateid});
+    </insert>
+
+    <update id="editCategoryFirst">
+        UPDATE category
+        SET Cname=#{category.Cname}
+        WHERE Cateid = #{cateid};
+    </update>
+
+    <update id="editCategorySecond">
+        UPDATE categorysecond
+        SET Csname=#{categorysecond.Csname},Cateid=#{categorysecond.Cateid}
+        WHERE Csid = #{csid};
+    </update>
+
+    <delete id="deleteCategoryFirst">
+        DELETE FROM category
+        WHERE Cateid = #{cateid};
+    </delete>
+
+    <delete id="deleteCategorySecond">
+        DELETE FROM categorysecond
+        WHERE Csid = #{csid};
+    </delete>
+</mapper>
