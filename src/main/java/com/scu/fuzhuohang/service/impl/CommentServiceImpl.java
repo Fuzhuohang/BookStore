@@ -1,6 +1,7 @@
 package com.scu.fuzhuohang.service.impl;
 
 import com.scu.fuzhuohang.bean.Comment;
+import com.scu.fuzhuohang.bean.mergebean.CommentUser;
 import com.scu.fuzhuohang.dao.CommentDao;
 import com.scu.fuzhuohang.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,17 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    public List<CommentUser> getCommentUser(int productId){
+        return commentDao.getCommentUser(productId);
+    }
+
+    @Override
     public int addComment(Comment comment) {
         return commentDao.addComment(comment);
+    }
+
+    @Override
+    public int getCount(int productId){
+        return commentDao.getCount(productId);
     }
 }

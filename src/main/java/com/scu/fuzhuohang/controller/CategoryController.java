@@ -24,14 +24,5 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
 
-    @RequestMapping("getCategory")
-    @ResponseBody
-    public ModelAndView getCategory(HttpSession session,
-                                    ModelAndView modelAndView){
-        List<Category> categoryList = categoryService.getCategoryFirst();
-        session.setAttribute("current_category",categoryList);
-        modelAndView.addObject("message","加载成功");
-        modelAndView.setViewName("redirect:/jsp/shopping/shopindex.jsp");
-        return modelAndView;
-    }
+
 }

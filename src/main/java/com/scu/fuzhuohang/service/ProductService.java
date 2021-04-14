@@ -1,6 +1,7 @@
 package com.scu.fuzhuohang.service;
 
 import com.scu.fuzhuohang.bean.Product;
+import com.scu.fuzhuohang.bean.mergebean.ProductBusiness;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -11,6 +12,14 @@ import java.util.List;
  * @Version 1.0
  */
 public interface ProductService {
+
+    public List<Product> getProductAll();
+
+    public List<ProductBusiness> getProductList();
+
+    public List<ProductBusiness> getProductListByCateId(int cateId);
+
+    public List<ProductBusiness> getProductListByCsId(int csId);
 
     public List<Product> getProductByName( String productName);
 

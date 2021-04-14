@@ -1,6 +1,7 @@
 package com.scu.fuzhuohang.dao;
 
 import com.scu.fuzhuohang.bean.Comment;
+import com.scu.fuzhuohang.bean.mergebean.CommentUser;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -16,6 +17,10 @@ public interface CommentDao {
 
     public List<Comment> getCommentsByProduct(@Param("pid") int productId);
 
+    public List<CommentUser> getCommentUser(@Param("pid") int productId);
+
     public int addComment(@Param("comment") Comment comment);
+
+    public int getCount(@Param("pid") int productId);
 
 }

@@ -12,8 +12,20 @@
         WHERE Pid = #{pid};
     </select>
 
+    <select id="getCommentUser" resultType="CommentUser">
+        SELECT comment.Cid,comment.Pid,comment.Score,comment.Comm,user.Username
+        FROM comment LEFT JOIN user ON comment.Uid = user.Uid
+        WHERE comment.Pid = #{pid};
+    </select>
+
     <insert id="addComment">
         INSERT INTO comment (Cid,Uid,Pid,Score,Comm)
         VALUES (null, #{comment.Uid},#{comment.Pid},#{comment.Score},#{comment.Comm});
     </insert>
+
+    <select id="getCount" resultType="Integer">
+        SELECT COUNT(*)
+        FROM comment
+        WHERE Pid = #{pid};
+    </select>
 </mapper>

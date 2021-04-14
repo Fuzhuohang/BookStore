@@ -2,6 +2,7 @@ package com.scu.fuzhuohang.controller;
 
 import com.scu.fuzhuohang.bean.User;
 import com.scu.fuzhuohang.service.AddressService;
+import com.scu.fuzhuohang.service.OrdersService;
 import com.scu.fuzhuohang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,9 @@ public class UserController {
     @Autowired
     AddressService addressService;
 
+    @Autowired
+    OrdersService ordersService;
+
     private static final String MESSAGE = "message";
     private static final String CURRENT_USER = "current_user";
     private static final String URL_1 = "redirect:/jsp/shopping/shopindex1.jsp";
@@ -40,6 +44,10 @@ public class UserController {
             modelAndView.addObject(MESSAGE,"登录失败，账号或密码错误");
             modelAndView.setViewName("login");
         } else {
+            session.setAttribute("orders_count_user_state00",ordersService.getUserCountByState(user.getUid(),0));
+            session.setAttribute("orders_count_user_state01",ordersService.getUserCountByState(user.getUid(),1));
+            session.setAttribute("orders_count_user_state02",ordersService.getUserCountByState(user.getUid(),2));
+            session.setAttribute("orders_count_user_state03",ordersService.getUserCountByState(user.getUid(),3));
             session.setAttribute(CURRENT_USER, user);
             modelAndView.addObject(MESSAGE,"登录成功");
             modelAndView.setViewName(URL_1);

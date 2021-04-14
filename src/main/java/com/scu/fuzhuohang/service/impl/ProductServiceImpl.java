@@ -1,8 +1,10 @@
 package com.scu.fuzhuohang.service.impl;
 
 import com.scu.fuzhuohang.bean.Product;
+import com.scu.fuzhuohang.bean.mergebean.ProductBusiness;
 import com.scu.fuzhuohang.dao.ProductDao;
 import com.scu.fuzhuohang.service.ProductService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,26 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     ProductDao productDao;
+
+    @Override
+    public List<Product> getProductAll(){
+        return productDao.getProductAll();
+    }
+
+    @Override
+    public List<ProductBusiness> getProductList(){
+        return productDao.getProductList();
+    }
+
+    @Override
+    public List<ProductBusiness> getProductListByCateId(int cateId){
+        return productDao.getProductListByCateId(cateId);
+    }
+
+    @Override
+    public List<ProductBusiness> getProductListByCsId(int csId){
+        return productDao.getProductListByCsId(csId);
+    }
 
     @Override
     public List<Product> getProductByName(String productName) {
