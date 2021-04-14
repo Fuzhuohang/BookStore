@@ -2,7 +2,7 @@ package com.scu.fuzhuohang.bean;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * @Author Fuzhuoh
@@ -24,9 +24,7 @@ public class Orders {
     private int Ostate;
     private int AddrId;
     private double Total;
-
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
-    private Date Time;
+    private Timestamp Time;
 
     public int getOid() {
         return Oid;
@@ -92,11 +90,11 @@ public class Orders {
         AddrId = addrId;
     }
 
-    public Date getTime() {
+    public Timestamp getTime() {
         return Time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(Timestamp time) {
         Time = time;
     }
 

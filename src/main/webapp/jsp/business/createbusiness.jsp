@@ -29,7 +29,7 @@
                     <span class="icon-bar">b</span>
                     <span class="icon-bar">c</span>
                 </button>
-                <a class="navbar-brand" href="shopindex1.jsp">悦读书城</a>
+                <a class="navbar-brand" href="${pageContext.request.contextPath}/jsp/shopping/shopindex1.jsp">悦读书城</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -37,7 +37,7 @@
                     <li><a href="logout.action">退出登录</a></li>
                     <li><a href="#about">收藏夹</a></li>
                     <li><a href="${pageContext.request.contextPath}/jsp/shopping/shoppingcart.jsp">购物车</a></li>
-                    <li><a href="${pageContext.request.contextPath}/jsp/shopping/orders.jsp">订单</a></li>
+                    <li><a href="getuserorders.action?uid=${sessionScope.current_user.uid}">订单</a></li>
                     <li><a href="entermybusiness.action?userId=${sessionScope.current_user.uid}">我的店铺</a></li>
                 </ul>
             </div><!--/.nav-collapse -->

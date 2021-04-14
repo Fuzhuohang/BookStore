@@ -7,24 +7,28 @@
         WHERE Oid = #{oid};
     </select>
 
-    <select id="getOrderAll" resultType="Orders">
-        SELECT * FROM orders
-        WHERE Uid = #{uid} AND Ostate != 0;
+    <select id="getOrderAll" resultType="UserOrders">
+        SELECT orders.Oid,orders.Pnum,orders.Time,orders.Total,product.Pname,address.`Name`,address.Tel,address.Addr,business.Bname
+        FROM orders LEFT JOIN product ON orders.Pid = product.Pid LEFT JOIN address ON orders.Addrid = address.Addrid LEFT JOIN business ON orders.Bid = business.Bid
+        WHERE orders.Uid = #{uid} AND orders.Ostate != 0;
     </select>
 
-    <select id="getOrderByState" resultType="Orders">
-        SELECT * FROM orders
-        WHERE Uid = #{uid} AND Ostate = #{ostate};
+    <select id="getOrderByState" resultType="UserOrders">
+        SELECT orders.Oid,orders.Pnum,orders.Time,orders.Total,product.Pname,address.`Name`,address.Tel,address.Addr,business.Bname
+        FROM orders LEFT JOIN product ON orders.Pid = product.Pid LEFT JOIN address ON orders.Addrid = address.Addrid LEFT JOIN business ON orders.Bid = business.Bid
+        WHERE orders.Uid = #{uid} AND orders.Ostate = #{ostate};
     </select>
 
-    <select id="getBusinessOrderAll" resultType="Orders">
-        SELECT * FROM orders
-        WHERE Bid = #{bid} AND Ostate != 0;
+    <select id="getBusinessOrderAll" resultType="BusinessOrders">
+        SELECT orders.Oid,orders.Pnum,orders.Time,orders.Total,product.Pname,address.`Name`,address.Tel,address.Addr,user.Username
+        FROM orders LEFT JOIN product ON orders.Pid = product.Pid LEFT JOIN address ON orders.Addrid = address.Addrid LEFT JOIN user ON orders.Uid = user.Uid
+        WHERE orders.Bid = #{bid} AND orders.Ostate != 0;
     </select>
 
-    <select id="getBusinessOrderByState" resultType="Orders">
-        SELECT * FROM orders
-        WHERE Bid = #{bid} AND Ostate = #{ostate};
+    <select id="getBusinessOrderByState" resultType="BusinessOrders">
+        SELECT orders.Oid,orders.Pnum,orders.Time,orders.Total,product.Pname,address.`Name`,address.Tel,address.Addr,user.Username
+        FROM orders LEFT JOIN product ON orders.Pid = product.Pid LEFT JOIN address ON orders.Addrid = address.Addrid LEFT JOIN user ON orders.Uid = user.Uid
+        WHERE orders.Bid = #{bid} AND orders.Ostate = #{ostate};
     </select>
 
     <insert id="createOrder">
@@ -38,9 +42,15 @@
         WHERE Oid = #{oid};
     </update>
 
+    <update id="settleOrder">
+        UPDATE orders
+        SET Money = #{order.Money},Addrid = #{order.Addrid},Pnum = #{order.Pnum},Total = #{order.Total},Ostate = 1, Time = CURRENT_TIMESTAMP
+        WHERE Oid = #{oid};
+    </update>
+
     <update id="updateState">
-        UPDATE user
-        SET Ostate = #{order.Ostate}, Time = #{order.time}
+        UPDATE orders
+        SET Ostate = #{ostate}, Time = CURRENT_TIMESTAMP
         WHERE Oid = #{oid};
     </update>
 

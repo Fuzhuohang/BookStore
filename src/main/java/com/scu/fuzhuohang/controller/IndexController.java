@@ -35,8 +35,10 @@ public class IndexController {
     public ModelAndView getIndex(HttpSession session,
                                  ModelAndView modelAndView){
         List<Category> categoryList = categoryService.getCategoryFirst();
+        List<CategorySecond> categorySecondList = categoryService.getCategorySecondAll();
         List<ProductBusiness> productList = productService.getProductList();
         session.setAttribute("current_category",categoryList);
+        session.setAttribute("current_categorysecond",categorySecondList);
         session.setAttribute("current_product",productList);
         modelAndView.addObject("message","加载成功");
         modelAndView.setViewName("redirect:/jsp/shopping/shopindex.jsp");

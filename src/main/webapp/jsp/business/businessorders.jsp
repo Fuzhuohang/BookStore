@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: LX
@@ -20,9 +21,9 @@
     <link href="${pageContext.request.contextPath}/css/dashboard.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/signin.css" rel="stylesheet">
     <script type="text/javascript" language="JavaScript">
-        function url(bid){
+        function url(uid){
             if(confirm('警告：关停店铺将不可逆，请慎重考虑！！！请确认是否关停店铺')){
-                window.location.href="deletebusiness.action?bid="+bid;
+                window.location.href="deletebusiness.action?uid="+uid;
             }
         }
 
@@ -80,7 +81,7 @@
                 <span class="icon-bar">b</span>
                 <span class="icon-bar">c</span>
             </button>
-            <a class="navbar-brand" href="shopindex1.jsp">悦读书城</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/jsp/shopping/shopindex1.jsp">悦读书城</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -88,7 +89,7 @@
                 <li><a href="logout.action">退出登录</a></li>
                 <li><a href="#about">收藏夹</a></li>
                 <li><a href="${pageContext.request.contextPath}/jsp/shopping/shoppingcart.jsp">购物车</a></li>
-                <li><a href="${pageContext.request.contextPath}/jsp/shopping/orders.jsp">订单</a></li>
+                <li><a href="getuserorders.action?uid=${sessionScope.current_user.uid}">订单</a></li>
                 <li class="active"><a href="entermybusiness.action?userId=${sessionScope.current_user.uid}">我的店铺</a></li>
             </ul>
         </div><!--/.nav-collapse -->
@@ -100,8 +101,8 @@
             <ul class="nav nav-sidebar">
                 <li><a href="mybusiness.jsp">店铺信息</a></li>
                 <li><a href="changeBusinessInfo.jsp">修改信息</a></li>
-                <li><a href="businessProducts.jsp">全部商品</a></li>
-                <li class="active"><a href="businessorders.jsp">订单详情</a></li>
+                <li><a href="enterbusinessproduct.action?bid=${sessionScope.current_business.bid}">全部商品</a></li>
+                <li class="active"><a href="getbusinessorders.action?bid=${sessionScope.current_business.bid}">订单详情</a></li>
                 <li><a onclick="url(${sessionScope.current_business.uid})" href="javascript:void(0)">关停店铺</a></li>
             </ul>
         </div>
@@ -109,18 +110,113 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
         <div class="layui-tab layui-tab-card">
             <ul class="layui-tab-title">
-                <li class="layui-this">未发货订单 <span class="layui-badge">6</span></li>
-                <li>未完成订单 <span class="layui-badge">6</span></li>
+                <li class="layui-this">未发货订单 <span class="layui-badge">${sessionScope.orders_count_business_state01}</span></li>
+                <li>未完成订单 <span class="layui-badge">${sessionScope.orders_count_business_state02}</span></li>
                 <li>已完成订单</li>
-                <li>全部订单</li>
             </ul>
             <div class="layui-tab-content" style="height: 100px;">
-                <div class="layui-tab-item layui-show">默认宽度是相对于父元素100%适应的，你也可以固定宽度。</div>
-                <div class="layui-tab-item">2</div>
-                <div class="layui-tab-item">3</div>
-                <div class="layui-tab-item">4</div>
-                <div class="layui-tab-item">5</div>
-                <div class="layui-tab-item">6</div>
+                <div class="layui-tab-item layui-show">
+                    <div class="layui-bg-gray" style="padding: 30px;">
+                        <div class="layui-row layui-col-space15">
+                            <c:forEach items="${sessionScope.orders_list_business_state01}" var="orders">
+                                <div class="layui-col-md12">
+                                    <div class="layui-card">
+                                        <div class="layui-card-header">
+                                            <div style="display: flex; ">
+                                                <div style="margin: 5px 10px 5px 5px; ">${orders.username}</div>
+                                                <div style="margin: 5px 5px 5px 10px; ">状态更新时间：${orders.time}</div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-card-body">
+                                            <div style="display: flex; ">
+                                                <div>
+                                                    <div style="margin: 5px 10px 5px 10px; "><h3>${orders.pname}</h3></div>
+                                                    <div style="margin: 5px 10px 5px 10px; ">商品数量：${orders.pnum}</div>
+                                                    <div style="margin: 5px 10px 5px 10px; ">订单总价：${orders.total}</div>
+                                                    <div style="margin: 5px 10px 5px 10px; display: flex; ">
+                                                        <div>收货人信息：</div>
+                                                        <div style="margin: 0 10px 0 0; ">${orders.name}</div>
+                                                        <div style="margin: 0 10px 0 10px; ">${orders.tel}</div>
+                                                        <div style="margin: 0 10px 0 10px; ">${orders.addr}</div>
+                                                    </div>
+                                                </div>
+                                                <div style="position: absolute; right: 0; padding:20px 50px; ">
+                                                    <button class="layui-btn layui-btn-primary layui-border-green" onclick="window.location.href='upstateorderstatebusiness.action?bid=${sessionScope.current_business.bid}&oid=${orders.oid}&ostate=2'">确认发货</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-bg-gray" style="padding: 30px;">
+                        <div class="layui-row layui-col-space15">
+                            <c:forEach items="${sessionScope.orders_list_business_state02}" var="orders">
+                                <div class="layui-col-md12">
+                                    <div class="layui-card">
+                                        <div class="layui-card-header">
+                                            <div style="display: flex; ">
+                                                <div style="margin: 5px 10px 5px 5px; ">${orders.username}</div>
+                                                <div style="margin: 5px 5px 5px 10px; ">状态更新时间：${orders.time}</div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-card-body">
+                                            <div style="display: flex; ">
+                                                <div>
+                                                    <div style="margin: 5px 10px 5px 10px; "><h3>${orders.pname}</h3></div>
+                                                    <div style="margin: 5px 10px 5px 10px; ">商品数量：${orders.pnum}</div>
+                                                    <div style="margin: 5px 10px 5px 10px; ">订单总价：${orders.total}</div>
+                                                    <div style="margin: 5px 10px 5px 10px; display: flex; ">
+                                                        <div>收货人信息：</div>
+                                                        <div style="margin: 0 10px 0 0; ">${orders.name}</div>
+                                                        <div style="margin: 0 10px 0 10px; ">${orders.tel}</div>
+                                                        <div style="margin: 0 10px 0 10px; ">${orders.addr}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-bg-gray" style="padding: 30px;">
+                        <div class="layui-row layui-col-space15">
+                            <c:forEach items="${sessionScope.orders_list_business_state03}" var="orders">
+                                <div class="layui-col-md12">
+                                    <div class="layui-card">
+                                        <div class="layui-card-header">
+                                            <div style="display: flex; ">
+                                                <div style="margin: 5px 10px 5px 5px; ">${orders.username}</div>
+                                                <div style="margin: 5px 5px 5px 10px; ">状态更新时间：${orders.time}</div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-card-body">
+                                            <div style="display: flex; ">
+                                                <div>
+                                                    <div style="margin: 5px 10px 5px 10px; "><h3>${orders.pname}</h3></div>
+                                                    <div style="margin: 5px 10px 5px 10px; ">商品数量：${orders.pnum}</div>
+                                                    <div style="margin: 5px 10px 5px 10px; ">订单总价：${orders.total}</div>
+                                                    <div style="margin: 5px 10px 5px 10px; display: flex; ">
+                                                        <div>收货人信息：</div>
+                                                        <div style="margin: 0 10px 0 0; ">${orders.name}</div>
+                                                        <div style="margin: 0 10px 0 10px; ">${orders.tel}</div>
+                                                        <div style="margin: 0 10px 0 10px; ">${orders.addr}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

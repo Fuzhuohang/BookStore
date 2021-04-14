@@ -1,6 +1,9 @@
 package com.scu.fuzhuohang.service;
 
 import com.scu.fuzhuohang.bean.Orders;
+import com.scu.fuzhuohang.bean.mergebean.BusinessOrders;
+import com.scu.fuzhuohang.bean.mergebean.UserOrders;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 import java.util.List;
@@ -14,13 +17,13 @@ public interface OrdersService {
 
     public Orders getAnOrder(int ordersId);
 
-    public List<Orders> getUserOrders(int userId);
+    public List<UserOrders> getUserOrders(int userId);
 
-    public List<Orders> getUserOrdersByState(int userId, int state);
+    public List<UserOrders> getUserOrdersByState(int userId, int state);
 
-    public List<Orders> getBusinessOrders(int businessId);
+    public List<BusinessOrders> getBusinessOrders(int businessId);
 
-    public List<Orders> getBusinessOrdersByState(int businessId, int state);
+    public List<BusinessOrders> getBusinessOrdersByState(int businessId, int state);
 
     public int createOrder(Orders orders);
 
@@ -28,7 +31,9 @@ public interface OrdersService {
 
     public int editOrder(int orderId,Orders orders);
 
-    public int updateState(int orderId, int state, Date time);
+    public int settleOrder(int orderId, Orders order);
+
+    public int updateState(int orderId, int state);
 
     public int getUserCount(int userId);
 

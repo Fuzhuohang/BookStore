@@ -1,6 +1,8 @@
 package com.scu.fuzhuohang.service.impl;
 
 import com.scu.fuzhuohang.bean.Orders;
+import com.scu.fuzhuohang.bean.mergebean.BusinessOrders;
+import com.scu.fuzhuohang.bean.mergebean.UserOrders;
 import com.scu.fuzhuohang.dao.OrderDao;
 import com.scu.fuzhuohang.service.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,22 +30,22 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
-    public List<Orders> getUserOrders(int userId) {
+    public List<UserOrders> getUserOrders(int userId) {
         return orderDao.getOrderAll(userId);
     }
 
     @Override
-    public List<Orders> getUserOrdersByState(int userId, int state) {
+    public List<UserOrders> getUserOrdersByState(int userId, int state) {
         return orderDao.getOrderByState(userId, state);
     }
 
     @Override
-    public List<Orders> getBusinessOrders(int businessId) {
+    public List<BusinessOrders> getBusinessOrders(int businessId) {
         return orderDao.getBusinessOrderAll(businessId);
     }
 
     @Override
-    public List<Orders> getBusinessOrdersByState(int businessId, int state) {
+    public List<BusinessOrders> getBusinessOrdersByState(int businessId, int state) {
         return orderDao.getBusinessOrderByState(businessId, state);
     }
 
@@ -63,8 +65,13 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
-    public int updateState(int orderId, int state, Date time) {
-        return orderDao.updateState(orderId,state,time);
+    public int settleOrder(int orderId, Orders order){
+        return orderDao.settleOrder(orderId, order);
+    }
+
+    @Override
+    public int updateState(int orderId, int state) {
+        return orderDao.updateState(orderId,state);
     }
 
     @Override

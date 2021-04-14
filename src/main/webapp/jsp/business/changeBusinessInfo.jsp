@@ -20,9 +20,9 @@
     <link href="${pageContext.request.contextPath}/css/dashboard.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/signin.css" rel="stylesheet">
     <script type="text/javascript" language="JavaScript">
-        function url(bid){
+        function url(uid){
             if(confirm('警告：关停店铺将不可逆，请慎重考虑！！！请确认是否关停店铺')){
-                window.location.href="deletebusiness.action?bid="+bid;
+                window.location.href="deletebusiness.action?uid="+uid;
             }
         }
     </script>
@@ -38,7 +38,7 @@
                 <span class="icon-bar">b</span>
                 <span class="icon-bar">c</span>
             </button>
-            <a class="navbar-brand" href="shopindex1.jsp">悦读书城</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/jsp/shopping/shopindex1.jsp">悦读书城</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -46,7 +46,7 @@
                 <li><a href="logout.action">退出登录</a></li>
                 <li><a href="#about">收藏夹</a></li>
                 <li><a href="${pageContext.request.contextPath}/jsp/shopping/shoppingcart.jsp">购物车</a></li>
-                <li><a href="${pageContext.request.contextPath}/jsp/shopping/orders.jsp">订单</a></li>
+                <li><a href="getuserorders.action?uid=${sessionScope.current_user.uid}">订单</a></li>
                 <li class="active"><a href="entermybusiness.action?userId=${sessionScope.current_user.uid}">我的店铺</a></li>
             </ul>
         </div><!--/.nav-collapse -->
@@ -58,8 +58,8 @@
             <ul class="nav nav-sidebar">
                 <li><a href="mybusiness.jsp">店铺信息</a></li>
                 <li class="active"><a href="changeBusinessInfo.jsp">修改信息</a></li>
-                <li><a href="businessProducts.jsp">全部商品</a></li>
-                <li><a href="businessorders.jsp">订单详情</a></li>
+                <li><a href="enterbusinessproduct.action?bid=${sessionScope.current_business.bid}">全部商品</a></li>
+                <li><a href="getbusinessorders.action?bid=${sessionScope.current_business.bid}">订单详情</a></li>
                 <li><a onclick="url(${sessionScope.current_business.uid})" href="javascript:void(0)">关停店铺</a></li>
             </ul>
         </div>

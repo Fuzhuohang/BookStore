@@ -1,7 +1,10 @@
 package com.scu.fuzhuohang.controller;
 
 import com.scu.fuzhuohang.bean.Business;
+import com.scu.fuzhuohang.bean.Product;
 import com.scu.fuzhuohang.service.BusinessService;
+import com.scu.fuzhuohang.service.OrdersService;
+import com.scu.fuzhuohang.service.ProductService;
 import com.scu.fuzhuohang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @Author Fuzhuoh
@@ -24,6 +28,12 @@ public class BusinessController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    OrdersService ordersService;
+
+    @Autowired
+    ProductService productService;
 
     private static final String MESSAGE = "message";
     private static final String CURRENT_BUSINESS = "current_business";
@@ -40,6 +50,12 @@ public class BusinessController {
             modelAndView.addObject(MESSAGE,"您没有开设自己的店铺，请先进行店铺申请注册");
             modelAndView.setViewName(URL_1);
         }else {
+            int CountOfBusinessState01 = ordersService.getBusinessCountByState(business.getBid(),1);
+            int CountOfBusinessState02 = ordersService.getBusinessCountByState(business.getBid(),2);
+            int CountOfBusinessState03 = ordersService.getBusinessCountByState(business.getBid(),3);
+            session.setAttribute("orders_count_business_state01",CountOfBusinessState01);
+            session.setAttribute("orders_count_business_state02",CountOfBusinessState02);
+            session.setAttribute("orders_count_business_state03",CountOfBusinessState03);
             session.setAttribute(CURRENT_BUSINESS,business);
             modelAndView.addObject(MESSAGE,"进入成功");
             modelAndView.setViewName(URL_2);
@@ -47,12 +63,24 @@ public class BusinessController {
         return modelAndView;
     }
 
+    @RequestMapping("/jsp/*/enterbusinessproduct")
+    @ResponseBody
+    public ModelAndView enterBusinessProduct(@RequestParam("bid") int bid,
+                                             HttpSession session,
+                                             ModelAndView modelAndView){
+        List<Product> productList = productService.getProductListByBusiness(bid);
+        session.setAttribute("business_products",productList);
+        modelAndView.addObject(MESSAGE, "加载成功");
+        modelAndView.setViewName("redirect:/jsp/business/businessProducts.jsp");
+        return modelAndView;
+    }
+
     @RequestMapping("/jsp/*/enterproductbusiness")
     @ResponseBody
-    public ModelAndView enterProductBusiness(@RequestParam("businessId") int businessId,
+    public ModelAndView enterProductBusiness(@RequestParam("bid") int bid,
                                         HttpSession session,
                                         ModelAndView modelAndView){
-        Business business = businessService.enterProductBusiness(businessId);
+        Business business = businessService.enterProductBusiness(bid);
         if(business == null){
             modelAndView.addObject(MESSAGE,"该店铺不存在");
 

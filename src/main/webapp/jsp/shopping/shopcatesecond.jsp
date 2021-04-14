@@ -44,7 +44,7 @@
                     <li><a href="logout.action">退出登录</a></li>
                     <li><a href="#about">收藏夹</a></li>
                     <li><a href="${pageContext.request.contextPath}/jsp/shopping/shoppingcart.jsp">购物车</a></li>
-                    <li><a href="${pageContext.request.contextPath}/jsp/shopping/orders.jsp">订单</a></li>
+                    <li><a href="getuserorders.action?uid=${sessionScope.current_user.uid}">订单</a></li>
                     <li><a href="entermybusiness.action?userId=${sessionScope.current_user.uid}">我的店铺</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
@@ -56,11 +56,11 @@
         <div class="col-sm-3 col-md-2 sidebar" >
             <h3>欢迎！${sessionScope.current_user.username}</h3>
             <div style="display: flex; margin:10px 0px 10px 0px;">
-                <div class="layui-col-md3">
+                <div class="layui-col-md3" onclick="window.location.href='getuserorders.action?uid=${sessionScope.current_user.uid}'">
                     <div>待发货</div>
                     <div>${sessionScope.orders_count_user_state01}</div>
                 </div>
-                <div class="layui-col-md3">
+                <div class="layui-col-md3" onclick="window.location.href='getuserorders.action?uid=${sessionScope.current_user.uid}'">
                     <div>待收货</div>
                     <div>${sessionScope.orders_count_user_state02}</div>
                 </div>
@@ -68,8 +68,8 @@
                     <div>待付款</div>
                     <div>${sessionScope.orders_count_user_state00}</div>
                 </div>
-                <div class="layui-col-md3">
-                    <div>待评价</div>
+                <div class="layui-col-md3" onclick="window.location.href='getuserorders.action?uid=${sessionScope.current_user.uid}'">
+                    <div>已完成</div>
                     <div>${sessionScope.orders_count_user_state03}</div>
                 </div>
             </div>

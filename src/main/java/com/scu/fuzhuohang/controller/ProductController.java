@@ -51,4 +51,88 @@ public class ProductController {
         modelAndView.setViewName("redirect:/jsp/shopping/productInfo.jsp");
         return modelAndView;
     }
+
+    @RequestMapping("/jsp/*/addproduct")
+    @ResponseBody
+    public ModelAndView addProduct(@RequestParam("bid") int bid,
+                                   @RequestParam("pname") String pname,
+                                   @RequestParam("price") double price,
+                                   @RequestParam("pnum") int pnum,
+                                   @RequestParam("pdesc") String pdesc,
+                                   @RequestParam("csid") int csid,
+                                   HttpSession session,
+                                   ModelAndView modelAndView){
+        Product product = new Product();
+        product.setBid(bid);
+        product.setPname(pname);
+        product.setPrice(price);
+        product.setPnum(pnum);
+        product.setPdesc(pdesc);
+        product.setCsid(csid);
+        if(productService.addProduct(product)!=0){
+            List<Product> productList = productService.getProductListByBusiness(bid);
+            session.setAttribute("business_products",productList);
+            modelAndView.addObject("message", "添加成功");
+            modelAndView.setViewName("redirect:/jsp/business/businessProducts.jsp");
+        }else{
+            modelAndView.addObject("message", "添加失败");
+            modelAndView.setViewName("addProduct");
+        }
+        return modelAndView;
+    }
+
+    @RequestMapping("/jsp/*/editproduct01")
+    @ResponseBody
+    public ModelAndView editProduct01(@RequestParam("pid") int productId,
+                                       HttpSession session,
+                                       ModelAndView modelAndView){
+        Product product = productService.getProductById(productId);
+        session.setAttribute("product_info",product);
+        modelAndView.addObject("message","跳转成功");
+        modelAndView.setViewName("redirect:/jsp/business/editProduct.jsp");
+        return modelAndView;
+    }
+
+    @RequestMapping("/jsp/*/editproduct02")
+    @ResponseBody
+    public ModelAndView editProduct02(@RequestParam("bid") int bid,
+                                    @RequestParam("pid") int pid,
+                                    @RequestParam("pname") String pname,
+                                    @RequestParam("price") double price,
+                                    @RequestParam("pnum") int pnum,
+                                    @RequestParam("pdesc") String pdesc,
+                                    @RequestParam("csid") int csid,
+                                    HttpSession session,
+                                    ModelAndView modelAndView){
+        Product product = new Product();
+        product.setPname(pname);
+        product.setPrice(price);
+        product.setPnum(pnum);
+        product.setPdesc(pdesc);
+        product.setCsid(csid);
+        if(productService.editProduct(pid,product)!=0){
+            List<Product> productList = productService.getProductListByBusiness(bid);
+            session.setAttribute("business_products",productList);
+            modelAndView.addObject("message", "修改成功");
+            modelAndView.setViewName("redirect:/jsp/business/businessProducts.jsp");
+        }else{
+            modelAndView.addObject("message", "修改失败");
+            modelAndView.setViewName("editProduct");
+        }
+        return modelAndView;
+    }
+
+    @RequestMapping("/jsp/*/deleteproduct")
+    @ResponseBody
+    public ModelAndView deleteProduct(@RequestParam("pid") int pid,
+                                      HttpSession session,
+                                      ModelAndView modelAndView){
+        if(productService.deleteProductByProduct(pid)!=0){
+            List<Product> productList = productService.getProductListByBusiness(((Business) session.getAttribute("current_business")).getBid());
+            session.setAttribute("business_products",productList);
+            modelAndView.addObject("message", "删除成功");
+            modelAndView.setViewName("redirect:/jsp/business/businessProducts.jsp");
+        }
+        return modelAndView;
+    }
 }

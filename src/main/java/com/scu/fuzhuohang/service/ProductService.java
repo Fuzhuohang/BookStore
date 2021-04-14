@@ -21,6 +21,8 @@ public interface ProductService {
 
     public List<ProductBusiness> getProductListByCsId(int csId);
 
+    public List<Product> getProductListByBusiness(int bid);
+
     public List<Product> getProductByName( String productName);
 
     public Product getProductById( int productId);

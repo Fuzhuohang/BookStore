@@ -13,8 +13,12 @@
 <html>
 <head>
     <title>悦读书城-个人空间</title>
+    <script src="${pageContext.request.contextPath}/webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/layui/js/layui.js"></script>
     <link href="${pageContext.request.contextPath}/webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/layui/css/layui.css" rel="stylesheet" media="all">
     <link href="${pageContext.request.contextPath}/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/theme.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/dashboard.css" rel="stylesheet">
@@ -49,7 +53,7 @@
                     <li><a href="logout.action">退出登录</a></li>
                     <li><a href="#about">收藏夹</a></li>
                     <li><a href="${pageContext.request.contextPath}/jsp/shopping/shoppingcart.jsp">购物车</a></li>
-                    <li><a href="${pageContext.request.contextPath}/jsp/shopping/orders.jsp">订单</a></li>
+                    <li><a href="getuserorders.action?uid=${sessionScope.current_user.uid}">订单</a></li>
                     <li><a href="entermybusiness.action?userId=${sessionScope.current_user.uid}">我的店铺</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
@@ -82,6 +86,40 @@
             <div align="center">
                 <label for="email">邮件：</label>
                 <input id="email" name="email" type="email" value="${sessionScope.current_user.email}" disabled>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <hr class="layui-border-green">
+            <div style="align-content: center; "><h2>个人订单信息总览</h2></div>
+            <div class="layui-form">
+                <table class="layui-table">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>待发货</th>
+                        <th>待收货</th>
+                        <th>待付款</th>
+                        <th>待评价</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>${sessionScope.orders_count_user_state01}</td>
+                        <td>${sessionScope.orders_count_user_state02}</td>
+                        <td>${sessionScope.orders_count_user_state00}</td>
+                        <td>${sessionScope.orders_count_user_state03}</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

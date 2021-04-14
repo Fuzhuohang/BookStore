@@ -1,6 +1,8 @@
 package com.scu.fuzhuohang.dao;
 
 import com.scu.fuzhuohang.bean.Orders;
+import com.scu.fuzhuohang.bean.mergebean.BusinessOrders;
+import com.scu.fuzhuohang.bean.mergebean.UserOrders;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -15,13 +17,13 @@ public interface OrderDao {
 
     public Orders getOrder(@Param("oid") int orderId);
 
-    public List<Orders> getOrderAll(@Param("uid") int userId);
+    public List<UserOrders> getOrderAll(@Param("uid") int userId);
 
-    public List<Orders> getOrderByState(@Param("uid") int userId, @Param("ostate") int orderState);
+    public List<UserOrders> getOrderByState(@Param("uid") int userId, @Param("ostate") int orderState);
 
-    public List<Orders> getBusinessOrderAll(@Param("bid") int businessId);
+    public List<BusinessOrders> getBusinessOrderAll(@Param("bid") int businessId);
 
-    public List<Orders> getBusinessOrderByState(@Param("bid") int businessId, @Param("ostate") int orderState);
+    public List<BusinessOrders> getBusinessOrderByState(@Param("bid") int businessId, @Param("ostate") int orderState);
 
     public int createOrder(@Param("order") Orders order);
 
@@ -29,7 +31,9 @@ public interface OrderDao {
 
     public int editOrder(@Param("oid") int orderId, @Param("order") Orders order);
 
-    public int updateState(@Param("oid") int orderId, @Param("ostate") int ostate, @Param("time")Date time);
+    public int settleOrder(@Param("oid") int orderId, @Param("order") Orders order);
+
+    public int updateState(@Param("oid") int orderId, @Param("ostate") int ostate);
 
     public int getCount(@Param("uid") int userId);
 

@@ -41,7 +41,7 @@
                     <li><a href="logout.action">退出登录</a></li>
                     <li><a href="#about">收藏夹</a></li>
                     <li><a href="${pageContext.request.contextPath}/jsp/shopping/shoppingcart.jsp">购物车</a></li>
-                    <li><a href="${pageContext.request.contextPath}/jsp/shopping/orders.jsp">订单</a></li>
+                    <li><a href="getuserorders.action?uid=${sessionScope.current_user.uid}">订单</a></li>
                     <li><a href="entermybusiness.action?userId=${sessionScope.current_user.uid}">我的店铺</a></li>
                 </ul>
             </div><!--/.nav-collapse -->

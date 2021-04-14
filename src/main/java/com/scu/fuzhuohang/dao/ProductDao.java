@@ -21,6 +21,8 @@ public interface ProductDao {
 
     public List<ProductBusiness> getProductListByCsId(@Param("csid") int csId);
 
+    public List<Product> getProductListByBusiness(@Param("bid") int bid);
+
     public List<Product> getProductByName(@Param("pname") String productName);
 
     public Product getProductById(@Param("pid") int productId);
