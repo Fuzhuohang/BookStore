@@ -2,7 +2,6 @@ package com.scu.fuzhuohang.controller;
 
 import com.scu.fuzhuohang.bean.Category;
 import com.scu.fuzhuohang.bean.CategorySecond;
-import com.scu.fuzhuohang.bean.Product;
 import com.scu.fuzhuohang.bean.mergebean.ProductBusiness;
 import com.scu.fuzhuohang.service.CategoryService;
 import com.scu.fuzhuohang.service.ProductService;
@@ -30,6 +29,8 @@ public class IndexController {
     @Autowired
     CategoryService categoryService;
 
+    private static final String MESSAGE = "message";
+
     @RequestMapping("getCategory")
     @ResponseBody
     public ModelAndView getIndex(HttpSession session,
@@ -40,7 +41,7 @@ public class IndexController {
         session.setAttribute("current_category",categoryList);
         session.setAttribute("current_categorysecond",categorySecondList);
         session.setAttribute("current_product",productList);
-        modelAndView.addObject("message","加载成功");
+        modelAndView.addObject(MESSAGE,"加载成功");
         modelAndView.setViewName("redirect:/jsp/shopping/shopindex.jsp");
         return modelAndView;
     }
@@ -55,7 +56,7 @@ public class IndexController {
         session.setAttribute("current_category_persent",cateId);
         session.setAttribute("current_category_second",categorySeconds);
         session.setAttribute("current_product_persent",productList);
-        modelAndView.addObject("message","加载成功");
+        modelAndView.addObject(MESSAGE,"加载成功");
         modelAndView.setViewName("redirect:/jsp/shopping/shopcategory.jsp");
         return modelAndView;
     }
@@ -68,7 +69,7 @@ public class IndexController {
         List<ProductBusiness> productList = productService.getProductListByCsId(csId);
         session.setAttribute("current_category_second_persent",csId);
         session.setAttribute("current_product_second_persent",productList);
-        modelAndView.addObject("message","加载成功");
+        modelAndView.addObject(MESSAGE,"加载成功");
         modelAndView.setViewName("redirect:/jsp/shopping/shopcatesecond.jsp");
         return modelAndView;
     }

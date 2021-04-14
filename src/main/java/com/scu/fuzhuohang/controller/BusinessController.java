@@ -50,12 +50,12 @@ public class BusinessController {
             modelAndView.addObject(MESSAGE,"您没有开设自己的店铺，请先进行店铺申请注册");
             modelAndView.setViewName(URL_1);
         }else {
-            int CountOfBusinessState01 = ordersService.getBusinessCountByState(business.getBid(),1);
-            int CountOfBusinessState02 = ordersService.getBusinessCountByState(business.getBid(),2);
-            int CountOfBusinessState03 = ordersService.getBusinessCountByState(business.getBid(),3);
-            session.setAttribute("orders_count_business_state01",CountOfBusinessState01);
-            session.setAttribute("orders_count_business_state02",CountOfBusinessState02);
-            session.setAttribute("orders_count_business_state03",CountOfBusinessState03);
+            int countOfBusinessState01 = ordersService.getBusinessCountByState(business.getBid(),1);
+            int countOfBusinessState02 = ordersService.getBusinessCountByState(business.getBid(),2);
+            int countOfBusinessState03 = ordersService.getBusinessCountByState(business.getBid(),3);
+            session.setAttribute("orders_count_business_state01",countOfBusinessState01);
+            session.setAttribute("orders_count_business_state02",countOfBusinessState02);
+            session.setAttribute("orders_count_business_state03",countOfBusinessState03);
             session.setAttribute(CURRENT_BUSINESS,business);
             modelAndView.addObject(MESSAGE,"进入成功");
             modelAndView.setViewName(URL_2);

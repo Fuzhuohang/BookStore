@@ -45,11 +45,11 @@
     </nav>
     <div class="container" id = "login_frame">
         <form class="form-signin" action="registerbusiness.action?uid=${sessionScope.current_user.uid}" method="post">
-            <div align="center">
+            <div style="align-content: center">
                 <label for="bname">店&nbsp;&nbsp;铺&nbsp;&nbsp;名&nbsp;&nbsp;称：</label>
                 <input id="bname" name="bname" type="text" class="form-control2" placeholder="请输入店铺名称">
             </div>
-            <div align="center">
+            <div style="align-content: center">
                 <label for="baddr">店铺所在地址：</label>
                 <input id="baddr" name="baddr" type="text" class="form-control2" placeholder="请输入店铺所在地址">
             </div>

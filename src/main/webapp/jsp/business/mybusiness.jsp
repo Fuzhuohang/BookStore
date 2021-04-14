@@ -65,12 +65,12 @@
         </div>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
-        <div align="center">
+        <div style="align-content: center">
             <h1>${sessionScope.current_business.bname}</h1>
             <label for="bname">店铺名称：</label>
             <input id="bname" name="bname" type="text" class="form-control2" value="${sessionScope.current_business.bname}" disabled>
         </div>
-        <div align="center">
+        <div style="align-content: center">
             <label for="baddr">店铺地址：</label>
             <input id="baddr" name="baddr" type="text" value="${sessionScope.current_business.BAddr}" disabled>
         </div>

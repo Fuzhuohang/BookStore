@@ -1,7 +1,6 @@
 package com.scu.fuzhuohang.controller;
 
 import com.scu.fuzhuohang.bean.Business;
-import com.scu.fuzhuohang.bean.Comment;
 import com.scu.fuzhuohang.bean.Product;
 import com.scu.fuzhuohang.bean.mergebean.CommentUser;
 import com.scu.fuzhuohang.service.BusinessService;
@@ -34,6 +33,10 @@ public class ProductController {
     @Autowired
     CommentService commentService;
 
+    private static final String URL_1 = "redirect:/jsp/business/businessProducts.jsp";
+    private static final String BUSINESS_PRODUCTS = "business_products";
+    private static final String MESSAGE = "message";
+
     @RequestMapping("/jsp/*/getproductinfo")
     @ResponseBody
     public ModelAndView getProductInfo(@RequestParam("pid") int productId,
@@ -47,7 +50,7 @@ public class ProductController {
         session.setAttribute("product_business",business);
         session.setAttribute("product_comment",commentList);
         session.setAttribute("product_commentcount",commentCount);
-        modelAndView.addObject("message","跳转成功");
+        modelAndView.addObject(MESSAGE,"跳转成功");
         modelAndView.setViewName("redirect:/jsp/shopping/productInfo.jsp");
         return modelAndView;
     }
@@ -71,11 +74,11 @@ public class ProductController {
         product.setCsid(csid);
         if(productService.addProduct(product)!=0){
             List<Product> productList = productService.getProductListByBusiness(bid);
-            session.setAttribute("business_products",productList);
-            modelAndView.addObject("message", "添加成功");
-            modelAndView.setViewName("redirect:/jsp/business/businessProducts.jsp");
+            session.setAttribute(BUSINESS_PRODUCTS,productList);
+            modelAndView.addObject(MESSAGE, "添加成功");
+            modelAndView.setViewName(URL_1);
         }else{
-            modelAndView.addObject("message", "添加失败");
+            modelAndView.addObject(MESSAGE, "添加失败");
             modelAndView.setViewName("addProduct");
         }
         return modelAndView;
@@ -88,7 +91,7 @@ public class ProductController {
                                        ModelAndView modelAndView){
         Product product = productService.getProductById(productId);
         session.setAttribute("product_info",product);
-        modelAndView.addObject("message","跳转成功");
+        modelAndView.addObject(MESSAGE,"跳转成功");
         modelAndView.setViewName("redirect:/jsp/business/editProduct.jsp");
         return modelAndView;
     }
@@ -112,11 +115,11 @@ public class ProductController {
         product.setCsid(csid);
         if(productService.editProduct(pid,product)!=0){
             List<Product> productList = productService.getProductListByBusiness(bid);
-            session.setAttribute("business_products",productList);
-            modelAndView.addObject("message", "修改成功");
-            modelAndView.setViewName("redirect:/jsp/business/businessProducts.jsp");
+            session.setAttribute(BUSINESS_PRODUCTS,productList);
+            modelAndView.addObject(MESSAGE, "修改成功");
+            modelAndView.setViewName(URL_1);
         }else{
-            modelAndView.addObject("message", "修改失败");
+            modelAndView.addObject(MESSAGE, "修改失败");
             modelAndView.setViewName("editProduct");
         }
         return modelAndView;
@@ -129,9 +132,9 @@ public class ProductController {
                                       ModelAndView modelAndView){
         if(productService.deleteProductByProduct(pid)!=0){
             List<Product> productList = productService.getProductListByBusiness(((Business) session.getAttribute("current_business")).getBid());
-            session.setAttribute("business_products",productList);
-            modelAndView.addObject("message", "删除成功");
-            modelAndView.setViewName("redirect:/jsp/business/businessProducts.jsp");
+            session.setAttribute(BUSINESS_PRODUCTS,productList);
+            modelAndView.addObject(MESSAGE, "删除成功");
+            modelAndView.setViewName(URL_1);
         }
         return modelAndView;
     }

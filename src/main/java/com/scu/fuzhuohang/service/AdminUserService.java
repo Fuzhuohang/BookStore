@@ -1,7 +1,6 @@
 package com.scu.fuzhuohang.service;
 
 import com.scu.fuzhuohang.bean.AdminUser;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

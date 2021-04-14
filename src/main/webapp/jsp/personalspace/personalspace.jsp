@@ -74,16 +74,16 @@
             </div>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
-            <div align="center">
+            <div style="align-content: center">
                 <h1>你好！${sessionScope.current_user.username}</h1>
                 <label for="account">账号：</label>
                 <input id="account" name="account" type="text" value="${sessionScope.current_user.account}" disabled>
             </div>
-            <div align="center">
+            <div style="align-content: center">
                 <label for="tel">电话：</label>
                 <input id="tel" name="tel" type="tel" value="${sessionScope.current_user.tel}" disabled>
             </div>
-            <div align="center">
+            <div style="align-content: center">
                 <label for="email">邮件：</label>
                 <input id="email" name="email" type="email" value="${sessionScope.current_user.email}" disabled>
             </div>

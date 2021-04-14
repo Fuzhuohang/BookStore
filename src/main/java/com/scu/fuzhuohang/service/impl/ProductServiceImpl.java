@@ -4,7 +4,6 @@ import com.scu.fuzhuohang.bean.Product;
 import com.scu.fuzhuohang.bean.mergebean.ProductBusiness;
 import com.scu.fuzhuohang.dao.ProductDao;
 import com.scu.fuzhuohang.service.ProductService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

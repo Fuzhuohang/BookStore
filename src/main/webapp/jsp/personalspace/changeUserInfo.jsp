@@ -72,19 +72,19 @@
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
         <form class="form-signin" action="updateInfo.action" method="post">
-            <div align="center">
+            <div style="align-content: center">
                 <label for="account">账&nbsp;&nbsp;&nbsp;号：</label>
                 <input id="account" name="account" type="text" class="form-control2" value="${sessionScope.current_user.account}" readonly="readonly">
             </div>
-            <div align="center">
+            <div style="align-content: center">
                 <label for="username">用户名：</label>
                 <input id="username" name="username" type="text" value="${sessionScope.current_user.username}">
             </div>
-            <div align="center">
+            <div style="align-content: center">
                 <label for="tel">电&nbsp;&nbsp;&nbsp;话：</label>
                 <input id="tel" name="tel" type="tel" value="${sessionScope.current_user.tel}">
             </div>
-            <div align="center">
+            <div style="align-content: center">
                 <label for="email">邮&nbsp;&nbsp;&nbsp;件：</label>
                 <input id="email" name="email" type="email" value="${sessionScope.current_user.email}">
             </div>

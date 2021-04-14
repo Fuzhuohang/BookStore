@@ -2,7 +2,6 @@ package com.scu.fuzhuohang.service;
 
 import com.scu.fuzhuohang.bean.Comment;
 import com.scu.fuzhuohang.bean.mergebean.CommentUser;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
