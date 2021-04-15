@@ -51,7 +51,7 @@
 
     <update id="updateNum">
         UPDATE product
-        SET Pnum=#{pnum}
+        SET Pnum = Pnum-#{pnum}
         WHERE Pid = #{pid};
     </update>
 

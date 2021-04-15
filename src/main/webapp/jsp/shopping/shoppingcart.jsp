@@ -108,7 +108,7 @@
                     </td>
                     <td>
                         <div style="width: 65px;">
-                            <div><a>订单结算</a></div>
+                            <div><a href="topayment2.action?oid=${orders.oid}&uid=${sessionScope.current_user.uid}">订单结算</a></div>
                             <div><a>保存修改</a></div>
                             <div><a>删除订单</a></div>
                         </div>

@@ -110,8 +110,8 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
         <div class="layui-tab layui-tab-card">
             <ul class="layui-tab-title">
-                <li class="layui-this">未发货订单 <span class="layui-badge">${sessionScope.orders_count_business_state01}</span></li>
-                <li>未完成订单 <span class="layui-badge">${sessionScope.orders_count_business_state02}</span></li>
+                <li class="layui-this">未发货订单 <span class="layui-badge">${sessionScope.orders_list_business_state01.size()}</span></li>
+                <li>未完成订单 <span class="layui-badge">${sessionScope.orders_list_business_state02.size()}</span></li>
                 <li>已完成订单</li>
             </ul>
             <div class="layui-tab-content" style="height: 100px;">

@@ -8,6 +8,7 @@ import com.scu.fuzhuohang.bean.mergebean.BusinessOrders;
 import com.scu.fuzhuohang.bean.mergebean.UserOrders;
 import com.scu.fuzhuohang.service.AddressService;
 import com.scu.fuzhuohang.service.OrdersService;
+import com.scu.fuzhuohang.service.ProductService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -38,6 +40,9 @@ public class OrdersController {
     @Autowired
     AddressService addressService;
 
+    @Autowired
+    ProductService productService;
+
     private static final String ORDERS_LIST_USER_STATE = "orders_list_user_state";
     private static final String ORDERS_COUNT_USER_STATE = "orders_count_user_state";
     private static final String ORDERS_LIST_BUSINESS_STATE = "orders_list_business_state";
@@ -50,6 +55,7 @@ public class OrdersController {
     private static final String URL_3 = "redirect:/jsp/shopping/shoppingcart.jsp";
     private static final String URL_4 = "redirect:/jsp/shopping/productInfo.jsp";
     private static final String URL_5 = "redirect:/jsp/shopping/createorders.jsp";
+    private static final String URL_6 = "redirect:/jsp/shopping/paysuccess.jsp";
 
     @RequestMapping("/jsp/*/getbusinessorders")
     @ResponseBody
@@ -237,16 +243,74 @@ public class OrdersController {
         Product product = (Product) session.getAttribute("product_info");
         Business business = (Business) session.getAttribute("product_business");
         UserOrders userOrders = new UserOrders();
+        userOrders.setOid(0);
         userOrders.setBname(business.getBname());
         userOrders.setPname(product.getPname());
         userOrders.setPnum(pnum);
         userOrders.setMoney(product.getPrice());
         userOrders.setTotal(product.getPrice()*pnum);
+        userOrders.setUid(uid);
+        userOrders.setBid(business.getBid());
+        userOrders.setPid(product.getPid());
         List<Address> addresses = addressService.getAddresses(uid);
         session.setAttribute("current_addresses",addresses);
         session.setAttribute("product_paid",userOrders);
         modelAndView.addObject(MESSAGE,"跳转成功");
         modelAndView.setViewName(URL_5);
+        return modelAndView;
+    }
+
+    @RequestMapping("/jsp/*/topayment2")
+    @ResponseBody
+    public ModelAndView toPayment2(@RequestParam("oid") int oid,
+                                  @RequestParam("uid") int uid,
+                                  HttpSession session,
+                                  ModelAndView modelAndView){
+        List<UserOrders> userOrdersList = (List<UserOrders>) session.getAttribute("orders_list_user_state00");
+        for(UserOrders userOrders : userOrdersList){
+            if(userOrders.getOid() == oid){
+                List<Address> addresses = addressService.getAddresses(uid);
+                session.setAttribute("current_addresses",addresses);
+                session.setAttribute("product_paid",userOrders);
+                modelAndView.addObject(MESSAGE,"跳转成功");
+                modelAndView.setViewName(URL_5);
+            }
+        }
+        return modelAndView;
+    }
+
+    @RequestMapping("/jsp/*/payment")
+    @ResponseBody
+    public ModelAndView pay(@RequestParam("uid") int uid,
+                            @RequestParam("bid") int bid,
+                            @RequestParam("pid") int pid,
+                            @RequestParam("addrid") int addrid,
+                            HttpSession session,
+                            ModelAndView modelAndView){
+        UserOrders userOrders = (UserOrders) session.getAttribute("product_paid");
+        Orders orders = new Orders();
+        orders.setUid(uid);
+        orders.setBid(bid);
+        orders.setPid(pid);
+        orders.setPnum(userOrders.getPnum());
+        orders.setMoney(userOrders.getMoney());
+        orders.setOstate(1);
+        orders.setAddrId(addrid);
+        orders.setTime(new Timestamp(System.currentTimeMillis()));
+        orders.setTotal(userOrders.getTotal());
+        if(userOrders.getOid()==0){
+            if(ordersService.createOrder(orders)!=0){
+                productService.updateNum(pid,userOrders.getPnum());
+                modelAndView.addObject("支付成功");
+                modelAndView.setViewName(URL_6);
+            }
+        }else{
+            if(ordersService.settleOrder(userOrders.getOid(),orders)!=0){
+                productService.updateNum(pid,userOrders.getPnum());
+                modelAndView.addObject("支付成功");
+                modelAndView.setViewName(URL_6);
+            }
+        }
         return modelAndView;
     }
 }

@@ -19,6 +19,9 @@ public class UserOrders {
     private String Tel;
     private String Addr;
     private String Bname;
+    private int Uid;
+    private int Bid;
+    private int Pid;
 
 
     public int getOid() {
@@ -107,5 +110,29 @@ public class UserOrders {
 
     public void setBname(String bname) {
         Bname = bname;
+    }
+
+    public int getUid() {
+        return Uid;
+    }
+
+    public void setUid(int uid) {
+        Uid = uid;
+    }
+
+    public int getBid() {
+        return Bid;
+    }
+
+    public void setBid(int bid) {
+        Bid = bid;
+    }
+
+    public int getPid() {
+        return Pid;
+    }
+
+    public void setPid(int pid) {
+        Pid = pid;
     }
 }
