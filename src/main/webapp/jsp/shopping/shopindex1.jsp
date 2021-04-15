@@ -43,7 +43,7 @@
                         <li><a href="${pageContext.request.contextPath}/jsp/personalspace/personalspace.jsp">欢迎！${sessionScope.current_user.username}</a></li>
                         <li><a href="logout.action">退出登录</a></li>
                         <li><a href="#about">收藏夹</a></li>
-                        <li><a href="${pageContext.request.contextPath}/jsp/shopping/shoppingcart.jsp">购物车</a></li>
+                        <li><a href="getshoppingcart.action?uid=${sessionScope.current_user.uid}">购物车</a></li>
                         <li><a href="getuserorders.action?uid=${sessionScope.current_user.uid}">订单</a></li>
                         <li><a href="entermybusiness.action?userId=${sessionScope.current_user.uid}">我的店铺</a></li>
                     </ul>
@@ -73,31 +73,6 @@
                         <div>${sessionScope.orders_count_user_state03}</div>
                     </div>
                 </div>
-<%--                <div class="layui-form">--%>
-<%--                    <table class="layui-table">--%>
-<%--                        <colgroup>--%>
-<%--                            <col>--%>
-<%--                            <col>--%>
-<%--                            <col>--%>
-<%--                        </colgroup>--%>
-<%--                        <thead>--%>
-<%--                        <tr>--%>
-<%--                            <th style="font-size: 5px">待发货</th>--%>
-<%--                            <th>待收货</th>--%>
-<%--                            <th>待付款</th>--%>
-<%--                            <th>待评价</th>--%>
-<%--                        </tr>--%>
-<%--                        </thead>--%>
-<%--                        <tbody>--%>
-<%--                        <tr>--%>
-<%--                            <td>${sessionScope.orders_count_user_state01}</td>--%>
-<%--                            <td>${sessionScope.orders_count_user_state02}</td>--%>
-<%--                            <td>${sessionScope.orders_count_user_state00}</td>--%>
-<%--                            <td>${sessionScope.orders_count_user_state03}</td>--%>
-<%--                        </tr>--%>
-<%--                        </tbody>--%>
-<%--                    </table>--%>
-<%--                </div>--%>
                 <h3 class="form-signin-heading" style="margin-top: 10px">书籍分类</h3>
                 <ul class="nav nav-sidebar">
                     <c:forEach items="${sessionScope.current_category}" var="category">

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: LX
@@ -48,6 +49,100 @@
         </div>
     </div>
 </nav>
-
+<div class="layui-row container">
+    <div class="layui-form">
+        <table class="layui-table" id="test">
+            <colgroup>
+                <col align="center">
+                <col>
+                <col align="center">
+                <col align="center">
+                <col align="center">
+            </colgroup>
+            <thead>
+            <tr>
+                <th style="width: 65px;">
+                    <div style="width: 32px;" onclick="checkAll(check_all)">
+                        <input type="checkbox" id="check_all" name="check_all" value="check_all">
+                    </div>
+                </th>
+                <th>商品</th>
+                <th style="width: 100px;">数量</th>
+                <th style="width: 100px;">价格</th>
+                <th style="width: 100px;">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${sessionScope.orders_list_user_state00}" var="orders">
+                <tr>
+                    <td>
+                        <div style="width: 32px;">
+                            <input type="checkbox" id="check_${orders.oid}" name="checkbox_info" value="${orders}" onclick="console.log(check_${orders.oid}+'checked');">
+                        </div>
+                    </td>
+                    <td>
+                        <div style="height: 120px; display: flex;">
+                            <c:if test="${orders.image == null}">
+                                <img src="${pageContext.request.contextPath}/images/bookicon.jpeg" style="height: 100px;width: 100px;padding: 10px;"/>
+                            </c:if>
+                            <c:if test="${orders.image != null}">
+                                <img src="${orders.image}" style="height: 100px;width: 100px;padding: 10px;"/>
+                            </c:if>
+                            <div style="height: 100%;width: 100%;display:flex;">
+                                <div style="height: 100%; padding: 10px 30px;">
+                                    <div style="position: absolute; top:15px;font-weight: bold; font-size: large;">${orders.pname}</div>
+                                    <div style="position: absolute; bottom:15px;">${orders.bname}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="width: 65px;">
+                            <input type="number" id="num_${orders.oid}" value="${orders.pnum}" style="width: 65px;">
+                        </div>
+                    </td>
+                    <td>
+                        <div style="width: 65px;">
+                            <input type="number" step="0.01" id="price_${orders.oid}" value="${orders.total}" readonly="readonly" style="width: 65px; border: none; color: #FF5722; font-size: 20px;">
+                        </div>
+                    </td>
+                    <td>
+                        <div style="width: 65px;">
+                            <div><a>订单结算</a></div>
+                            <div><a>保存修改</a></div>
+                            <div><a>删除订单</a></div>
+                        </div>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    function checkAll(checkall) {
+        console.log("check_all is checked");
+        var arr = document.getElementsByName("checkbox_info");
+        if (checkall.checked == true) {
+            console.log(checkall.checked);
+            for(var i = 0;i < arr.length;i++){
+                console.log(arr[i].id+"::"+arr[i].checked);
+                if(arr[i].checked == false){
+                    console.log(arr[i].id+" changeed");
+                    arr[i].checked = true;
+                }
+                console.log(arr[i].id+"::"+arr[i].checked);
+            }
+        }else{
+            for(var i = 0;i < arr.length;i++){
+                console.log(arr[i].id+"::"+arr[i].checked);
+                if(arr[i].checked == true){
+                    arr[i].checked = false;
+                }
+                console.log(arr[i].id+"::"+arr[i].checked);
+            }
+        }
+    }
+</script>
 </body>
 </html>

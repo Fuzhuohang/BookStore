@@ -22,7 +22,7 @@ public class Orders {
     private int Pnum;
     private double Money;
     private int Ostate;
-    private int AddrId;
+    private int Addrid;
     private double Total;
     private Timestamp Time;
 
@@ -83,11 +83,11 @@ public class Orders {
     }
 
     public int getAddrId() {
-        return AddrId;
+        return Addrid;
     }
 
     public void setAddrId(int addrId) {
-        AddrId = addrId;
+        Addrid = addrId;
     }
 
     public Timestamp getTime() {

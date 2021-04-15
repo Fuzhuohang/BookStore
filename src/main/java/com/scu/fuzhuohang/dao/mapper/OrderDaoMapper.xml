@@ -8,13 +8,13 @@
     </select>
 
     <select id="getOrderAll" resultType="UserOrders">
-        SELECT orders.Oid,orders.Pnum,orders.Time,orders.Total,product.Pname,address.`Name`,address.Tel,address.Addr,business.Bname
+        SELECT orders.Oid,orders.Pnum,orders.Time,orders.Money,orders.Total,product.Pname,product.Image,address.`Name`,address.Tel,address.Addr,business.Bname
         FROM orders LEFT JOIN product ON orders.Pid = product.Pid LEFT JOIN address ON orders.Addrid = address.Addrid LEFT JOIN business ON orders.Bid = business.Bid
         WHERE orders.Uid = #{uid} AND orders.Ostate != 0;
     </select>
 
     <select id="getOrderByState" resultType="UserOrders">
-        SELECT orders.Oid,orders.Pnum,orders.Time,orders.Total,product.Pname,address.`Name`,address.Tel,address.Addr,business.Bname
+        SELECT orders.Oid,orders.Pnum,orders.Time,orders.Money,orders.Total,product.Pname,product.Image,address.`Name`,address.Tel,address.Addr,business.Bname
         FROM orders LEFT JOIN product ON orders.Pid = product.Pid LEFT JOIN address ON orders.Addrid = address.Addrid LEFT JOIN business ON orders.Bid = business.Bid
         WHERE orders.Uid = #{uid} AND orders.Ostate = #{ostate};
     </select>

@@ -20,8 +20,14 @@
     <link href="${pageContext.request.contextPath}/css/theme.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/dashboard.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/signin.css" rel="stylesheet">
-    <script type="javascript">
-
+    <script type="text/javascript">
+        function addshoppingcart(uid,pnum){
+            alert("添加成功");
+            window.location.href="addshoppingcart.action?uid="+uid+"&pnum="+pnum;
+        }
+        function topayment(uid,pnum){
+            window.location.href="topayment.action?uid="+uid+"&pnum="+pnum;
+        }
     </script>
     <script type="text/css">
 
@@ -96,10 +102,12 @@
             </div>
             <div style="margin: 5px;">
                 <div class="layui-col-md6">
-                    <button type="button" class="layui-btn" style="width: inherit">立即购买</button>
+                    <button type="button" class="layui-btn" style="width: inherit"
+                            onclick="topayment(${sessionScope.current_user.uid},document.getElementById('buynum').value)">立即购买</button>
                 </div>
                 <div class="layui-col-md6">
-                    <button type="button" class="layui-btn layui-btn-primary layui-border-green" style="width: inherit">加入购物车</button>
+                    <button type="button" class="layui-btn layui-btn-primary layui-border-green" style="width: inherit"
+                            onclick="addshoppingcart(${sessionScope.current_user.uid},document.getElementById('buynum').value)">加入购物车</button>
                 </div>
             </div>
             <%--        <div style="border: 1px solid #000;">--%>

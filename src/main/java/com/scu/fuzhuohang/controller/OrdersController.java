@@ -1,12 +1,18 @@
 package com.scu.fuzhuohang.controller;
 
+import com.scu.fuzhuohang.bean.Address;
+import com.scu.fuzhuohang.bean.Business;
+import com.scu.fuzhuohang.bean.Orders;
+import com.scu.fuzhuohang.bean.Product;
 import com.scu.fuzhuohang.bean.mergebean.BusinessOrders;
 import com.scu.fuzhuohang.bean.mergebean.UserOrders;
+import com.scu.fuzhuohang.service.AddressService;
 import com.scu.fuzhuohang.service.OrdersService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,6 +35,9 @@ public class OrdersController {
     @Autowired
     OrdersService ordersService;
 
+    @Autowired
+    AddressService addressService;
+
     private static final String ORDERS_LIST_USER_STATE = "orders_list_user_state";
     private static final String ORDERS_COUNT_USER_STATE = "orders_count_user_state";
     private static final String ORDERS_LIST_BUSINESS_STATE = "orders_list_business_state";
@@ -38,10 +47,13 @@ public class OrdersController {
     private static final String MESSAGE = "message";
     private static final String URL_1 = "redirect:/jsp/shopping/orders.jsp";
     private static final String URL_2 = "redirect:/jsp/business/businessorders.jsp";
+    private static final String URL_3 = "redirect:/jsp/shopping/shoppingcart.jsp";
+    private static final String URL_4 = "redirect:/jsp/shopping/productInfo.jsp";
+    private static final String URL_5 = "redirect:/jsp/shopping/createorders.jsp";
 
     @RequestMapping("/jsp/*/getbusinessorders")
     @ResponseBody
-    public ModelAndView getBusinessOrders(@Param("bid") int bid,
+    public ModelAndView getBusinessOrders(@RequestParam("bid") int bid,
                                           HttpSession session,
                                           ModelAndView modelAndView){
         List<BusinessOrders> ordersOfBusinessState01 = ordersService.getBusinessOrdersByState(bid,1);
@@ -65,9 +77,9 @@ public class OrdersController {
 
     @RequestMapping("/jsp/*/upstateorderstatebusiness")
     @ResponseBody
-    public ModelAndView updateBusinessOrders(@Param("bid") int bid,
-                                             @Param("oid") int oid,
-                                             @Param("ostate") int ostate,
+    public ModelAndView updateBusinessOrders(@RequestParam("bid") int bid,
+                                             @RequestParam("oid") int oid,
+                                             @RequestParam("ostate") int ostate,
                                              HttpSession session,
                                              ModelAndView modelAndView){
         if(ordersService.updateState(oid,ostate)!=0){
@@ -96,7 +108,7 @@ public class OrdersController {
 
     @RequestMapping("/jsp/*/getuserorders")
     @ResponseBody
-    public ModelAndView getUserOrders(@Param("uid") int uid,
+    public ModelAndView getUserOrders(@RequestParam("uid") int uid,
                                       HttpSession session,
                                       ModelAndView modelAndView){
         List<UserOrders> ordersOfUserState01 = ordersService.getUserOrdersByState(uid,1);
@@ -120,9 +132,9 @@ public class OrdersController {
 
     @RequestMapping("/jsp/*/upstateorderstateuser")
     @ResponseBody
-    public ModelAndView updateUserOrders(@Param("uid") int uid,
-                                         @Param("oid") int oid,
-                                         @Param("ostate") int ostate,
+    public ModelAndView updateUserOrders(@RequestParam("uid") int uid,
+                                         @RequestParam("oid") int oid,
+                                         @RequestParam("ostate") int ostate,
                                          HttpSession session,
                                          ModelAndView modelAndView){
         if(ordersService.updateState(oid,ostate)!=0){
@@ -151,8 +163,8 @@ public class OrdersController {
 
     @RequestMapping("/jsp/*/deleteorders")
     @ResponseBody
-    public ModelAndView deleteOrders(@Param("uid") int uid,
-                                     @Param("oid") int oid,
+    public ModelAndView deleteOrders(@RequestParam("uid") int uid,
+                                     @RequestParam("oid") int oid,
                                      HttpSession session,
                                      ModelAndView modelAndView){
         if(ordersService.deleteOrder(oid)!=0){
@@ -176,6 +188,65 @@ public class OrdersController {
             modelAndView.addObject(MESSAGE,"订单删除失败");
             modelAndView.setViewName("orders");
         }
+        return modelAndView;
+    }
+
+    @RequestMapping("/jsp/*/getshoppingcart")
+    @ResponseBody
+    public ModelAndView getShoppingCart(@RequestParam("uid") int uid,
+                                        HttpSession session,
+                                        ModelAndView modelAndView){
+        List<UserOrders> ordersInShoppingCart = ordersService.getUserOrdersByState(uid,0);
+        session.setAttribute(ORDERS_LIST_USER_STATE+"00",ordersInShoppingCart);
+        modelAndView.addObject(MESSAGE,"加载成功");
+        modelAndView.setViewName(URL_3);
+        return modelAndView;
+    }
+
+    @RequestMapping("/jsp/*/addshoppingcart")
+    @ResponseBody
+    public ModelAndView addShoppingCart(@RequestParam("uid") int uid,
+                                        @RequestParam("pnum") int pnum,
+                                        HttpSession session,
+                                        ModelAndView modelAndView){
+        Product product = (Product) session.getAttribute("product_info");
+        Orders orders = new Orders();
+        orders.setUid(uid);
+        orders.setBid(product.getBid());
+        orders.setPid(product.getPid());
+        orders.setPnum(pnum);
+        orders.setMoney(product.getPrice());
+        orders.setTotal(product.getPrice() * pnum);
+        orders.setOstate(0);
+        if(ordersService.createOrder(orders)!=0){
+            modelAndView.addObject(MESSAGE,"添加成功");
+            modelAndView.setViewName(URL_4);
+        }else {
+            modelAndView.addObject(MESSAGE,"添加失败");
+            modelAndView.setViewName(URL_4);
+        }
+        return modelAndView;
+    }
+
+    @RequestMapping("/jsp/*/topayment")
+    @ResponseBody
+    public ModelAndView toPayment(@RequestParam("uid") int uid,
+                                  @RequestParam("pnum") int pnum,
+                                  HttpSession session,
+                                  ModelAndView modelAndView){
+        Product product = (Product) session.getAttribute("product_info");
+        Business business = (Business) session.getAttribute("product_business");
+        UserOrders userOrders = new UserOrders();
+        userOrders.setBname(business.getBname());
+        userOrders.setPname(product.getPname());
+        userOrders.setPnum(pnum);
+        userOrders.setMoney(product.getPrice());
+        userOrders.setTotal(product.getPrice()*pnum);
+        List<Address> addresses = addressService.getAddresses(uid);
+        session.setAttribute("current_addresses",addresses);
+        session.setAttribute("product_paid",userOrders);
+        modelAndView.addObject(MESSAGE,"跳转成功");
+        modelAndView.setViewName(URL_5);
         return modelAndView;
     }
 }

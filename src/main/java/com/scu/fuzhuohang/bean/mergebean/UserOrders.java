@@ -11,12 +11,15 @@ public class UserOrders {
     private int Oid;
     private int Pnum;
     private Timestamp Time;
+    private double Money;
     private double Total;
     private String Pname;
+    private String Image;
     private String Name;
     private String Tel;
     private String Addr;
     private String Bname;
+
 
     public int getOid() {
         return Oid;
@@ -42,6 +45,14 @@ public class UserOrders {
         Time = time;
     }
 
+    public double getMoney() {
+        return Money;
+    }
+
+    public void setMoney(double money) {
+        Money = money;
+    }
+
     public double getTotal() {
         return Total;
     }
@@ -56,6 +67,14 @@ public class UserOrders {
 
     public void setPname(String pname) {
         Pname = pname;
+    }
+
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String image) {
+        Image = image;
     }
 
     public String getName() {
