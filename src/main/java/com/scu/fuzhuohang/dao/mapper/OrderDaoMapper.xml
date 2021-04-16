@@ -7,6 +7,12 @@
         WHERE Oid = #{oid};
     </select>
 
+    <select id="getUserOrder" resultType="UserOrders">
+        SELECT orders.Oid,orders.Pnum,orders.Time,orders.Money,orders.Total,product.Pname,product.Image,address.`Name`,address.Tel,address.Addr,business.Bname,orders.Uid,orders.Bid,orders.Pid
+        FROM orders LEFT JOIN product ON orders.Pid = product.Pid LEFT JOIN address ON orders.Addrid = address.Addrid LEFT JOIN business ON orders.Bid = business.Bid
+        WHERE orders.Oid = #{oid};
+    </select>
+
     <select id="getOrderAll" resultType="UserOrders">
         SELECT orders.Oid,orders.Pnum,orders.Time,orders.Money,orders.Total,product.Pname,product.Image,address.`Name`,address.Tel,address.Addr,business.Bname,orders.Uid,orders.Bid,orders.Pid
         FROM orders LEFT JOIN product ON orders.Pid = product.Pid LEFT JOIN address ON orders.Addrid = address.Addrid LEFT JOIN business ON orders.Bid = business.Bid
@@ -38,13 +44,13 @@
 
     <update id="editOrder">
         UPDATE orders
-        SET Money = #{order.Money},Addrid = #{order.Addrid},Pnum = #{order.Pnum},Total = #{order.Total}
+        SET Pnum = #{order.Pnum},Total = #{order.Total}
         WHERE Oid = #{oid};
     </update>
 
     <update id="settleOrder">
         UPDATE orders
-        SET Money = #{order.Money},Addrid = #{order.Addrid},Pnum = #{order.Pnum},Total = #{order.Total},Ostate = 1, Time = CURRENT_TIMESTAMP
+        SET Addrid = #{order.Addrid},Pnum = #{order.Pnum},Total = #{order.Total},Ostate = 1, Time = CURRENT_TIMESTAMP
         WHERE Oid = #{oid};
     </update>
 

@@ -67,13 +67,13 @@
                 <span class="icon-bar">b</span>
                 <span class="icon-bar">c</span>
             </button>
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/jsp/shopping/shopindex1.jsp">悦读书城</a>
+            <a class="navbar-brand" href="gotoindex.action">悦读书城</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="${pageContext.request.contextPath}/jsp/personalspace/personalspace.jsp">欢迎！${sessionScope.current_user.username}</a></li>
                 <li><a href="logout.action">退出登录</a></li>
-                <li><a href="#about">收藏夹</a></li>
+<%--                <li><a href="#about">收藏夹</a></li>--%>
                 <li><a href="${pageContext.request.contextPath}/jsp/shopping/shoppingcart.jsp">购物车</a></li>
                 <li><a href="getuserorders.action?uid=${sessionScope.current_user.uid}">订单</a></li>
                 <li><a href="entermybusiness.action?userId=${sessionScope.current_user.uid}">我的店铺</a></li>
@@ -89,37 +89,24 @@
                 <li><a href="${pageContext.request.contextPath}/jsp/personalspace/changeUserInfo.jsp">修改信息</a></li>
                 <li class="active"><a href="${pageContext.request.contextPath}/jsp/personalspace/changePassword.jsp">修改密码</a></li>
                 <li><a onclick="addr()" href="javascript:void(0)">我的地址</a></li>
-                <li><a href="#">我的足迹</a></li>
-                <li><a href="#">我的评论</a></li>
+<%--                <li><a href="#">我的足迹</a></li>--%>
+                <li><a href="getcommentproduct.action?uid=${sessionScope.current_user.uid}">我的评论</a></li>
                 <li><a onclick="url(${sessionScope.current_user.uid})" href="javascript:void(0)">注销账号</a></li>
             </ul>
         </div>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
-<%--        <form id="formid" class="form-signin" action="updatepwd.action" method="post">--%>
-<%--            <label for="oldpassword" class="sr-only">请输入旧密码：</label>--%>
-<%--            <input type="password" name="oldpassword" id="oldpassword" class="form-control" placeholder="请输入旧密码" required>--%>
-<%--            <label for="newpassword" class="sr-only">请输入新密码：</label>--%>
-<%--            <input type="password" name="newpassword" id="newpassword" class="form-control" placeholder="请输入新密码" required>--%>
-<%--            <label for="newpassword1" class="sr-only">请确认新密码：</label>--%>
-<%--            <input type="password" name="newpassword1" id="newpassword1" class="form-control" placeholder="请确认新密码" required>--%>
-<%--            <div>--%>
-<%--                <button id="btn_login" class="btn btn-lg btn-primary btn-block" type="submit">提&nbsp;&nbsp;&nbsp;&nbsp;交</button>--%>
-<%--            </div>--%>
-<%--        </form>--%>
-
-    <form id="formid" class="form-signin">
-        <label for="oldpassword" class="sr-only">请输入旧密码：</label>
-        <input type="password" name="oldpassword" id="oldpassword" class="form-control" placeholder="请输入旧密码" required>
-        <label for="newpassword" class="sr-only">请输入新密码：</label>
-        <input type="password" name="newpassword" id="newpassword" class="form-control" placeholder="请输入新密码" required>
-        <label for="newpassword1" class="sr-only">请确认新密码：</label>
-        <input type="password" name="newpassword1" id="newpassword1" class="form-control" placeholder="请确认新密码" required>
-        <div>
-            <button id="btn_login" class="btn btn-lg btn-primary btn-block" type="button" onclick="postform()">提&nbsp;&nbsp;&nbsp;&nbsp;交</button>
-        </div>
-    </form>
-
+        <form id="formid" class="form-signin">
+            <label for="oldpassword" class="sr-only">请输入旧密码：</label>
+            <input type="password" name="oldpassword" id="oldpassword" class="form-control" placeholder="请输入旧密码" required>
+            <label for="newpassword" class="sr-only">请输入新密码：</label>
+            <input type="password" name="newpassword" id="newpassword" class="form-control" placeholder="请输入新密码" required>
+            <label for="newpassword1" class="sr-only">请确认新密码：</label>
+            <input type="password" name="newpassword1" id="newpassword1" class="form-control" placeholder="请确认新密码" required>
+            <div>
+                <button id="btn_login" class="btn btn-lg btn-primary btn-block" type="button" onclick="postform()">提&nbsp;&nbsp;&nbsp;&nbsp;交</button>
+            </div>
+        </form>
     </div>
 </div>
 </body>

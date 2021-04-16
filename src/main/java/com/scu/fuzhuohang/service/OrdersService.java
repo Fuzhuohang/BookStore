@@ -4,7 +4,6 @@ import com.scu.fuzhuohang.bean.Orders;
 import com.scu.fuzhuohang.bean.mergebean.BusinessOrders;
 import com.scu.fuzhuohang.bean.mergebean.UserOrders;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,6 +14,8 @@ import java.util.List;
 public interface OrdersService {
 
     public Orders getAnOrder(int ordersId);
+
+    public UserOrders getUserOrder(int orderId);
 
     public List<UserOrders> getUserOrders(int userId);
 

@@ -12,6 +12,7 @@ public class ProductBusiness {
     private String Image;
     private int Csid;
     private String Bname;
+    private int Bid;
 
     public int getPid() {
         return Pid;
@@ -59,5 +60,13 @@ public class ProductBusiness {
 
     public void setBname(String bname) {
         Bname = bname;
+    }
+
+    public int getBid() {
+        return Bid;
+    }
+
+    public void setBid(int bid) {
+        Bid = bid;
     }
 }

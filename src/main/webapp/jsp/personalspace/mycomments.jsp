@@ -1,4 +1,4 @@
-<%@ page import="com.scu.fuzhuohang.bean.User" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: LX
@@ -6,15 +6,16 @@
   Time: 15:42
   To change this template use File | Settings | File Templates.
 --%>
-<%
-    User user = (User) request.getSession().getAttribute("current_user");
-%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
     <title>悦读书城-个人空间</title>
+    <script src="${pageContext.request.contextPath}/webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/layui/js/layui.js"></script>
     <link href="${pageContext.request.contextPath}/webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/layui/css/layui.css" rel="stylesheet" media="all">
     <link href="${pageContext.request.contextPath}/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/theme.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/dashboard.css" rel="stylesheet">
@@ -25,7 +26,6 @@
                 window.location.href="writeoff.action?uid="+uid;
             }
         }
-
         function addr(){
             window.location.href="getAddressList.action"
         }
@@ -46,7 +46,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="personalspace.jsp">欢迎！${sessionScope.current_user.username}</a></li>
+                <li class="active"><a href="${pageContext.request.contextPath}/jsp/personalspace/personalspace.jsp">欢迎！${sessionScope.current_user.username}</a></li>
                 <li><a href="logout.action">退出登录</a></li>
 <%--                <li><a href="#about">收藏夹</a></li>--%>
                 <li><a href="getshoppingcart.action?uid=${sessionScope.current_user.uid}">购物车</a></li>
@@ -60,8 +60,8 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar" >
             <ul class="nav nav-sidebar">
-                <li><a href="${pageContext.request.contextPath}/jsp/personalspace/personalspace.jsp">个人信息</a></li>
-                <li class="active"><a href="${pageContext.request.contextPath}/jsp/personalspace/changeUserInfo.jsp">修改信息</a></li>
+                <li class="active"><a href="${pageContext.request.contextPath}/jsp/personalspace/personalspace.jsp">个人信息</a></li>
+                <li><a href="${pageContext.request.contextPath}/jsp/personalspace/changeUserInfo.jsp">修改信息</a></li>
                 <li><a href="${pageContext.request.contextPath}/jsp/personalspace/changePassword.jsp">修改密码</a></li>
                 <li><a onclick="addr()" href="javascript:void(0)">我的地址</a></li>
 <%--                <li><a href="#">我的足迹</a></li>--%>
@@ -71,28 +71,36 @@
         </div>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
-        <form class="form-signin" action="updateInfo.action" method="post">
-            <div style="align-content: center">
-                <label for="account">账&nbsp;&nbsp;&nbsp;号：</label>
-                <input id="account" name="account" type="text" class="form-control2" value="${sessionScope.current_user.account}" readonly="readonly">
+        <div class="layui-bg-gray" style="padding: 30px;">
+            <div id="addrs" class="layui-row layui-col-space15">
+                <c:forEach items="${sessionScope.user_comments}" var="comment">
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header" style="display: flex">
+                                <div>${comment.pname}</div>
+                                <div style="margin-left: 15px">${comment.bname}</div>
+                                <div id="score_${comment.cid}"></div>
+                            </div>
+                            <div class="layui-card-body">
+                                    ${comment.comm}
+                            </div>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        layui.use(['rate'], function() {
+                            var rate = layui.rate;
+                            rate.render({
+                                elem: '#score_${comment.cid}'
+                                ,value: ${comment.score}
+                                ,half: true
+                                ,text: true
+                                ,readonly: true
+                            });
+                        });
+                    </script>
+                </c:forEach>
             </div>
-            <div style="align-content: center">
-                <label for="username">用户名：</label>
-                <input id="username" name="username" type="text" value="${sessionScope.current_user.username}">
-            </div>
-            <div style="align-content: center">
-                <label for="tel">电&nbsp;&nbsp;&nbsp;话：</label>
-                <input id="tel" name="tel" type="tel" value="${sessionScope.current_user.tel}">
-            </div>
-            <div style="align-content: center">
-                <label for="email">邮&nbsp;&nbsp;&nbsp;件：</label>
-                <input id="email" name="email" type="email" value="${sessionScope.current_user.email}">
-            </div>
-            <div>
-                <button id="btn_login" class="btn btn-lg btn-primary btn-block" type="submit">提&nbsp;&nbsp;&nbsp;&nbsp;交</button>
-            </div>
-        </form>
+        </div>
     </div>
-</div>
 </body>
 </html>

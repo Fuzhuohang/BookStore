@@ -2,6 +2,7 @@ package com.scu.fuzhuohang.service;
 
 import com.scu.fuzhuohang.bean.Comment;
 import com.scu.fuzhuohang.bean.mergebean.CommentUser;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,6 +18,8 @@ public interface CommentService {
     public List<Comment> getCommentsByProduct( int productId);
 
     public List<CommentUser> getCommentUser(int productId);
+
+    public List<CommentUser> getCommentProduct(int userId);
 
     public int addComment(Comment comment);
 

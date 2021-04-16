@@ -11,6 +11,8 @@ public class CommentUser {
     private double Score;
     private String Comm;
     private String Username;
+    private String Pname;
+    private String Bname;
 
     public int getCid() {
         return Cid;
@@ -50,5 +52,21 @@ public class CommentUser {
 
     public void setUsername(String username) {
         Username = username;
+    }
+
+    public String getPname() {
+        return Pname;
+    }
+
+    public void setPname(String pname) {
+        Pname = pname;
+    }
+
+    public String getBname() {
+        return Bname;
+    }
+
+    public void setBname(String bname) {
+        Bname = bname;
     }
 }

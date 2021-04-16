@@ -58,7 +58,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="${pageContext.request.contextPath}/jsp/useraccount/login.jsp">登录</a></li>
                     <li><a href="${pageContext.request.contextPath}/jsp/useraccount/register.jsp">注册</a></li>
-                    <li><a href="${pageContext.request.contextPath}/jsp/useraccount/login.jsp">收藏夹</a></li>
+<%--                    <li><a href="${pageContext.request.contextPath}/jsp/useraccount/login.jsp">收藏夹</a></li>--%>
                     <li><a href="${pageContext.request.contextPath}/jsp/useraccount/login.jsp">购物车</a></li>
                     <li><a href="${pageContext.request.contextPath}/jsp/useraccount/login.jsp">订单</a></li>
                     <li><a href="${pageContext.request.contextPath}/jsp/useraccount/login.jsp">我的店铺</a></li>
@@ -105,7 +105,7 @@
                             <div style="height: 100%;width: 100%;display:flex;">
                                 <div style="height: 100%; padding: 10px 30px;">
                                     <div style="position: absolute; top:15px;font-weight: bold; font-size: large;">${product.pname}</div>
-                                    <div style="position: absolute; bottom:15px;">${product.bname}</div>
+                                    <div style="position: absolute; bottom:15px;"><a href="${pageContext.request.contextPath}/jsp/useraccount/login.jsp">${product.bname}</a></div>
                                 </div>
                                 <div style="padding: 20px 30px;position: absolute; right: 0;font-weight: bold;color: #FF5722; font-size: large;">${product.price}</div>
                             </div>

@@ -4,6 +4,7 @@ import com.scu.fuzhuohang.bean.Comment;
 import com.scu.fuzhuohang.bean.mergebean.CommentUser;
 import com.scu.fuzhuohang.dao.CommentDao;
 import com.scu.fuzhuohang.service.CommentService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,6 +36,11 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<CommentUser> getCommentUser(int productId){
         return commentDao.getCommentUser(productId);
+    }
+
+    @Override
+    public List<CommentUser> getCommentProduct(int userId){
+        return commentDao.getCommentProduct(userId);
     }
 
     @Override

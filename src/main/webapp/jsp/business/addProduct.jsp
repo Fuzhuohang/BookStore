@@ -39,14 +39,14 @@
                 <span class="icon-bar">b</span>
                 <span class="icon-bar">c</span>
             </button>
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/jsp/shopping/shopindex1.jsp">悦读书城</a>
+            <a class="navbar-brand" href="gotoindex.action">悦读书城</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="${pageContext.request.contextPath}/jsp/personalspace/personalspace.jsp">欢迎！${sessionScope.current_user.username}</a></li>
                 <li><a href="logout.action">退出登录</a></li>
-                <li><a href="#about">收藏夹</a></li>
-                <li><a href="${pageContext.request.contextPath}/jsp/shopping/shoppingcart.jsp">购物车</a></li>
+<%--                <li><a href="#about">收藏夹</a></li>--%>
+                <li><a href="getshoppingcart.action?uid=${sessionScope.current_user.uid}">购物车</a></li>
                 <li><a href="getuserorders.action?uid=${sessionScope.current_user.uid}">订单</a></li>
                 <li class="active"><a href="entermybusiness.action?userId=${sessionScope.current_user.uid}">我的店铺</a></li>
             </ul>
@@ -106,6 +106,19 @@
                     </select>
                 </div>
             </div>
+
+<%--            <input type="hidden" name="images" class="image">--%>
+<%--            <div class="layui-form-item">--%>
+<%--                <label class="layui-form-label ">添加书籍图片:</label>--%>
+<%--                <div class="layui-upload">--%>
+<%--                    <button type="button" class="layui-btn" id="test1">上传图片</button>--%>
+<%--                    <div class="layui-upload-list">--%>
+<%--                        <img class="layui-upload-img" id="demo1">--%>
+<%--                        <p id="demoText"></p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button type="submit" class="layui-btn">立即提交</button>
@@ -116,11 +129,50 @@
     </div>
 </div>
 <script>
-    layui.use(['form', 'layedit', 'laydate'], function(){
+    layui.use(['form', 'layedit', 'laydate', 'upload'], function(){
         var form = layui.form
             ,layer = layui.layer
             ,layedit = layui.layedit
             ,laydate = layui.laydate;
+
+        var $ = layui.jquery
+            ,upload = layui.upload;
+
+        //普通图片上传
+        var uploadInst = upload.render({
+            elem: '#test1'
+            ,url: '/upload/'
+            ,accept:'images'
+            ,size:50000
+            ,before: function(obj){
+
+                obj.preview(function(index, file, result){
+
+                    $('#demo1').attr('src', result);
+                });
+            }
+            ,done: function(res){
+                //如果上传失败
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #4cae4c;">上传成功</span>');
+
+                var fileupload = $(".image");
+                fileupload.attr("value",res.data.src);
+                console.log(fileupload.attr("value"));
+            }
+            ,error: function(){
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function(){
+                    uploadInst.upload();
+                });
+            }
+        });
 
         //日期
         laydate.render({

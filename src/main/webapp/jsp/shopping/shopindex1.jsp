@@ -36,13 +36,13 @@
                         <span class="icon-bar">b</span>
                         <span class="icon-bar">c</span>
                     </button>
-                    <a class="navbar-brand" href="${pageContext.request.contextPath}/jsp/shopping/shopindex1.jsp">悦读书城</a>
+                    <a class="navbar-brand" href="gotoindex.action">悦读书城</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="${pageContext.request.contextPath}/jsp/personalspace/personalspace.jsp">欢迎！${sessionScope.current_user.username}</a></li>
                         <li><a href="logout.action">退出登录</a></li>
-                        <li><a href="#about">收藏夹</a></li>
+<%--                        <li><a href="#about">收藏夹</a></li>--%>
                         <li><a href="getshoppingcart.action?uid=${sessionScope.current_user.uid}">购物车</a></li>
                         <li><a href="getuserorders.action?uid=${sessionScope.current_user.uid}">订单</a></li>
                         <li><a href="entermybusiness.action?userId=${sessionScope.current_user.uid}">我的店铺</a></li>
@@ -64,7 +64,7 @@
                         <div>待收货</div>
                         <div>${sessionScope.orders_count_user_state02}</div>
                     </div>
-                    <div class="layui-col-md3">
+                    <div class="layui-col-md3" onclick="window.location.href='getshoppingcart.action?uid=${sessionScope.current_user.uid}'">
                         <div>待付款</div>
                         <div>${sessionScope.orders_count_user_state00}</div>
                     </div>
@@ -104,7 +104,7 @@
                                 <div style="height: 100%;width: 100%;display:flex;">
                                     <div style="height: 100%; padding: 10px 30px;">
                                         <div style="position: absolute; top:15px;font-weight: bold; font-size: large;">${product.pname}</div>
-                                        <div style="position: absolute; bottom:15px;">${product.bname}</div>
+                                        <div style="position: absolute; bottom:15px;"><a href="enterproductbusiness.action?bid=${product.bid}">${product.bname}</a></div>
                                     </div>
                                     <div style="padding: 20px 30px;position: absolute; right: 0;font-weight: bold;color: #FF5722; font-size: large;">${product.price}</div>
                                 </div>

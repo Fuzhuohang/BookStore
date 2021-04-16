@@ -13,9 +13,15 @@
     </select>
 
     <select id="getCommentUser" resultType="CommentUser">
-        SELECT comment.Cid,comment.Pid,comment.Score,comment.Comm,user.Username
-        FROM comment LEFT JOIN user ON comment.Uid = user.Uid
+        SELECT comment.Cid,comment.Pid,comment.Score,comment.Comm,user.Username,product.Pname,business.Bname
+        FROM comment LEFT JOIN user ON comment.Uid = user.Uid LEFT JOIN product ON comment.Pid = product.Pid LEFT JOIN business ON product.Bid = business.Bid
         WHERE comment.Pid = #{pid};
+    </select>
+
+    <select id="getCommentProduct" resultType="CommentUser">
+        SELECT comment.Cid,comment.Pid,comment.Score,comment.Comm,user.Username,product.Pname,business.Bname
+        FROM comment LEFT JOIN user ON comment.Uid = user.Uid LEFT JOIN product ON comment.Pid = product.Pid LEFT JOIN business ON product.Bid = business.Bid
+        WHERE comment.Uid = #{uid};
     </select>
 
     <insert id="addComment">

@@ -36,14 +36,14 @@
                     <span class="icon-bar">b</span>
                     <span class="icon-bar">c</span>
                 </button>
-                <a class="navbar-brand" href="${pageContext.request.contextPath}/jsp/shopping/shopindex1.jsp">悦读书城</a>
+                <a class="navbar-brand" href="gotoindex.action">悦读书城</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="${pageContext.request.contextPath}/jsp/personalspace/personalspace.jsp">欢迎！${sessionScope.current_user.username}</a></li>
                     <li><a href="logout.action">退出登录</a></li>
-                    <li><a href="#about">收藏夹</a></li>
-                    <li><a href="${pageContext.request.contextPath}/jsp/shopping/shoppingcart.jsp">购物车</a></li>
+<%--                    <li><a href="#about">收藏夹</a></li>--%>
+                    <li><a href="getshoppingcart.action?uid=${sessionScope.current_user.uid}">购物车</a></li>
                     <li><a href="getuserorders.action?uid=${sessionScope.current_user.uid}">订单</a></li>
                     <li><a href="entermybusiness.action?userId=${sessionScope.current_user.uid}">我的店铺</a></li>
                 </ul>
@@ -64,7 +64,7 @@
                     <div>待收货</div>
                     <div>${sessionScope.orders_count_user_state02}</div>
                 </div>
-                <div class="layui-col-md3">
+                <div class="layui-col-md3" onclick="window.location.href='getshoppingcart.action?uid=${sessionScope.current_user.uid}'">
                     <div>待付款</div>
                     <div>${sessionScope.orders_count_user_state00}</div>
                 </div>
@@ -91,13 +91,13 @@
             <div class="layui-col-xs3">&nbsp;</div>
         </div>
         <span class="layui-breadcrumb">
-            <a href="${pageContext.request.contextPath}/jsp/shopping/shopindex1.jsp">首页</a>
-            <a href="${pageContext.request.contextPath}/jsp/shopping/shopcategory.jsp">${sessionScope.current_category.get(sessionScope.current_category_persent-1).cname}</a>
-            <a><cite>${sessionScope.current_category_second.get(sessionScope.current_category_second_persent-sessionScope.current_category_second.get(0).csid).csname}</cite></a>
+            <a href="gotoindex.action">首页</a>
+            <a href="getCategorysecond.action?cateid=${sessionScope.current_category_chosen}">${sessionScope.current_category.get(sessionScope.current_category_chosen-1).cname}</a>
+            <a><cite>${sessionScope.current_category_second.get(sessionScope.current_category_second_chosen-sessionScope.current_category_second.get(0).csid).csname}</cite></a>
         </span>
         <div style="padding: 30px;">
             <div class="layui-row layui-col-space15">
-                <c:forEach items="${sessionScope.current_product_second_persent}" var="product">
+                <c:forEach items="${sessionScope.current_product_second_chosen}" var="product">
                     <div class="layui-col-md12">
                         <div class="layui-panel" style="height: 120px; display: flex;">
                             <c:if test="${product.image == null}">

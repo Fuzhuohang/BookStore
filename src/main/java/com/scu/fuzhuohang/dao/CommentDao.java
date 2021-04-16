@@ -19,6 +19,8 @@ public interface CommentDao {
 
     public List<CommentUser> getCommentUser(@Param("pid") int productId);
 
+    public List<CommentUser> getCommentProduct(@Param("uid") int userId);
+
     public int addComment(@Param("comment") Comment comment);
 
     public int getCount(@Param("pid") int productId);

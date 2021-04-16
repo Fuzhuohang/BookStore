@@ -79,14 +79,14 @@
                     <span class="icon-bar">b</span>
                     <span class="icon-bar">c</span>
                 </button>
-                <a class="navbar-brand" href="${pageContext.request.contextPath}/jsp/shopping/shopindex1.jsp">悦读书城</a>
+                <a class="navbar-brand" href="gotoindex.action">悦读书城</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="${pageContext.request.contextPath}/jsp/personalspace/personalspace.jsp">欢迎！${sessionScope.current_user.username}</a></li>
                     <li><a href="logout.action">退出登录</a></li>
-                    <li><a href="#about">收藏夹</a></li>
-                    <li><a href="${pageContext.request.contextPath}/jsp/shopping/shoppingcart.jsp">购物车</a></li>
+<%--                    <li><a href="#about">收藏夹</a></li>--%>
+                    <li><a href="getshoppingcart.action?uid=${sessionScope.current_user.uid}">购物车</a></li>
                     <li class="active"><a href="getuserorders.action?uid=${sessionScope.current_user.uid}">订单</a></li>
                     <li><a href="entermybusiness.action?userId=${sessionScope.current_user.uid}">我的店铺</a></li>
                 </ul>
@@ -199,6 +199,9 @@
                                                     <div style="margin: 0 10px 0 10px; ">${orders.tel}</div>
                                                     <div style="margin: 0 10px 0 10px; ">${orders.addr}</div>
                                                 </div>
+                                            </div>
+                                            <div style="position: absolute; right: 0; padding:20px 50px; ">
+                                                <button class="layui-btn layui-btn-primary layui-border-green" onclick="window.location.href='tocreatecomment.action?oid=${orders.oid}'">前往评价</button>
                                             </div>
                                         </div>
                                     </div>

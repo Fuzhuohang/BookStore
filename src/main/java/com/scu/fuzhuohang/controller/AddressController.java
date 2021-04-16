@@ -14,6 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+import static com.scu.fuzhuohang.res.Session.*;
+import static com.scu.fuzhuohang.res.Url.*;
+
 /**
  * @Author Fuzhuoh
  * @Date 2021/4/8 14:57
@@ -25,12 +28,6 @@ public class AddressController {
     @Autowired
     AddressService addressService;
 
-    private static final String URL_1 = "redirect:/jsp/personalspace/shippingAddress.jsp";
-    private static final String URL_2 = "shippingAddress";
-    private static final String CURRENT_USER = "current_user";
-    private static final String CURRENT_ADDRESSES = "current_addresses";
-    private static final String MESSAGE = "message";
-
     @RequestMapping("/jsp/*/getAddressList")
     @ResponseBody
     public ModelAndView getAddressList(HttpSession session,
@@ -39,7 +36,7 @@ public class AddressController {
         List<Address> addresses = addressService.getAddresses(uid);
         session.setAttribute(CURRENT_ADDRESSES,addresses);
         modelAndView.addObject(MESSAGE,"获取成功");
-        modelAndView.setViewName(URL_1);
+        modelAndView.setViewName(URL_SHIPPING_ADDRESS);
         return modelAndView;
     }
 
@@ -60,10 +57,10 @@ public class AddressController {
             List<Address> addresses = addressService.getAddresses(((User) session.getAttribute(CURRENT_USER)).getUid());
             session.setAttribute(CURRENT_ADDRESSES,addresses);
             modelAndView.addObject(MESSAGE,"添加成功");
-            modelAndView.setViewName(URL_1);
+            modelAndView.setViewName(URL_SHIPPING_ADDRESS);
         }else{
             modelAndView.addObject(MESSAGE,"添加失败");
-            modelAndView.setViewName(URL_2);
+            modelAndView.setViewName(URL_SHIPPING_ADDRESS);
         }
         return modelAndView;
     }
@@ -84,10 +81,10 @@ public class AddressController {
             List<Address> addresses = addressService.getAddresses(((User) session.getAttribute(CURRENT_USER)).getUid());
             session.setAttribute(CURRENT_ADDRESSES,addresses);
             modelAndView.addObject(MESSAGE,"更新成功");
-            modelAndView.setViewName(URL_1);
+            modelAndView.setViewName(URL_SHIPPING_ADDRESS);
         }else{
             modelAndView.addObject(MESSAGE,"更新失败");
-            modelAndView.setViewName(URL_2);
+            modelAndView.setViewName(URL_SHIPPING_ADDRESS);
         }
         return modelAndView;
     }
@@ -101,10 +98,10 @@ public class AddressController {
             List<Address> addresses = addressService.getAddresses(((User) session.getAttribute(CURRENT_USER)).getUid());
             session.setAttribute(CURRENT_ADDRESSES,addresses);
             modelAndView.addObject(MESSAGE,"删除成功");
-            modelAndView.setViewName(URL_1);
+            modelAndView.setViewName(URL_SHIPPING_ADDRESS);
         }else{
             modelAndView.addObject(MESSAGE,"删除失败");
-            modelAndView.setViewName(URL_2);
+            modelAndView.setViewName(URL_SHIPPING_ADDRESS);
         }
         return modelAndView;
     }

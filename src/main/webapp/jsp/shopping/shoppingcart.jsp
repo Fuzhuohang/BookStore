@@ -19,7 +19,11 @@
     <link href="${pageContext.request.contextPath}/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/theme.css" rel="stylesheet">
     <script type="javascript">
-
+        function url(oid){
+            if(confirm('警告：删除操作将不可逆，请慎重考虑！！！请确认是否删除商品订单')){
+                window.location.href="writeoff.action?uid="+uid;
+            }
+        }
     </script>
 </head>
 <body>
@@ -34,14 +38,14 @@
                     <span class="icon-bar">b</span>
                     <span class="icon-bar">c</span>
                 </button>
-                <a class="navbar-brand" href="${pageContext.request.contextPath}/jsp/shopping/shopindex1.jsp">悦读书城</a>
+                <a class="navbar-brand" href="gotoindex.action">悦读书城</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="${pageContext.request.contextPath}/jsp/personalspace/personalspace.jsp">欢迎！${sessionScope.current_user.username}</a></li>
                     <li><a href="logout.action">退出登录</a></li>
-                    <li><a href="#about">收藏夹</a></li>
-                    <li><a href="${pageContext.request.contextPath}/jsp/shopping/shoppingcart.jsp">购物车</a></li>
+<%--                    <li><a href="#about">收藏夹</a></li>--%>
+                    <li class="active"><a href="getshoppingcart.action?uid=${sessionScope.current_user.uid}">购物车</a></li>
                     <li><a href="getuserorders.action?uid=${sessionScope.current_user.uid}">订单</a></li>
                     <li><a href="entermybusiness.action?userId=${sessionScope.current_user.uid}">我的店铺</a></li>
                 </ul>
@@ -53,7 +57,7 @@
     <div class="layui-form">
         <table class="layui-table" id="test">
             <colgroup>
-                <col align="center">
+<%--                <col align="center">--%>
                 <col>
                 <col align="center">
                 <col align="center">
@@ -61,11 +65,11 @@
             </colgroup>
             <thead>
             <tr>
-                <th style="width: 65px;">
-                    <div style="width: 32px;" onclick="checkAll(check_all)">
-                        <input type="checkbox" id="check_all" name="check_all" value="check_all">
-                    </div>
-                </th>
+<%--                <th style="width: 65px;">--%>
+<%--                    <div style="width: 32px;" onclick="checkAll(check_all)">--%>
+<%--                        <input type="checkbox" id="check_all" name="check_all" value="check_all">--%>
+<%--                    </div>--%>
+<%--                </th>--%>
                 <th>商品</th>
                 <th style="width: 100px;">数量</th>
                 <th style="width: 100px;">价格</th>
@@ -75,11 +79,11 @@
             <tbody>
             <c:forEach items="${sessionScope.orders_list_user_state00}" var="orders">
                 <tr>
-                    <td>
-                        <div style="width: 32px;">
-                            <input type="checkbox" id="check_${orders.oid}" name="checkbox_info" value="${orders}" onclick="console.log(check_${orders.oid}+'checked');">
-                        </div>
-                    </td>
+<%--                    <td>--%>
+<%--                        <div style="width: 32px;">--%>
+<%--                            <input type="checkbox" id="check_${orders.oid}" name="checkbox_info" value="${orders}" onclick="console.log(check_${orders.oid}+'checked');">--%>
+<%--                        </div>--%>
+<%--                    </td>--%>
                     <td>
                         <div style="height: 120px; display: flex;">
                             <c:if test="${orders.image == null}">
@@ -109,40 +113,51 @@
                     <td>
                         <div style="width: 65px;">
                             <div><a href="topayment2.action?oid=${orders.oid}&uid=${sessionScope.current_user.uid}">订单结算</a></div>
-                            <div><a>保存修改</a></div>
-                            <div><a>删除订单</a></div>
+                            <div><a href="javascript:void(0)" onclick="edit(${orders.oid})">保存修改</a></div>
+                            <div><a href="deletecart.action?oid=${orders.oid}">删除订单</a></div>
                         </div>
                     </td>
                 </tr>
+                <script type="text/javascript">
+                    function edit(oid){
+                        var pnum = document.getElementById("num_${orders.oid}").value;
+                        if(pnum<=0){
+                            alert("商品数量不能少于1！")
+                        }else {
+                            window.location.href="updateordersinfo.action?oid="+oid+"&pnum="+pnum;
+                        }
+                    }
+                </script>
             </c:forEach>
             </tbody>
         </table>
     </div>
 </div>
 <script type="text/javascript">
-    function checkAll(checkall) {
-        console.log("check_all is checked");
-        var arr = document.getElementsByName("checkbox_info");
-        if (checkall.checked == true) {
-            console.log(checkall.checked);
-            for(var i = 0;i < arr.length;i++){
-                console.log(arr[i].id+"::"+arr[i].checked);
-                if(arr[i].checked == false){
-                    console.log(arr[i].id+" changeed");
-                    arr[i].checked = true;
-                }
-                console.log(arr[i].id+"::"+arr[i].checked);
-            }
-        }else{
-            for(var i = 0;i < arr.length;i++){
-                console.log(arr[i].id+"::"+arr[i].checked);
-                if(arr[i].checked == true){
-                    arr[i].checked = false;
-                }
-                console.log(arr[i].id+"::"+arr[i].checked);
-            }
-        }
-    }
+    // function checkAll(checkall) {
+    //     console.log("check_all is checked");
+    //     var arr = document.getElementsByName("checkbox_info");
+    //     if (checkall.checked == true) {
+    //         console.log(checkall.checked);
+    //         for(var i = 0;i < arr.length;i++){
+    //             console.log(arr[i].id+"::"+arr[i].checked);
+    //             if(arr[i].checked == false){
+    //                 console.log(arr[i].id+" changeed");
+    //                 arr[i].checked = true;
+    //             }
+    //             console.log(arr[i].id+"::"+arr[i].checked);
+    //         }
+    //     }else{
+    //         for(var i = 0;i < arr.length;i++){
+    //             console.log(arr[i].id+"::"+arr[i].checked);
+    //             if(arr[i].checked == true){
+    //                 arr[i].checked = false;
+    //             }
+    //             console.log(arr[i].id+"::"+arr[i].checked);
+    //         }
+    //     }
+    // }
+
 </script>
 </body>
 </html>

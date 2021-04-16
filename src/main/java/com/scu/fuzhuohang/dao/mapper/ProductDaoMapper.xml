@@ -7,18 +7,18 @@
     </select>
 
     <select id="getProductList" resultType="ProductBusiness">
-        SELECT product.Pid,product.Pname,product.Price,product.Image,product.Csid,business.Bname
+        SELECT product.Pid,product.Pname,product.Price,product.Image,product.Csid,business.Bname,product.Bid
         FROM product LEFT JOIN business ON product.Bid = business.Bid;
     </select>
 
     <select id="getProductListByCateId" resultType="ProductBusiness">
-        SELECT product.Pid,product.Pname,product.Price,product.Image,product.Csid,business.Bname
+        SELECT product.Pid,product.Pname,product.Price,product.Image,product.Csid,business.Bname,product.Bid
         FROM product LEFT JOIN business ON product.Bid = business.Bid LEFT JOIN categorysecond ON product.Csid = categorysecond.Csid
         WHERE categorysecond.Cateid = #{cateid};
     </select>
 
     <select id="getProductListByCsId" resultType="ProductBusiness">
-        SELECT product.Pid,product.Pname,product.Price,product.Image,product.Csid,business.Bname
+        SELECT product.Pid,product.Pname,product.Price,product.Image,product.Csid,business.Bname,product.Bid
         FROM product LEFT JOIN business ON product.Bid = business.Bid
         WHERE Csid = #{csid};
     </select>

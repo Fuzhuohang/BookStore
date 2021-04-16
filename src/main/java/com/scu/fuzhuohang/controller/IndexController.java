@@ -15,6 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+import static com.scu.fuzhuohang.res.Session.*;
+import static com.scu.fuzhuohang.res.Url.*;
+
 /**
  * @Author Fuzhuoh
  * @Date 2021/4/13 10:36
@@ -29,8 +32,6 @@ public class IndexController {
     @Autowired
     CategoryService categoryService;
 
-    private static final String MESSAGE = "message";
-
     @RequestMapping("getCategory")
     @ResponseBody
     public ModelAndView getIndex(HttpSession session,
@@ -38,11 +39,11 @@ public class IndexController {
         List<Category> categoryList = categoryService.getCategoryFirst();
         List<CategorySecond> categorySecondList = categoryService.getCategorySecondAll();
         List<ProductBusiness> productList = productService.getProductList();
-        session.setAttribute("current_category",categoryList);
-        session.setAttribute("current_categorysecond",categorySecondList);
-        session.setAttribute("current_product",productList);
+        session.setAttribute(CURRENT_CATEGORY,categoryList);
+        session.setAttribute(CURRENT_CATEGORYSECOND,categorySecondList);
+        session.setAttribute(CURRENT_PRODUCT,productList);
         modelAndView.addObject(MESSAGE,"加载成功");
-        modelAndView.setViewName("redirect:/jsp/shopping/shopindex.jsp");
+        modelAndView.setViewName(URL_SHOP_INDEX);
         return modelAndView;
     }
 
@@ -53,11 +54,11 @@ public class IndexController {
                                     ModelAndView modelAndView){
         List<CategorySecond> categorySeconds = categoryService.getCategorySecond(cateId);
         List<ProductBusiness> productList = productService.getProductListByCateId(cateId);
-        session.setAttribute("current_category_persent",cateId);
-        session.setAttribute("current_category_second",categorySeconds);
-        session.setAttribute("current_product_persent",productList);
+        session.setAttribute(CURRENT_CATEGORY_CHOSEN,cateId);
+        session.setAttribute(CURRENT_CATEGORY_SECOND,categorySeconds);
+        session.setAttribute(CURRENT_PRODUCT_CHOSEN,productList);
         modelAndView.addObject(MESSAGE,"加载成功");
-        modelAndView.setViewName("redirect:/jsp/shopping/shopcategory.jsp");
+        modelAndView.setViewName(URL_SHOP_CATEGORY);
         return modelAndView;
     }
 
@@ -67,10 +68,25 @@ public class IndexController {
                                     HttpSession session,
                                     ModelAndView modelAndView){
         List<ProductBusiness> productList = productService.getProductListByCsId(csId);
-        session.setAttribute("current_category_second_persent",csId);
-        session.setAttribute("current_product_second_persent",productList);
+        session.setAttribute(CURRENT_CATEGORY_SECOND_CHOSEN,csId);
+        session.setAttribute(CURRENT_PRODUCT_SECOND_CHOSEN,productList);
         modelAndView.addObject(MESSAGE,"加载成功");
-        modelAndView.setViewName("redirect:/jsp/shopping/shopcatesecond.jsp");
+        modelAndView.setViewName(URL_SHOP_CATEGORY_SECOND);
+        return modelAndView;
+    }
+
+    @RequestMapping("/jsp/*/gotoindex")
+    @ResponseBody
+    public ModelAndView gotoIndex(HttpSession session,
+                                  ModelAndView modelAndView){
+        List<Category> categoryList = categoryService.getCategoryFirst();
+        List<CategorySecond> categorySecondList = categoryService.getCategorySecondAll();
+        List<ProductBusiness> productList = productService.getProductList();
+        session.setAttribute(CURRENT_CATEGORY,categoryList);
+        session.setAttribute(CURRENT_CATEGORYSECOND,categorySecondList);
+        session.setAttribute(CURRENT_PRODUCT,productList);
+        modelAndView.addObject(MESSAGE,"加载成功");
+        modelAndView.setViewName(URL_SHOP_INDEX_01);
         return modelAndView;
     }
 }

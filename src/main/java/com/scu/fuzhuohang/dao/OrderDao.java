@@ -17,6 +17,8 @@ public interface OrderDao {
 
     public Orders getOrder(@Param("oid") int orderId);
 
+    public UserOrders getUserOrder(@Param("oid") int orderId);
+
     public List<UserOrders> getOrderAll(@Param("uid") int userId);
 
     public List<UserOrders> getOrderByState(@Param("uid") int userId, @Param("ostate") int orderState);

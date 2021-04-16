@@ -1,9 +1,6 @@
 package com.scu.fuzhuohang.controller;
 
-import com.scu.fuzhuohang.bean.Address;
-import com.scu.fuzhuohang.bean.Business;
-import com.scu.fuzhuohang.bean.Orders;
-import com.scu.fuzhuohang.bean.Product;
+import com.scu.fuzhuohang.bean.*;
 import com.scu.fuzhuohang.bean.mergebean.BusinessOrders;
 import com.scu.fuzhuohang.bean.mergebean.UserOrders;
 import com.scu.fuzhuohang.service.AddressService;
@@ -20,6 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.util.List;
+
+import static com.scu.fuzhuohang.res.Session.*;
+import static com.scu.fuzhuohang.res.Url.*;
 
 /**
  * @Author Fuzhuoh
@@ -43,20 +43,6 @@ public class OrdersController {
     @Autowired
     ProductService productService;
 
-    private static final String ORDERS_LIST_USER_STATE = "orders_list_user_state";
-    private static final String ORDERS_COUNT_USER_STATE = "orders_count_user_state";
-    private static final String ORDERS_LIST_BUSINESS_STATE = "orders_list_business_state";
-    private static final String ORDERS_COUNT_BUSINESS_STATE = "orders_count_business_state01";
-    private static final String ORDERS_COUNT_USER = "orders_count_user";
-    private static final String ORDERS_COUNT_BUSINESS = "orders_count_business";
-    private static final String MESSAGE = "message";
-    private static final String URL_1 = "redirect:/jsp/shopping/orders.jsp";
-    private static final String URL_2 = "redirect:/jsp/business/businessorders.jsp";
-    private static final String URL_3 = "redirect:/jsp/shopping/shoppingcart.jsp";
-    private static final String URL_4 = "redirect:/jsp/shopping/productInfo.jsp";
-    private static final String URL_5 = "redirect:/jsp/shopping/createorders.jsp";
-    private static final String URL_6 = "redirect:/jsp/shopping/paysuccess.jsp";
-
     @RequestMapping("/jsp/*/getbusinessorders")
     @ResponseBody
     public ModelAndView getBusinessOrders(@RequestParam("bid") int bid,
@@ -77,7 +63,7 @@ public class OrdersController {
         session.setAttribute(ORDERS_COUNT_BUSINESS_STATE+"03",countOfBusinessState03);
         session.setAttribute(ORDERS_COUNT_BUSINESS,countOfBusiness);
         modelAndView.addObject(MESSAGE,"加载成功");
-        modelAndView.setViewName(URL_2);
+        modelAndView.setViewName(URL_BUSINESS_ORDERS);
         return modelAndView;
     }
 
@@ -104,10 +90,10 @@ public class OrdersController {
             session.setAttribute(ORDERS_COUNT_BUSINESS_STATE+"03",countOfBusinessState03);
             session.setAttribute(ORDERS_COUNT_BUSINESS,countOfBusiness);
             modelAndView.addObject(MESSAGE,"状态更新成功");
-            modelAndView.setViewName(URL_2);
+            modelAndView.setViewName(URL_BUSINESS_ORDERS);
         } else{
             modelAndView.addObject(MESSAGE,"状态更新失败");
-            modelAndView.setViewName("businessorders");
+            modelAndView.setViewName(URL_BUSINESS_ORDERS);
         }
         return modelAndView;
     }
@@ -132,7 +118,7 @@ public class OrdersController {
         session.setAttribute(ORDERS_COUNT_USER_STATE+"03",countOfUserState03);
         session.setAttribute(ORDERS_COUNT_USER,countOfUser);
         modelAndView.addObject(MESSAGE,"加载成功");
-        modelAndView.setViewName(URL_1);
+        modelAndView.setViewName(URL_ORDERS);
         return modelAndView;
     }
 
@@ -159,10 +145,10 @@ public class OrdersController {
             session.setAttribute(ORDERS_COUNT_USER_STATE+"03",countOfUserState03);
             session.setAttribute(ORDERS_COUNT_USER,countOfUser);
             modelAndView.addObject(MESSAGE,"状态更新成功");
-            modelAndView.setViewName(URL_1);
+            modelAndView.setViewName(URL_ORDERS);
         } else{
             modelAndView.addObject(MESSAGE,"状态更新失败");
-            modelAndView.setViewName("orders");
+            modelAndView.setViewName(URL_ORDERS);
         }
         return modelAndView;
     }
@@ -189,10 +175,10 @@ public class OrdersController {
             session.setAttribute(ORDERS_COUNT_USER_STATE+"03",countOfUserState03);
             session.setAttribute(ORDERS_COUNT_USER,countOfUser);
             modelAndView.addObject(MESSAGE,"订单删除成功");
-            modelAndView.setViewName(URL_1);
+            modelAndView.setViewName(URL_ORDERS);
         } else{
             modelAndView.addObject(MESSAGE,"订单删除失败");
-            modelAndView.setViewName("orders");
+            modelAndView.setViewName(URL_ORDERS);
         }
         return modelAndView;
     }
@@ -205,7 +191,7 @@ public class OrdersController {
         List<UserOrders> ordersInShoppingCart = ordersService.getUserOrdersByState(uid,0);
         session.setAttribute(ORDERS_LIST_USER_STATE+"00",ordersInShoppingCart);
         modelAndView.addObject(MESSAGE,"加载成功");
-        modelAndView.setViewName(URL_3);
+        modelAndView.setViewName(URL_SHOPPING_CART);
         return modelAndView;
     }
 
@@ -215,7 +201,7 @@ public class OrdersController {
                                         @RequestParam("pnum") int pnum,
                                         HttpSession session,
                                         ModelAndView modelAndView){
-        Product product = (Product) session.getAttribute("product_info");
+        Product product = (Product) session.getAttribute(PRODUCT_INFO);
         Orders orders = new Orders();
         orders.setUid(uid);
         orders.setBid(product.getBid());
@@ -226,10 +212,10 @@ public class OrdersController {
         orders.setOstate(0);
         if(ordersService.createOrder(orders)!=0){
             modelAndView.addObject(MESSAGE,"添加成功");
-            modelAndView.setViewName(URL_4);
+            modelAndView.setViewName(URL_PRODUCT_INFO);
         }else {
             modelAndView.addObject(MESSAGE,"添加失败");
-            modelAndView.setViewName(URL_4);
+            modelAndView.setViewName(URL_PRODUCT_INFO);
         }
         return modelAndView;
     }
@@ -240,8 +226,8 @@ public class OrdersController {
                                   @RequestParam("pnum") int pnum,
                                   HttpSession session,
                                   ModelAndView modelAndView){
-        Product product = (Product) session.getAttribute("product_info");
-        Business business = (Business) session.getAttribute("product_business");
+        Product product = (Product) session.getAttribute(PRODUCT_INFO);
+        Business business = (Business) session.getAttribute(PRODUCT_BUSINESS);
         UserOrders userOrders = new UserOrders();
         userOrders.setOid(0);
         userOrders.setBname(business.getBname());
@@ -253,10 +239,10 @@ public class OrdersController {
         userOrders.setBid(business.getBid());
         userOrders.setPid(product.getPid());
         List<Address> addresses = addressService.getAddresses(uid);
-        session.setAttribute("current_addresses",addresses);
-        session.setAttribute("product_paid",userOrders);
+        session.setAttribute(CURRENT_ADDRESSES,addresses);
+        session.setAttribute(PRODUCT_PAID,userOrders);
         modelAndView.addObject(MESSAGE,"跳转成功");
-        modelAndView.setViewName(URL_5);
+        modelAndView.setViewName(URL_CREATE_ORDERS);
         return modelAndView;
     }
 
@@ -266,14 +252,14 @@ public class OrdersController {
                                   @RequestParam("uid") int uid,
                                   HttpSession session,
                                   ModelAndView modelAndView){
-        List<UserOrders> userOrdersList = (List<UserOrders>) session.getAttribute("orders_list_user_state00");
+        List<UserOrders> userOrdersList = (List<UserOrders>) session.getAttribute(ORDERS_LIST_USER_STATE+"00");
         for(UserOrders userOrders : userOrdersList){
             if(userOrders.getOid() == oid){
                 List<Address> addresses = addressService.getAddresses(uid);
-                session.setAttribute("current_addresses",addresses);
-                session.setAttribute("product_paid",userOrders);
+                session.setAttribute(CURRENT_ADDRESSES,addresses);
+                session.setAttribute(PRODUCT_PAID,userOrders);
                 modelAndView.addObject(MESSAGE,"跳转成功");
-                modelAndView.setViewName(URL_5);
+                modelAndView.setViewName(URL_CREATE_ORDERS);
             }
         }
         return modelAndView;
@@ -287,7 +273,7 @@ public class OrdersController {
                             @RequestParam("addrid") int addrid,
                             HttpSession session,
                             ModelAndView modelAndView){
-        UserOrders userOrders = (UserOrders) session.getAttribute("product_paid");
+        UserOrders userOrders = (UserOrders) session.getAttribute(PRODUCT_PAID);
         Orders orders = new Orders();
         orders.setUid(uid);
         orders.setBid(bid);
@@ -302,14 +288,65 @@ public class OrdersController {
             if(ordersService.createOrder(orders)!=0){
                 productService.updateNum(pid,userOrders.getPnum());
                 modelAndView.addObject("支付成功");
-                modelAndView.setViewName(URL_6);
+                modelAndView.setViewName(URL_PAY_SUCCESS);
             }
         }else{
             if(ordersService.settleOrder(userOrders.getOid(),orders)!=0){
                 productService.updateNum(pid,userOrders.getPnum());
                 modelAndView.addObject("支付成功");
-                modelAndView.setViewName(URL_6);
+                modelAndView.setViewName(URL_PAY_SUCCESS);
             }
+        }
+        return modelAndView;
+    }
+
+    @RequestMapping("/jsp/*/tocreatecomment")
+    @ResponseBody
+    public ModelAndView toCreateComment(@RequestParam("oid") int oid,
+                                      HttpSession session,
+                                      ModelAndView modelAndView){
+        UserOrders userOrders = ordersService.getUserOrder(oid);
+        session.setAttribute(COMMENT_ORDERS,userOrders);
+        modelAndView.addObject(MESSAGE);
+        modelAndView.setViewName(URL_COMMENTS);
+        return modelAndView;
+    }
+
+    @RequestMapping("/jsp/*/updateordersinfo")
+    @ResponseBody
+    public ModelAndView updateOrderInfo(@RequestParam("oid") int oid,
+                                        @RequestParam("pnum") int pnum,
+                                        HttpSession session,
+                                        ModelAndView modelAndView){
+        User user = (User) session.getAttribute(CURRENT_USER);
+        Orders orders = new Orders();
+        orders.setPnum(pnum);
+        orders.setTotal(pnum * ordersService.getAnOrder(oid).getMoney());
+        if(ordersService.editOrder(oid,orders)!=0){
+            List<UserOrders> ordersInShoppingCart = ordersService.getUserOrdersByState(user.getUid(),0);
+            session.setAttribute(ORDERS_LIST_USER_STATE+"00",ordersInShoppingCart);
+            modelAndView.addObject(MESSAGE,"修改成功");
+            modelAndView.setViewName(URL_SHOPPING_CART);
+        }else {
+            modelAndView.addObject(MESSAGE,"修改失败");
+            modelAndView.setViewName(URL_SHOPPING_CART);
+        }
+        return modelAndView;
+    }
+
+    @RequestMapping("/jsp/*/deletecart")
+    @ResponseBody
+    public ModelAndView deleteCart(@RequestParam("oid") int oid,
+                                   HttpSession session,
+                                   ModelAndView modelAndView){
+        if(ordersService.deleteOrder(oid)!=0){
+            List<UserOrders> ordersInShoppingCart = ordersService.getUserOrdersByState(((User) session.getAttribute(CURRENT_USER)).getUid(),0);
+            session.setAttribute(ORDERS_LIST_USER_STATE+"00",ordersInShoppingCart);
+            modelAndView.addObject(MESSAGE,"订单删除成功");
+            modelAndView.setViewName(URL_SHOPPING_CART);
+        } else{
+            modelAndView.addObject(MESSAGE,"订单删除失败");
+            modelAndView.setViewName(URL_SHOPPING_CART);
         }
         return modelAndView;
     }
