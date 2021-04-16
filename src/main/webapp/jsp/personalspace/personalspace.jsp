@@ -108,7 +108,7 @@
                         <th>待发货</th>
                         <th>待收货</th>
                         <th>待付款</th>
-                        <th>待评价</th>
+                        <th>可评价</th>
                     </tr>
                     </thead>
                     <tbody>
